@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test plot Gosling</title>
+
+    <!-- Import the Gosling.js library -->
+    <script type="module" src="https://esm.sh/gosling.js@0.9.22?bundle&deps=react-dom@17,react@17,pixi.js@6,higlass@1.11"></script>
+
+    <!-- Import your custom JavaScript file -->
+    <script type="module">
+        import { spec } from './tutorial_gosling.ts';
+      
+        let el = document.querySelector('#vis');
+        let opts = {}; // You can add options here if needed
+      
+        gosling.embed(el, spec, opts).catch((err) => {
+          console.error('Error embedding Gosling visualization:', err);
+        });
+      </script>
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <div class="white">
+        <h2 id="header"></h2>
+
+        <!-- Your Gosling.js visualization container -->
+        <div id="vis"></div>
+        
+    </div>
+
+</body>
+
+</html>
