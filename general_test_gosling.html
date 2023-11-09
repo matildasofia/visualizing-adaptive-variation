@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test plot Gosling</title>
+
+    <!-- Import the Gosling.js library and its dependencies -->
+    <link rel="stylesheet" href="https://esm.sh/higlass@1.13/dist/hglib.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18",
+          "react-dom": "https://esm.sh/react-dom@18",
+          "pixi": "https://esm.sh/pixi.js@6",
+          "higlass": "https://esm.sh/higlass@1.13?external=react,react-dom,pixi",
+          "gosling.js": "https://esm.sh/gosling.js@0.11.0?external=react,react-dom,pixi,higlass"
+        }
+      }
+    </script>
+    <script type="module">
+      import './general_test_gosling.ts'; // Import the TypeScript file
+    </script>
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <div class="white">
+        <h2 id="header"></h2>
+
+        <!-- Your Gosling.js visualization container -->
+        <div id="vis"></div>
+        
+    </div>
+
+</body>
+
+</html>

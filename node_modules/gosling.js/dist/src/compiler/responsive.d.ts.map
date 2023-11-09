@@ -1,0 +1,1 @@
+{"version":3,"file":"responsive.d.ts","sourceRoot":"","sources":["../../../src/compiler/responsive.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,WAAW,EAAwB,UAAU,EAAE,MAAM,8BAA8B,CAAC;AAGlG,wBAAgB,qBAAqB,CACjC,IAAI,EAAE,WAAW,GAAG,UAAU,EAC9B,OAAO,EAAE,MAAM,EACf,OAAO,EAAE,MAAM,EACf,WAAW,EAAE,MAAM,EACnB,YAAY,EAAE,MAAM,GACrB,OAAO,CA4CT"}

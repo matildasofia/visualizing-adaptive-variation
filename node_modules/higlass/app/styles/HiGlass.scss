@@ -1,0 +1,16 @@
+// Third party styles should be added here so that they are name spaces
+@import 'react-grid-layout/css/styles.css';
+@import 'react-resizable/css/styles.css';
+@import 'prism.css';
+
+.higlass {
+
+  // Enforce to avoid big-finger mode in Jupyter Lab
+  * {
+    box-sizing: border-box;
+  }
+
+  .react-resizable-handle {
+    z-index: 1;
+  }
+}
