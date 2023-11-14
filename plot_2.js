@@ -1,4 +1,4 @@
-var spec = {
+var plot_spec = {
     "title": "Plot 2",
     "subtitle": "Example",
     //"static": false,
@@ -59,4 +59,4 @@ var spec = {
     ]
 };
                     
-export { spec };
+export { plot_spec };

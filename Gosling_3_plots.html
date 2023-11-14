@@ -17,25 +17,28 @@
 </head>
 
 <body>
-    <div id="plot-1-container"></div>
-    <div id="plot-2-container"></div>
-    <div id="plot-3-container"></div> 
+    <div id="plots-container"></div>
+
     <script type="module">
         import { embed } from 'gosling.js';
 
-        // Plot 1
-        import { spec as plot_1_Spec } from './plot_1.js';
-        embed(document.getElementById('plot-1-container'), plot_1_Spec);
+        // Import specifications for each individual plot
+        import { plot_spec as plot_1_Spec } from './plot_1.js';
+        import { plot_spec as plot_2_Spec } from './plot_2.js';
+        import { plot_spec as plot_3_Spec } from './plot_3.js';
 
-        // plot_2
-        import { spec as plot_2_Spec } from './plot_2.js';
-        embed(document.getElementById('plot-2-container'), plot_2_Spec);
-
-        // // plot_3
-        import { spec as plot_3_Spec } from './plot_3.js';
-        embed(document.getElementById('plot-3-container'), plot_3_Spec);
-
+        // Combine specifications of the different plots into a single javascript "Object"
+        const combinedSpec = {
+            "arrangement": "parallel",
+            "views": [
+                plot_1_Spec,
+                plot_2_Spec,
+                plot_3_Spec
+            ]
+        };        
+        embed(document.getElementById('plots-container'), combinedSpec); // Embed the combined specifications into the container
     </script>
-<body>
+</body>
+
 
 </html>
