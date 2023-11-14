@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Gosling Visualization</title>
+    <link rel="stylesheet" href="https://esm.sh/higlass@1.13/dist/hglib.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "react": "https://esm.sh/react@18",
+                "react-dom": "https://esm.sh/react-dom@18",
+                "pixi": "https://esm.sh/pixi.js@6",
+                "gosling.js": "https://esm.sh/gosling.js@0.11.0?external=react,react-dom,pixi"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="plot-1-container"></div>
+    <div id="plot-2-container"></div>
+    <div id="plot-3-container"></div> 
+    <script type="module">
+        import { embed } from 'gosling.js';
+
+        // Plot 1
+        import { spec as plot_1_Spec } from './plot_1.js';
+        embed(document.getElementById('plot-1-container'), plot_1_Spec);
+
+        // plot_2
+        import { spec as plot_2_Spec } from './plot_2.js';
+        embed(document.getElementById('plot-2-container'), plot_2_Spec);
+
+        // // plot_3
+        import { spec as plot_3_Spec } from './plot_3.js';
+        embed(document.getElementById('plot-3-container'), plot_3_Spec);
+
+    </script>
+<body>
+
+</html>
