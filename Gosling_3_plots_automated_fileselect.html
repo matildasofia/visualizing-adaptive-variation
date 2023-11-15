@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <title>Gosling Visualization</title>
@@ -21,42 +21,61 @@
     <input type="file" id="fileInput">
 
     <script type="module">
+        // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+        // Block of code letting the user input a file that they want to have plotted. 
+        // An URL will thereafter be generated from this selected file
+        // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+
         document.addEventListener('DOMContentLoaded', function () {
-            // Import specifications for each individual plot
-            import('./plot_3_automated_url.js').then(({ plot_spec: plot_3_Spec }) => {
-                const fileInput = document.getElementById('fileInput');
+            const fileInput = document.getElementById('fileInput');
+            
+            fileInput.addEventListener('change', function () {
+                const selectedFile = fileInput.files[0];
 
+                // Check if a file is selected
+                if (selectedFile) {
+                    // Generate a URL from the selected file
+                    const fileURL = URL.createObjectURL(selectedFile);
 
-                fileInput.addEventListener('change', function () {
-                    const selectedFile = fileInput.files[0];
-
-                    if (selectedFile) {
-                        const fileURL = URL.createObjectURL(selectedFile);
-
-                        // Update the plot_spec with the dynamically generated URL
-                        if (plot_3_Spec.tracks && plot_3_Spec.tracks.length > 0) {
-                            plot_3_Spec.tracks[0].data.url = fileURL; // Updated field
-
-                            // Log the updated plot_spec for testing (you can remove this in production)
-                            console.log(plot_3_Spec);
-                            // Combine specifications of the different plots into a single javascript "Object"                             
-                            import('gosling.js').then(({ embed }) => {
-                                const combinedSpec = {
-                                    "arrangement": "parallel",
-                                    "views": [
-                                        plot_3_Spec
-                                    ]
-                                };
-                                // Embed the combined specifications (combinedSpec) into the container
-                                embed(document.getElementById('plots-container'), combinedSpec).catch(error => console.error(error));
-                            }).catch(error => console.error(error));
-                        } else {
-                            console.error('Invalid plot specification:', plot_3_Spec);
-                        }
-                    }
-                });
-            }).catch(error => console.error(error));
+                    // Calling the plotting function 
+                    GoslingPlotWithLocalData(document.getElementById('plots-container'), fileURL);
+                }            
+            });
         });
+
+        // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+        // Plotting using gosling.js 
+        // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+        
+        // Importing specifications for each individual plot
+        import { embed } from 'gosling.js';
+        
+        import { plot_spec as plot_3_Spec } from './plot_3_automated_url.js';
+
+        // Function that creates a plot using gosling.js with the user-selected data file
+        async function GoslingPlotWithLocalData(container, fileURL) {
+            try {
+                // Update the plot_spec with the dynamically generated URL
+                if (plot_3_Spec.tracks && plot_3_Spec.tracks.length > 0) {
+                    plot_3_Spec.tracks[0].data.url = fileURL;
+                    // // Log the updated plot_spec for testing 
+                    // console.log('Updated Plot Spec:', plot_3_Spec);
+
+                    // Combine specifications of the different plots into a single javascript "Object"
+                    const combinedSpec = {
+                        "arrangement": "parallel",
+                        "views": [plot_3_Spec]
+                    };
+
+                    // Embed the combined specifications (combinedSpec) into the container
+                    embed(container, combinedSpec).catch(error => console.error(error));
+                } else {
+                    console.error('Invalid plot specification:', plot_3_Spec);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
     </script>
 </body>
 
