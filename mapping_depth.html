@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gosling Visualization</title>
+    <link rel="stylesheet" href="https://esm.sh/higlass@1.13/dist/hglib.css">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/pixi.js@6/dist/browser/pixi.min.js"></script>
+    <script src="https://unpkg.com/higlass@1.6/dist/hglib.min.js"></script>
+    <script src="https://unpkg.com/gosling.js@0.10.3/dist/gosling.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "react": "https://esm.sh/react@18",
+                "react-dom": "https://esm.sh/react-dom@18",
+                "pixi": "https://esm.sh/pixi.js@6",
+                "gosling.js": "https://esm.sh/gosling.js@0.11.0?external=react,react-dom,pixi"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="gosling-container"></div>
+    <script type="module">
+        import { embed } from 'gosling.js';
+
+        import { spec as mappingSpec } from './mapping_depth.js';
+        embed(document.getElementById('gosling-container'), mappingSpec);
+
+        /* var dataUrl = mappingSpec.tracks[0].data.url;
+       fetch(dataUrl)
+           .then(response => response.text())
+           .then(data => {
+               document.getElementById('gosling-container').innerText = data;
+           }) */
+        var samples = mappingSpec.tracks[0].data.value;
+
+        console.log(samples);
+
+
+       //console.log(data);
+    </script>
+</body>
+</html>
