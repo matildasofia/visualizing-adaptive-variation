@@ -1,3 +1,7 @@
-/data/
+# Ignore all files in the 'data' directory
+data/*
+
+# Except for 'readme.md'
+!data/README.md
 
 .DS_Store
