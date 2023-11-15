@@ -13,17 +13,18 @@ var plot_spec = {
             "data": {
                 "url": "",
                 "type": "csv",
-                "column": "START",
-                "value": "all_PI",
+                "column": "POS",
+                "value": "FST",
+                "binSize": 10,
                 "sampleLength": "100000",
             },
-
-            "mark": "line",
-            "x": { "field": "START", "type": "genomic", "axis": "bottom" },
-            "y": { "field": "all_PI", "type": "quantitative", "axis": "left", "domain": [0, 1] },
-            "color": { "value": "red" },
-            "opacity": { "value": 0.5 },
-            "size": { "value": 2 },
+            "mark": "point",
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
+            "y": { "field": "FST", "type": "quantitative", "axis": "none", "domain": [0, 1] },
+            "color": { "field": "TYPE", "type": "nominal", "legend": true },
+            "opacity": { "value": 0.8 },
+            "size": { "value": 4 },
+  
 
         },
     ]
