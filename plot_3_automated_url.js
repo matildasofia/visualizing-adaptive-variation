@@ -10,14 +10,6 @@ var plot_spec = {
     "assembly": "unknown",
     "tracks": [
         {
-            // "data": {
-            //     "url": "C:\Users\jonat\GitHub\Visualizing-adaptive-variation\data\ALL.at_vs_me.consolidated_windows.1000bp.GT.seq_s_18363.csv",
-            //     "type": "csv",
-            //     "column": "START",
-            //     "value": "all_PI",
-            //     "sampleLength": "100000",
-            // },
-
             "data": {
                 "url": "",
                 "type": "csv",

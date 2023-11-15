@@ -22,8 +22,10 @@
 
     <script type="module">
         document.addEventListener('DOMContentLoaded', function () {
+            // Import specifications for each individual plot
             import('./plot_3_automated_url.js').then(({ plot_spec: plot_3_Spec }) => {
                 const fileInput = document.getElementById('fileInput');
+
 
                 fileInput.addEventListener('change', function () {
                     const selectedFile = fileInput.files[0];
@@ -32,18 +34,20 @@
                         const fileURL = URL.createObjectURL(selectedFile);
 
                         // Update the plot_spec with the dynamically generated URL
-                        if (plot_3_Spec.views && plot_3_Spec.views.length > 0 && plot_3_Spec.views[0].tracks && plot_3_Spec.views[0].tracks.length > 0) {
-                            plot_3_Spec.views[0].tracks[0].data.url = fileURL;
+                        if (plot_3_Spec.tracks && plot_3_Spec.tracks.length > 0) {
+                            plot_3_Spec.tracks[0].data.url = fileURL; // Updated field
 
                             // Log the updated plot_spec for testing (you can remove this in production)
                             console.log(plot_3_Spec);
-
-                            // Embed the combined specifications into the container
+                            // Combine specifications of the different plots into a single javascript "Object"                             
                             import('gosling.js').then(({ embed }) => {
                                 const combinedSpec = {
                                     "arrangement": "parallel",
-                                    "views": [plot_3_Spec]
+                                    "views": [
+                                        plot_3_Spec
+                                    ]
                                 };
+                                // Embed the combined specifications (combinedSpec) into the container
                                 embed(document.getElementById('plots-container'), combinedSpec).catch(error => console.error(error));
                             }).catch(error => console.error(error));
                         } else {
