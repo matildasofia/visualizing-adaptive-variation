@@ -65,14 +65,17 @@
                     const combinedSpec = {
                         "arrangement": "parallel",
                         "views": [plot_3_Spec]
-                    };
+                                     };
 
                     // Embed the combined specifications (combinedSpec) into the container
                     embed(container, combinedSpec).catch(error => console.error(error));
-                } else {
+                } 
+                
+                else {
                     console.error('Invalid plot specification:', plot_3_Spec);
                 }
-            } catch (error) {
+            } 
+            catch (error) {
                 console.error(error);
             }
         }
