@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Gosling Visualization</title>
+    <link rel="stylesheet" href="https://esm.sh/higlass@1.13/dist/hglib.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "react": "https://esm.sh/react@18",
+                "react-dom": "https://esm.sh/react-dom@18",
+                "pixi": "https://esm.sh/pixi.js@6",
+                "gosling.js": "https://esm.sh/gosling.js@0.11.0?external=react,react-dom,pixi"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="plots-container"></div>
+    <input type="file" id="fileInput">
+
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', function () {
+            import('./plot_3_automated_url.js').then(({ plot_spec: plot_3_Spec }) => {
+                const fileInput = document.getElementById('fileInput');
+
+                fileInput.addEventListener('change', function () {
+                    const selectedFile = fileInput.files[0];
+
+                    if (selectedFile) {
+                        const fileURL = URL.createObjectURL(selectedFile);
+
+                        // Update the plot_spec with the dynamically generated URL
+                        if (plot_3_Spec.views && plot_3_Spec.views.length > 0 && plot_3_Spec.views[0].tracks && plot_3_Spec.views[0].tracks.length > 0) {
+                            plot_3_Spec.views[0].tracks[0].data.url = fileURL;
+
+                            // Log the updated plot_spec for testing (you can remove this in production)
+                            console.log(plot_3_Spec);
+
+                            // Embed the combined specifications into the container
+                            import('gosling.js').then(({ embed }) => {
+                                const combinedSpec = {
+                                    "arrangement": "parallel",
+                                    "views": [plot_3_Spec]
+                                };
+                                embed(document.getElementById('plots-container'), combinedSpec).catch(error => console.error(error));
+                            }).catch(error => console.error(error));
+                        } else {
+                            console.error('Invalid plot specification:', plot_3_Spec);
+                        }
+                    }
+                });
+            }).catch(error => console.error(error));
+        });
+    </script>
+</body>
+
+</html>
