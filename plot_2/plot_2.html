@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gosling Visualization</title>
+    <link rel="stylesheet" href="https://esm.sh/higlass@1.13/dist/hglib.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "react": "https://esm.sh/react@18",
+                "react-dom": "https://esm.sh/react-dom@18",
+                "pixi": "https://esm.sh/pixi.js@6",
+                "gosling.js": "https://esm.sh/gosling.js@0.11.0?external=react,react-dom,pixi"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="gosling-container"></div>
+    <script type="module">
+        import { embed } from 'gosling.js';
+
+        import { plot_spec as diversitySpec } from './plot_2.js';
+        embed(document.getElementById('gosling-container'), diversitySpec);
+
+        /* var dataUrl = mappingSpec.tracks[0].data.url;
+        fetch(dataUrl)
+           .then(response => response.text())
+           .then(data => {
+               document.getElementById('gosling-container').innerText = data;
+           }) */
+        //var samples = mappingSpec.tracks[0].data.value;
+
+        //console.log(samples);
+
+
+       //console.log(data);
+    </script>
+</body>
+</html>
