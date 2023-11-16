@@ -13,6 +13,7 @@ var plot_spec = {
             "data": {
                 "url": "",
                 "type": "csv",
+                "separator": "\t",
                 "column": "POS",
                 "value": "FST",
                 "binSize": 10,
