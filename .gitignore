@@ -1,6 +1,8 @@
 # Ignore all files in the 'data' directory
 data/*
 
+/gosling
+
 # Except for 'readme.md'
 !data/README.md
 
