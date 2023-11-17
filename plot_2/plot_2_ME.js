@@ -1,4 +1,4 @@
-var plot_spec = {
+var plot_spec_ME = {
     "title": "Diversity Mediterranean",
     "subtitle": "A visualization of Theta, pi and tajimas D.",
     "static": false,
@@ -19,7 +19,7 @@ var plot_spec = {
                 "sampleLength": "100000", //how many rows the file is
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom" }, //think legend should show whats shown on the axis, but no.
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" }, //think legend should show whats shown on the axis, but no.
             "y": { "field": "me_THETA", "type": "quantitative", "axis": "left" },
             "color": { "value": "orange", "title": "Theta" },
             "opacity": { "value": 0.8 },
@@ -35,7 +35,7 @@ var plot_spec = {
                 "sampleLength": "100000",
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "none" },
+            "x": { "field": "POS", "type": "genomic", "axis": "none", "linkingId": "link-1" },
             "y": { "field": "me_PI", "type": "quantitative", "axis": "none" },
             "color": { "value": "purple" },
             "size": { "value": 2 },
@@ -50,8 +50,8 @@ var plot_spec = {
                 "sampleLength": "100000", 
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "none" },
-            "y": { "field": "me_TD", "type": "quantitative", "axis": "right", "domain": [-2, 2] }, 
+            "x": { "field": "POS", "type": "genomic", "axis": "none", "linkingId": "link-1" },
+            "y": { "field": "me_TD", "type": "quantitative", "axis": "right", "domain": [-2.5, 2.5] }, 
             "color": { "value": "green" },
             "opacity": { "value": 0.8 },
             "size": { "value": 2 },
