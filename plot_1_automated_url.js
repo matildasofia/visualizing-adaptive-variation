@@ -1,5 +1,5 @@
 var plot_spec = {
-    "title": "Plot 3",
+    "title": "FST - Plot 1",
     "subtitle": "Example",
     //"static": false,
     //"layout": { type: 'linear', },
@@ -25,10 +25,25 @@ var plot_spec = {
             "color": { "field": "TYPE", "type": "nominal", "legend": true },
             "opacity": { "value": 0.8 },
             "size": { "value": 4 },
+            },
+        {
+            "data": {
+                "url": "",
+                "type": "csv",
+                "separator": "\t",
+                "column": "POS", 
+                "value": "FST",
   
-
-        },
-    ]
-};
-                    
+                "sampleLength": "100000",
+            },
+            "mark": "line",
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
+            "y": { "field": "FST", "type": "quantitative", "axis": "left", "domain": [0, 1] },
+  
+            "color": { "value": "darkblue" },
+            "opacity": { "value": 0.5 },
+            "size": { "value": 2 }
+                }                ]
+            };
+            
 export { plot_spec };
