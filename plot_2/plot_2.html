@@ -24,12 +24,14 @@
 
         // Combine specifications of the different plots into a single javascript "Object"
         const combinedSpec = {
-            "arrangement": "parallel",
+            "arrangement": "horizontal", //vill ha parallel men då sätts de på varandra?
             "views": [
                 diversitySpecAT,
                 diversitySpecME,
             ]
         }; 
+
+        //TODO: legend för axklar, legend för streck, få till rätt upplägg på views.
 
         embed(document.getElementById('gosling-container'), combinedSpec); // Embed the combined specifications into the container
     </script>
