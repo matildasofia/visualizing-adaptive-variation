@@ -39,19 +39,18 @@ const iterations = Math.ceil(filesInFolder.length / filesPerIteration);
 
 // Read the template HTML file
 const template = fs.readFileSync('./template.html', 'utf-8');
+//const template = fs.readFileSync('./test.html', 'utf-8');
 
 // Iterate through the files and generate HTML files
 for (let i = 0; i < iterations; i++) {
   // Extract a chunk of files for this iteration
   const filesForIteration = filesInFolder.slice(i * filesPerIteration, (i + 1) * filesPerIteration);
-
+  
+  //const htmlContent = test.replace(
   const htmlContent = template.replace(
     /const filePaths = \[\];/,
     `const filePaths = ${JSON.stringify(filesForIteration)};`
   );
-
-  // Replace the placeholder with actual file paths
-  //const htmlContent = template.replace("const filePaths = [", `const filePaths = ${JSON.stringify(filesForIteration)}`);
 
   // Write the HTML file to the output folder
   fs.writeFileSync(`${outputFolder}plot_${i}.html`, htmlContent, 'utf-8');
