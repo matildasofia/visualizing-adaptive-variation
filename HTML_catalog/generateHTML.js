@@ -11,11 +11,11 @@ const sequenceNames = [
 const path = '../data/gene_regions/{sequenceName}.{fileType}.tsv';
 
 // Define the file types you want to repeat
-const fileTypes = ['snps', 'windows', 'windows', 'windows', 'windows', 'mappings.windows_1000.at', 'mappings.windows_1000.at'];
+const fileTypes = ['snps', 'windows', 'windows', 'windows', 'windows', 'windows', 'windows', 'windows', 'mappings.windows_1000.me', 'mappings.windows_1000.me', 'mappings.windows_1000.at','mappings.windows_1000.at'];
 
 const filesInFolder = sequenceNames.flatMap((sequenceName, sequenceIndex) => {
   return fileTypes.map((fileType, fileTypeIndex) => {
-    if (fileTypeIndex >= 5) {
+    if (fileTypeIndex >= 8) {
       // Use a different path for the last two file types
       return path.replace('{sequenceName}', sequenceName).replace('{fileType}', fileType).replace('../data/gene_regions/', '../data/gene_regions_data_mappings/');
     } else {
@@ -24,10 +24,10 @@ const filesInFolder = sequenceNames.flatMap((sequenceName, sequenceIndex) => {
   });
 });
 // Number of files to include in each iteration
-const filesPerIteration = 7;
+const filesPerIteration = 12;
 
 // Output folder for generated HTML files
-const outputFolder = '../generated_html/';
+const outputFolder = '../HTML_catalog/';
 
 // Ensure the output folder exists
 if (!fs.existsSync(outputFolder)) {

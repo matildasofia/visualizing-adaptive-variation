@@ -1,4 +1,4 @@
-var plot_spec_ME = {
+var plot_spec = {
     "title": "Mapping depth and nr of samples, normalized (window size: 1000)",
     "subtitle": "Mapping depth and nr of samples.",
     "static": false,
@@ -18,7 +18,7 @@ var plot_spec_ME = {
     "tracks": [
         {
             "data": {
-                "url": "../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.me.tsv",
+                "url": "",
                 "type": "csv",
                 "separator": "\t",
                 "column": "POS",
@@ -41,7 +41,7 @@ var plot_spec_ME = {
         },
         {
             "data": {
-                "url": "../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.me.tsv",
+                "url": "",
                 "type": "csv",
                 "separator": "\t",
                 "column": "POS",
@@ -57,7 +57,7 @@ var plot_spec_ME = {
         },
         {
             "data": {
-                "url": "../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.at.tsv",
+                "url": "",
                 "type": "csv",
                 "separator": "\t",
                 "column": "POS",
@@ -73,7 +73,7 @@ var plot_spec_ME = {
         },
         {
             "data": {
-                "url": "../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.at.tsv",
+                "url": "",
                 "type": "csv",
                 "separator": "\t",
                 "column": "POS",
@@ -139,4 +139,4 @@ var plot_spec_ME = {
 }
 */
 
-export { plot_spec_ME }; 
+export { plot_spec}; 
