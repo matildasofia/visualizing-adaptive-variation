@@ -37,7 +37,7 @@
     <div id="plot-container-2" class="plot-container"></div>
 
     <script type="module">
-        const filePaths = ["../../data/gene_regions/seq_c_34941.REF_STRG_1_77343_XLOC_008605.snps.tsv","../../data/gene_regions/seq_c_34941.REF_STRG_1_77343_XLOC_008605.windows.tsv","../../data/gene_regions/seq_c_34941.REF_STRG_1_77343_XLOC_008605.windows.tsv","../../data/gene_regions/seq_c_34941.REF_STRG_1_77343_XLOC_008605.windows.tsv","../../data/gene_regions/seq_c_34941.REF_STRG_1_77343_XLOC_008605.windows.tsv","../../data/gene_regions_data_mappings/seq_c_34941.REF_STRG_1_77343_XLOC_008605.mappings.windows_1000.at.tsv","../../data/gene_regions_data_mappings/seq_c_34941.REF_STRG_1_77343_XLOC_008605.mappings.windows_1000.at.tsv"];
+        const filePaths = [];
 
         document.addEventListener('DOMContentLoaded', function () {
             filePaths.forEach(function (filePath, button_data_track_number) {
@@ -60,9 +60,9 @@
         }
 
         import { embed } from 'gosling.js';
-        import { plot_spec as plot_1_Spec } from '../../plot_1_automated_url.js';
-        import { plot_spec as plot_2_Spec } from '../../plot_2_automated_url.js';
-        import { plot_spec as plot_3_Spec } from '../../plot_3_automated_url.js';
+        import { plot_spec as plot_1_Spec } from '../plot_1_automated_url.js';
+        import { plot_spec as plot_2_Spec } from '../plot_2_automated_url.js';
+        import { plot_spec as plot_3_Spec } from '../plot_3_automated_url.js';
 
         // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
         // Plotting using gosling.js 

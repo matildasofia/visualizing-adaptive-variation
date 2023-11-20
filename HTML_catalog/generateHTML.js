@@ -8,7 +8,7 @@ const sequenceNames = [
 ];
 
 // Define the template for file paths
-const path = '../../data/gene_regions/{sequenceName}.{fileType}.tsv';
+const path = '../data/gene_regions/{sequenceName}.{fileType}.tsv';
 
 // Define the file types you want to repeat
 const fileTypes = ['snps', 'windows', 'windows', 'windows', 'windows', 'mappings.windows_1000.at', 'mappings.windows_1000.at'];
@@ -17,7 +17,7 @@ const filesInFolder = sequenceNames.flatMap((sequenceName, sequenceIndex) => {
   return fileTypes.map((fileType, fileTypeIndex) => {
     if (fileTypeIndex >= 5) {
       // Use a different path for the last two file types
-      return path.replace('{sequenceName}', sequenceName).replace('{fileType}', fileType).replace('../../data/gene_regions/', '../../data/gene_regions_data_mappings/');
+      return path.replace('{sequenceName}', sequenceName).replace('{fileType}', fileType).replace('../data/gene_regions/', '../data/gene_regions_data_mappings/');
     } else {
       return path.replace('{sequenceName}', sequenceName).replace('{fileType}', fileType);
     }
