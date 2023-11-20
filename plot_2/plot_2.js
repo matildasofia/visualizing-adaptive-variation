@@ -21,7 +21,7 @@ var plot_spec_AT = {
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" }, //think legend should show whats shown on the axis, but no.
             "y": { "field": "at_THETA", "type": "quantitative", "axis": "left" },
-            "color": { "value": "orange", "title": "Theta" },
+            "color": { "value": "orange" },
             "opacity": { "value": 0.8 },
             "size": { "value": 2 }, //the width of the line
         },

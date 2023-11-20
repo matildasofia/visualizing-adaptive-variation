@@ -1,6 +1,6 @@
 var plot_spec = {
-    "title": "FST - Plot 1",
-    "subtitle": "Example",
+    "title": "FST",
+    "subtitle": "Per base and per kbase",
     //"static": false,
     //"layout": { type: 'linear', },
     "xDomain": { "interval": [0, 200000] },
