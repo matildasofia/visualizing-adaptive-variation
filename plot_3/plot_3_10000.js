@@ -11,7 +11,7 @@ var plot_spec_ME = {
     "tracks": [
         {
             "data": {
-                "url": "../gosling/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_10000.me.tsv",
+                "url": "../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_10000.me.tsv",
                 "type": "csv",
                 "separator": "\t",
                 "column": "POS",
@@ -27,7 +27,7 @@ var plot_spec_ME = {
         },
         {
             "data": {
-                "url": "../gosling/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_10000.me.tsv",
+                "url": "../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_10000.me.tsv",
                 "type": "csv",
                 "separator": "\t",
                 "column": "POS",
@@ -43,7 +43,7 @@ var plot_spec_ME = {
         },
         {
             "data": {
-                "url": "../gosling/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_10000.at.tsv",
+                "url": "../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_10000.at.tsv",
                 "type": "csv",
                 "separator": "\t",
                 "column": "POS",
@@ -59,7 +59,7 @@ var plot_spec_ME = {
         },
         {
             "data": {
-                "url": "../gosling/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_10000.at.tsv",
+                "url": "../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_10000.at.tsv",
                 "type": "csv",
                 "separator": "\t",
                 "column": "POS",
