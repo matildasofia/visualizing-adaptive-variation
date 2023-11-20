@@ -35,9 +35,10 @@
     <div id="plot-container-0" class="plot-container"></div>
     <div id="plot-container-1" class="plot-container"></div>
     <div id="plot-container-2" class="plot-container"></div>
+    <div id="plot-container-3" class="plot-container"></div>
 
     <script type="module">
-        const filePaths = ["../../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.snps.tsv","../../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.windows.tsv","../../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.windows.tsv","../../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.windows.tsv","../../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.windows.tsv","../../data/gene_regions_data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.at.tsv","../../data/gene_regions_data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.at.tsv"];
+        const filePaths = ["../data/gene_regions/seq_c_37243.REF_TRIN_14_03138_XLOC_008654.snps.tsv","../data/gene_regions/seq_c_37243.REF_TRIN_14_03138_XLOC_008654.windows.tsv","../data/gene_regions/seq_c_37243.REF_TRIN_14_03138_XLOC_008654.windows.tsv","../data/gene_regions/seq_c_37243.REF_TRIN_14_03138_XLOC_008654.windows.tsv","../data/gene_regions/seq_c_37243.REF_TRIN_14_03138_XLOC_008654.windows.tsv","../data/gene_regions/seq_c_37243.REF_TRIN_14_03138_XLOC_008654.windows.tsv","../data/gene_regions/seq_c_37243.REF_TRIN_14_03138_XLOC_008654.windows.tsv","../data/gene_regions/seq_c_37243.REF_TRIN_14_03138_XLOC_008654.windows.tsv","../data/gene_regions_data_mappings/seq_c_37243.REF_TRIN_14_03138_XLOC_008654.mappings.windows_1000.me.tsv","../data/gene_regions_data_mappings/seq_c_37243.REF_TRIN_14_03138_XLOC_008654.mappings.windows_1000.me.tsv","../data/gene_regions_data_mappings/seq_c_37243.REF_TRIN_14_03138_XLOC_008654.mappings.windows_1000.at.tsv","../data/gene_regions_data_mappings/seq_c_37243.REF_TRIN_14_03138_XLOC_008654.mappings.windows_1000.at.tsv"];
 
         document.addEventListener('DOMContentLoaded', function () {
             filePaths.forEach(function (filePath, button_data_track_number) {
@@ -60,9 +61,10 @@
         }
 
         import { embed } from 'gosling.js';
-        import { plot_spec as plot_1_Spec } from '../../plot_1_automated_url.js';
-        import { plot_spec as plot_2_Spec } from '../../plot_2_automated_url.js';
-        import { plot_spec as plot_3_Spec } from '../../plot_3_automated_url.js';
+        import { plot_spec as plot_1_Spec } from '../plot_1_automated_url.js';
+        import { plot_spec_AT as plot_2_Spec_AT} from '../plot_2/plot_2.js';
+        import { plot_spec_ME as plot_2_Spec_ME} from '../plot_2/plot_2.js';
+        import { plot_spec as plot_3_Spec } from '../plot_3/plot_3_1000.js';
 
         // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
         // Plotting using gosling.js 
@@ -78,13 +80,17 @@
                     plotSpec = plot_1_Spec;
                     containerId = 'plot-container-0';
                 } else if (button_data_track_number >= 2 && button_data_track_number <= 4) {
-                    trackData = plot_2_Spec.tracks[button_data_track_number - 2].data;
-                    plotSpec = plot_2_Spec;
+                    trackData = plot_2_Spec_AT.tracks[button_data_track_number - 2].data;
+                    plotSpec = plot_2_Spec_AT;
                     containerId = 'plot-container-1';
-                } else if (button_data_track_number >= 5 && button_data_track_number <= 6) {
-                    trackData = plot_3_Spec.tracks[button_data_track_number - 5].data;
-                    plotSpec = plot_3_Spec;
+                } else if (button_data_track_number >= 5 && button_data_track_number <= 7) {
+                    trackData = plot_2_Spec_ME.tracks[button_data_track_number - 5].data;
+                    plotSpec = plot_2_Spec_ME;
                     containerId = 'plot-container-2';
+                } else if (button_data_track_number >= 8 && button_data_track_number <= 11) {
+                    trackData = plot_3_Spec.tracks[button_data_track_number - 8].data;
+                    plotSpec = plot_3_Spec;
+                    containerId = 'plot-container-3';
                 } else {
                     console.error('Invalid button_data_track_number:', button_data_track_number);
                     return;
