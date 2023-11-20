@@ -25,6 +25,10 @@ var plot_spec = {
             "color": { "field": "TYPE", "type": "nominal", "legend": true },
             "opacity": { "value": 0.8 },
             "size": { "value": 4 },
+            "tooltip": [
+            {"field": "FST", "type": "quantitative", "format":"0.2f","alt":"SNPs (per bp) - FST:"}
+                   ],              
+            
             },
         {
             "data": {
@@ -42,7 +46,10 @@ var plot_spec = {
   
             "color": { "value": "darkblue" },
             "opacity": { "value": 0.5 },
-            "size": { "value": 2 }
+            "size": { "value": 2 },
+            "tooltip": [
+                {"field": "FST", "type": "quantitative", "format":"0.2f","alt":"Window-based (per kB) - FST:"}
+                       ],  
                 }                ]
             };
             

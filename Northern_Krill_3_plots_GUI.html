@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gosling Visualization</title>
+    <link rel="stylesheet" href="https://esm.sh/higlass@1.13/dist/hglib.css">
+    <!-- 0.12.0 is the latest gosling version -->
+    <script type="importmap">
+        {
+            "imports": {
+                "react": "https://esm.sh/react@18",
+                "react-dom": "https://esm.sh/react-dom@18",
+                "pixi": "https://esm.sh/pixi.js@6",
+                "gosling.js": "https://esm.sh/gosling.js@0.12.0?external=react,react-dom,pixi"
+            }
+        }
+    </script>
+    <!-- Styling for the body -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #plots-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .plot-container {
+            margin-bottom: 0px; /* Adjust the margin as needed */
+        }
+        #buttons-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Container for buttons -->
+    <div id="buttons-container">
+        <!-- plot 1 - Buttons for FST -->
+        <button class="plot-button" data-track="0">FST - SNPs</button>
+        <input type="file" class="file-input" style="display: none;">
+        <button class="plot-button" data-track="1">FST - Windows</button>
+        <input type="file" class="file-input" style="display: none;">
+        <!-- plot 2 - Buttons for diversity -->
+        <button class="plot-button" data-track="2">Diversity data (Mediterranean & Atlantic)</button>
+        <input type="file" class="file-input" style="display: none;">
+        <!-- plot 3 - Buttons for Mapping depths -->
+        <button class="plot-button" data-track="3">Mapping depths - Atlantic</button>
+        <input type="file" class="file-input" style="display: none;">
+        <button class="plot-button" data-track="4">Mapping depths - Mediterranean</button>
+        <input type="file" class="file-input" style="display: none;"> 
+    </div>
+    <!-- Container for the plots -->
+    <div id="plot-container-0" class="plot-container"></div>
+    <div id="plot-container-1" class="plot-container"></div>
+    <div id="plot-container-2" class="plot-container"></div>
+    <script type="module">
+        // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+        // Block of code letting the user input the file(s) that they want to have plotted. 
+        // As gosling.js requires data from URLs for plotting, URLs are created for each of the files.
+        // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+        // Document Loaded Event Listeners - Makes sure that the buttons appear only after the entire webpage has finished loading 
+        document.addEventListener('DOMContentLoaded', function () {
+            // Grouping all the file-input buttons into a list
+            const fileInputs = document.querySelectorAll('.file-input');
+            // Button Click Event Listeners - Triggers a popup GUI to choose files from, once you have clicked on a button
+            document.querySelectorAll('.plot-button').forEach(function (button, button_data_track_num) {
+                // Adding click event listener to each button
+                button.addEventListener('click', function () {
+                    fileInputs[button_data_track_num].click();
+                });
+            });
+            // File Input Event Listeners - Specifies what happens after local data files have been selected
+            fileInputs.forEach(function (fileInput, button_data_track_num) {
+                // Adding change event listener to each file-input button
+                fileInput.addEventListener('change', function () {
+                    URLfromFile(fileInputs, button_data_track_num);
+                });
+            });
+        });
+        
+        // Function that generates a URL for the selected file(s)
+        async function URLfromFile(fileInputs, button_data_track_number) {
+            // Creating a URL for the selected file
+            const fileURL = URL.createObjectURL(fileInputs[button_data_track_number].files[0]);
+            // Checking if the URL for the file exists
+            if (fileURL) {
+                // Calling the function to plot with local data
+                GoslingPlotWithLocalData(fileURL, button_data_track_number);
+            }
+        }
+        
+        // Importing specifications for each individual plot
+        import { embed } from 'gosling.js';
+        import { plot_spec as plot_1_Spec } from './plot_1_automated_url.js';
+        import { plot_spec as plot_2_Spec } from './plot_2_automated_url.js';
+        import { plot_spec as plot_3_Spec } from './plot_3_automated_url.js';
+        
+        // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+        // Plotting using gosling.js 
+        // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+        // Function that creates a plot using gosling.js with the user-selected data file(s)
+        async function GoslingPlotWithLocalData(fileURL, button_data_track_number) {
+            try {
+                let trackData;
+                let plotSpec;
+                let containerId;
+                if (button_data_track_number >= 0 && button_data_track_number <= 1) {
+                    // if this is the 1st or 2nd datatrack 
+                    // Accessing the data for the selected track based on data-track attribute
+                    trackData = plot_1_Spec.tracks[button_data_track_number].data;
+                    plotSpec = plot_1_Spec;
+                    containerId = 'plot-container-0';
+                    // Updating the 'url' property for the track's data
+                    trackData.url = fileURL;
+                } else if (button_data_track_number == 2) {
+                    plotSpec = plot_2_Spec
+                    containerId = 'plot-container-1';
+
+                    // Atlantic (1st,2nd,3rd track) - Comment away if you only want to see Meditteranian:
+                    plotSpec.tracks.slice(0,3).forEach((track) => {
+                    track.data.url = fileURL;
+                    });
+                    // Meditteranian (4th,5th,6th track): - Comment awy if you only want to see Atlantic 
+                    plotSpec.tracks.slice(3,6).forEach((track) => {
+                    track.data.url = fileURL; 
+                    });
+                    // console.log(JSON.stringify(plotSpec.tracks, null, 2)); // Check the merged tracks
+
+                } else if (button_data_track_number == 3 ) {
+                    // if this is the 6th or 7th datatrack 
+                    // Specifying the Atlantic data
+                    plotSpec = plot_3_Spec;
+                    containerId = 'plot-container-2';
+                    // trackData.url = fileURL;
+                    // Atlantic (1st,2nd track):
+                    plotSpec.tracks.slice(0,2).forEach((track) => {
+                    track.data.url = fileURL;
+                    });
+                    // console.log(JSON.stringify(plotSpec.tracks, null, 2)); // Check the merged tracks
+                }
+
+             else if (button_data_track_number == 4) {
+                    // Specifying the Meditteranian data
+                    plotSpec = plot_3_Spec;
+                    containerId = 'plot-container-2';
+                    // trackData.url = fileURL;
+                    // Meditteranian (3rd,4th track):
+                    plotSpec.tracks.slice(2,4).forEach((track) => {
+                    track.data.url = fileURL; 
+                    });
+                    console.log(JSON.stringify(plotSpec.tracks)); // Check the merged tracks
+
+
+                }     
+                                                     
+               else {
+                    console.error('Invalid button_data_track_number:', button_data_track_number);
+                    return;
+                }
+                // Create a new plot for each container
+                const container = document.getElementById(containerId);
+                const newPlot = await embed(container, plotSpec);
+            } catch (error) {
+                // Handling errors and logging to the console
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>

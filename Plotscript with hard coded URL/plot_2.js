@@ -22,7 +22,11 @@ var plot_spec = {
             "y": { "field": "all_PI", "type": "quantitative", "axis": "left", "domain": [0, 1] },
             "color": { "value": "red" },
             "opacity": { "value": 0.5 },
-            "size": { "value": 2 },
+            "size": { "value": 0.4 },
+            "tooltip": [
+                {"field": "all_PI", "type": "quantitative", "format":"0.2f","alt":"Pi - Nucleotide diversity :"}
+                
+                ],
 
         },
         {
@@ -38,7 +42,11 @@ var plot_spec = {
             "y": { "field": "all_TD", "type": "quantitative", "axis": "left", "domain": [0, 1] },
             "color": { "value": "darkblue" },
             "opacity": { "value": 0.5 },
-            "size": { "value": 2 },
+            "size": { "value": 1 },
+            "tooltip": [
+                {"field": "all_TD", "type": "quantitative", "format":"0.2f","alt":"Tajimas D (Blue):"}
+                
+                ],
         },
         {
             "data": {
@@ -54,6 +62,10 @@ var plot_spec = {
             "color": { "value": "green" },
             "opacity": { "value": 0.5 },
             "size": { "value": 2 },
+            "tooltip": [
+                {"field": "all_THETA", "type": "quantitative", "format":"0.2f","alt":"Theta (green):"}
+                
+                ],
 
         },
     ]
