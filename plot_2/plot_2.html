@@ -19,16 +19,15 @@
     <script type="module">
         import { embed } from 'gosling.js';
 
-        import { plot_spec_AT as diversitySpecAT } from './plot_2.js';
-        import { plot_spec_ME as diversitySpecME } from './plot_2.js';
+        import { plot_spec_AT as diversitySpecAT } from './plot_2_legend.js';
+        //import { plot_spec_ME as diversitySpecME } from './plot_2.js';
 
         // Combine specifications of the different plots into a single javascript "Object"
         const combinedSpec = {
-            "arrangement": "serial", //vill ha parallel men då sätts de på varandra?
-            "style": { "legendTitle": "Legend"},
+            "arrangement": "parallel", //vill ha parallel men då sätts de på varandra?
             "views": [
                 diversitySpecAT,
-                diversitySpecME,
+                //diversitySpecME,
             ]
         }; 
 

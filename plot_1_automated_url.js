@@ -8,6 +8,7 @@ var plot_spec = {
     "width": 1000,
     "height": 200,
     "assembly": "unknown",
+    "style": {"dashed": [3, 3]},
     "tracks": [
         {
             "data": {
@@ -34,7 +35,7 @@ var plot_spec = {
                 "column": "POS", 
                 "value": "FST",
   
-                "sampleLength": "100000",
+                "sampleLength": "270000",
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
@@ -43,7 +44,23 @@ var plot_spec = {
             "color": { "value": "darkblue" },
             "opacity": { "value": 0.5 },
             "size": { "value": 2 }
-                }                ]
-            };
-            
+                },
+        {
+            "data": {
+                "type": "json",
+                "values": [
+                  {"c": "10000", "p": 100000, "v": 0.1},
+                  {"c": "20000", "p": 100000, "v": 0.6},
+                ],
+                "chromosomeField": "c",
+                "genomicFields": ["p"]
+              },
+              "mark": "rule",
+              "x": {"field": "p", "type": "genomic"},
+              "y": {"field": "v", "type": "quantitative", "domain": [0, 0.003]},
+              "strokeWidth": {"field": "v", "type": "quantitative"},
+              "color": {"value": "red"}
+            },                          
+        ]   
+    }; 
 export { plot_spec };
