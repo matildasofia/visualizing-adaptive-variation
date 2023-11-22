@@ -36,6 +36,7 @@
     <div id="plot-container-1" class="plot-container"></div>
     <div id="plot-container-2" class="plot-container"></div>
     <div id="plot-container-3" class="plot-container"></div>
+    <div id="plot-container-4" class="plot-container"></div>
 
     <script type="module">
         const filePaths = [];
@@ -60,11 +61,13 @@
             }
         }
 
+        // Importing specifications for each individual plot
         import { embed } from 'gosling.js';
-        import { plot_spec as plot_1_Spec } from '../plot_1_automated_url.js';
-        import { plot_spec_AT as plot_2_Spec_AT} from '../plot_2/plot_2.js';
-        import { plot_spec_ME as plot_2_Spec_ME} from '../plot_2/plot_2.js';
-        import { plot_spec as plot_3_Spec } from '../plot_3/plot_3_1000.js';
+        import { plot_spec as plot_1_Spec } from './plot_1_FST.js';
+        import { plot_spec as plot_2_π_θ_Spec } from './plot_2_π_θ.js';
+        import { plot_spec as plot_2_td_Spec } from './plot_2_td.js';
+        import { plot_spec as plot_3_Spec_MD_Normalized } from './plot_3_mapping_depths_normalized.js';
+        import { plot_spec as plot_3_Spec_MD} from './plot_3_mapping_depths.js';
 
         // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
         // Plotting using gosling.js 
@@ -75,31 +78,115 @@
                 let trackData;
                 let plotSpec;
                 let containerId;
+                let containerId1
+                let containerId2
+                let containerId3
+                let containerId4
+
+                // ¤¤¤¤¤¤¤¤ If FST plot ¤¤¤¤¤¤¤¤
                 if (button_data_track_number >= 0 && button_data_track_number <= 1) {
+                    // if this is the 1st or 2nd datatrack 
+                    // Accessing the data for the selected track based on data-track attribute
                     trackData = plot_1_Spec.tracks[button_data_track_number].data;
                     plotSpec = plot_1_Spec;
                     containerId = 'plot-container-0';
-                } else if (button_data_track_number >= 2 && button_data_track_number <= 4) {
-                    trackData = plot_2_Spec_AT.tracks[button_data_track_number - 2].data;
-                    plotSpec = plot_2_Spec_AT;
-                    containerId = 'plot-container-1';
-                } else if (button_data_track_number >= 5 && button_data_track_number <= 7) {
-                    trackData = plot_2_Spec_ME.tracks[button_data_track_number - 5].data;
-                    plotSpec = plot_2_Spec_ME;
-                    containerId = 'plot-container-2';
-                } else if (button_data_track_number >= 8 && button_data_track_number <= 11) {
-                    trackData = plot_3_Spec.tracks[button_data_track_number - 8].data;
-                    plotSpec = plot_3_Spec;
-                    containerId = 'plot-container-3';
-                } else {
+                    // Updating the 'url' property for the track's data
+                    trackData.url = fileURL;
+                }   // ¤¤¤¤¤¤¤¤ If Diversity plot ¤¤¤¤¤¤¤¤
+                else if (button_data_track_number == 2) {
+                    // ################ PI AND THETA ################
+                    plotSpec = plot_2_π_θ_Spec;
+                    containerId1 = 'plot-container-1';
+                    // Atlantic (1st,2nd track) - Comment away if you only want to see Meditteranian:
+                    plotSpec.tracks.slice(0,2).forEach((track) => {
+                    track.data.url = fileURL;
+                    });
+
+                    // Meditteranian (3rd,4th track): - Comment awy if you only want to see Atlantic 
+                    plotSpec.tracks.slice(2,4).forEach((track) => {
+                    track.data.url = fileURL; 
+                    });
+                    const container1 = document.getElementById(containerId1);
+                    const newPlot1 = embed(container1, plotSpec);
+
+
+                    // ################ TD ################
+                    plotSpec = plot_2_td_Spec
+                    containerId2 = 'plot-container-2';
+                    // Atlantic (1st track) - Comment away if you only want to see Meditteranian:
+                    plotSpec.tracks.slice(0,1).forEach((track) => {
+                    track.data.url = fileURL;
+                    });
+                    // Mediterranean (2nd track) 
+                    plotSpec.tracks.slice(1,2).forEach((track) => {
+                    track.data.url = fileURL;
+                    });
+                    const container2 = document.getElementById(containerId2);
+                    const newPlot2 = embed(container2, plotSpec);
+                }                
+                else if (button_data_track_number == 3 ) {
+                    // ¤¤¤¤¤¤¤¤¤ Atlantic - Mapping Depth ¤¤¤¤¤¤¤¤¤
+                    plotSpec =  plot_3_Spec_MD;
+                    containerId3 = 'plot-container-3';
+                    // Atlantic (1st,2nd track):
+                    plotSpec.tracks.slice(0,2).forEach((track) => {
+                    track.data.url = fileURL;
+                    });
+                    const container3 = document.getElementById(containerId3);
+                    const newPlot3 = embed(container3, plotSpec);
+
+                    // console.log(JSON.stringify(plotSpec.tracks, null, 2)); // Check the merged tracks               
+
+                    // ¤¤¤¤¤¤¤¤¤ Atlantic - Normalized Mapping Depth ¤¤¤¤¤¤¤¤¤
+                    plotSpec = plot_3_Spec_MD_Normalized;
+                    containerId4 = 'plot-container-4';
+                    // Atlantic (1st,2nd track):
+                    plotSpec.tracks.slice(0,2).forEach((track) => {
+                    track.data.url = fileURL;
+                    });
+                    const container4 = document.getElementById(containerId4);
+                    const newPlot4 = embed(container4, plotSpec);
+
+                    // console.log(JSON.stringify(plotSpec.tracks, null, 2)); // Check the merged tracks
+
+                }
+
+                else if (button_data_track_number == 4) {
+                    // ¤¤¤¤¤¤¤¤¤ Meditteranian - Mapping Depth ¤¤¤¤¤¤¤¤¤
+                    plotSpec =  plot_3_Spec_MD;
+                    containerId3 = 'plot-container-3';
+                    // Meditteranian (3rd,4th track):
+                    plotSpec.tracks.slice(2,4).forEach((track) => {
+                    track.data.url = fileURL; 
+                    });
+                    const container3 = document.getElementById(containerId3);
+                    const newPlot3 = embed(container3, plotSpec);
+
+
+                    // ¤¤¤¤¤¤¤¤¤ Meditteranian - Normalized Mapping Depth ¤¤¤¤¤¤¤¤¤
+                    plotSpec = plot_3_Spec_MD_Normalized;
+                    containerId4 = 'plot-container-4';
+                    // Meditteranian (3rd,4th track):
+                    plotSpec.tracks.slice(2,4).forEach((track) => {
+                    track.data.url = fileURL; 
+                    });
+                    const container4 = document.getElementById(containerId4);
+                    const newPlot4 = embed(container4, plotSpec);
+                    console.log(JSON.stringify(plotSpec.tracks)); // Check the merged tracks
+                }     
+                                                     
+               else {
                     console.error('Invalid button_data_track_number:', button_data_track_number);
                     return;
+                   }
+
+                if (button_data_track_number >= 0 && button_data_track_number <= 1) {
+                    // Create a new plot for each container
+                    const container = document.getElementById(containerId);
+                    const newPlot = await embed(container, plotSpec);
                 }
-                trackData.url = fileURL;
-                const container = document.getElementById(containerId);
-                const newPlot = await embed(container, plotSpec);
-                await newPlot.api.setTrackData(0, trackData);
-            } catch (error) {
+            } 
+            catch (error) {
                 console.error(error);
             }
         }
