@@ -8,7 +8,11 @@ var plot_spec = {
     "width": 1000,
     "height": 200,
     "assembly": "unknown",
-    "tracks": [
+
+
+    // Specifying Light gray color as background color
+    "style": {"background":"#D3D3D3", "backgroundOpacity":0.1},
+        "tracks": [
         {
             "data": {
                 "url": "",
@@ -20,8 +24,8 @@ var plot_spec = {
                 "sampleLength": "100000",
             },
             "mark": "point",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
-            "y": { "field": "FST", "type": "quantitative", "axis": "none", "domain": [0, 1] },
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom"},
+            "y": { "field": "FST", "type": "quantitative", "axis": "none", "domain": [0, 1],"legend":"false" },
             "color": { "field": "TYPE", "type": "nominal", "legend": true },
             "opacity": { "value": 0.8 },
             "size": { "value": 4 },

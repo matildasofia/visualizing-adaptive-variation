@@ -28,7 +28,7 @@ var plot_spec = {
                 "sampleLength": "100000", 
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "none", "linkingId": "link-1" },
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" },
             "y": { "field": "at_TD", "type": "quantitative", "axis": "left", "domain": [-2.5, 2.5] }, 
             "color": { "value": color_td }, // Color for td
             "opacity": { "value": opacity_AT}, // Opacity for Atlantic

@@ -5,7 +5,7 @@ const color_nr_samples = "green"
 const color_mapping_depth = "orange"
 
 var plot_spec = {
-    "title": " Normalized Mapping depths plot - Depth of coverage (orange) & nr of samples (green), normalized (window size: 1000)",
+    "title": " Normalized Mapping depths plot - Depth of coverage (orange) & nr of samples (green) (window size: 1000)",
     "subtitle": "Atlantic population (bold) and Mediterranean (light)",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
     // "description": "At (bold), Me (light)",
