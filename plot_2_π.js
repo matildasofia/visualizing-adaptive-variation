@@ -1,13 +1,13 @@
 const size_val = 1.5;
 const opacity_AT = 1;
-const opacity_ME = 0.5;
-const color_pi_AT = "orange"
-const color_pi_ME = "orange"
+const opacity_ME = 1;
+const color_pi_AT = "darkorange"
+const color_pi_ME = "gold"
 
 var plot_spec = {
-    "title": "Diversity plot - Visualization of Pi (orange)",
+    "title": "Diversity plot - Visualization of Pi",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
-    "subtitle": "Atlantic population (bold) and Mediterranean (light)",
+    "subtitle": "Atlantic population (orange) and Mediterranean (gold)",
 
     "static": false,
     //"layout": { "type": "linear" },
@@ -32,8 +32,8 @@ var plot_spec = {
                 "sampleLength": "100000",
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "none", "linkingId": "link-1" },
-            "y": { "field": "at_PI", "type": "quantitative", "axis": "none" },
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" },
+            "y": { "field": "at_PI", "type": "quantitative", "axis": "left" },
             "color": { "value": color_pi_AT }, // Color for Pi    
             "opacity": { "value": opacity_AT}, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line

@@ -9,9 +9,9 @@ var plot_spec = {
     "height": 200,
     "assembly": "unknown",
 
-
     // Specifying Light gray color as background color
     "style": {"background":"#D3D3D3", "backgroundOpacity":0.1},
+
         "tracks": [
         {
             "data": {

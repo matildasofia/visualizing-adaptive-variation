@@ -7,7 +7,7 @@ const color_theta_ME = "lightblue"
 var plot_spec = {
     "title": "Diversity plot - Visualization of Theta (blue)",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
-    "subtitle": "Atlantic population (bold) and Mediterranean (light)",
+    "subtitle": "Atlantic population (dark) and Mediterranean (light)",
 
     "static": false,
     //"layout": { "type": "linear" },
@@ -16,6 +16,7 @@ var plot_spec = {
     "width": 1000,
     "height": 300,
     "assembly": "unknown",
+
     // Specifying Light gray color as background color
     "style": {"background":"#D3D3D3", "backgroundOpacity":0.1},
 
