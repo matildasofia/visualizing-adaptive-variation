@@ -9,7 +9,8 @@ var plot_spec = {
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
     "subtitle": "Atlantic population (orange) and Mediterranean (gold)",
 
-    "static": false,
+    "static": false, // enables zoom & pan for the tracks
+
     //"layout": { "type": "linear" },
     "xDomain": { "interval": [0, 250000] },
     "alignment": "overlay",
@@ -32,7 +33,7 @@ var plot_spec = {
                 "sampleLength": "100000",
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" },
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId":"GenomicPositions" },
             "y": { "field": "at_PI", "type": "quantitative", "axis": "left" },
             "color": { "value": color_pi_AT }, // Color for Pi    
             "opacity": { "value": opacity_AT}, // Opacity for Mediterranean
@@ -52,7 +53,7 @@ var plot_spec = {
                 "sampleLength": "100000",
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "none", "linkingId": "link-1" },
+            "x": { "field": "POS", "type": "genomic", "axis": "none", "linkingId":"GenomicPositions" },
             "y": { "field": "me_PI", "type": "quantitative", "axis": "none" },
             "color": { "value": color_pi_ME }, // Color for Pi
             "opacity": { "value": opacity_ME}, // Opacity for Mediterranean

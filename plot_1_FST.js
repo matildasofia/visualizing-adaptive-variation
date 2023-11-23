@@ -1,7 +1,7 @@
 var plot_spec = {
     "title": "FST",
     "subtitle": "Per base and per kbase",
-    //"static": false,
+    "static": false, // enables zoom & pan for the tracks
     //"layout": { type: 'linear', },
     "xDomain": { "interval": [0, 200000] },
     "alignment": "overlay",
@@ -10,7 +10,12 @@ var plot_spec = {
     "assembly": "unknown",
 
     // Specifying Light gray color as background color
-    "style": {"background":"#D3D3D3", "backgroundOpacity":0.1},
+//     "style": {
+//         "background":"#D3D3D3", "backgroundOpacity":0.1,
+//         "withinLinkVerticalLines":"true",
+//         "grid":"true"
+
+// },
 
         "tracks": [
         {
@@ -24,8 +29,9 @@ var plot_spec = {
                 "sampleLength": "100000",
             },
             "mark": "point",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom"},
-            "y": { "field": "FST", "type": "quantitative", "axis": "none", "domain": [0, 1],"legend":"false" },
+            // "x": { "field": "POS", "type": "genomic", "axis": "bottom","grid":"true"},
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom","grid":"true","linkingId":"GenomicPositions"},
+            "y": { "field": "FST", "type": "quantitative", "axis": "none", "domain": [0, 1],"legend":"false","grid":"true"},
             "color": { "field": "TYPE", "type": "nominal", "legend": true },
             "opacity": { "value": 0.8 },
             "size": { "value": 4 },
@@ -45,8 +51,9 @@ var plot_spec = {
                 "sampleLength": "100000",
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
-            "y": { "field": "FST", "type": "quantitative", "axis": "left", "domain": [0, 1] },
+            // "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom","linkingId":"GenomicPositions"},
+            "y": { "field": "FST", "type": "quantitative", "axis": "left", "domain": [0, 1]},
   
             "color": { "value": "darkblue" },
             "opacity": { "value": 0.5 },

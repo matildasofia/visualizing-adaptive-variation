@@ -1,6 +1,6 @@
 const size_val = 1.5;
 const opacity_AT = 1;
-const opacity_ME = 1;
+const opacity_ME = 0.7;
 const color_mapping_depth_AT = "purple"
 const color_mapping_depth_ME = "violet"
 
