@@ -1,11 +1,11 @@
 const size_val = 1.5;
 const opacity_AT = 1;
-const opacity_ME = 0.5;
-const color_td = "red"
-
+const opacity_ME = 1;
+const color_theta_AT = "blue"
+const color_theta_ME = "lightblue"
 
 var plot_spec = {
-    "title": "Diversity plot - Visualization of Tajimas D ",
+    "title": "Diversity plot - Visualization of Theta (blue)",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
     "subtitle": "Atlantic population (bold) and Mediterranean (light)",
 
@@ -29,18 +29,20 @@ var plot_spec = {
                 "type": "csv",
                 "separator": "\t",
                 "column": "POS",
-                "value": "at_TD",
-                "sampleLength": "100000", 
+                "value": "at_THETA",
+                "sampleLength": "100000", //how many rows the file is
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" },
-            "y": { "field": "at_TD", "type": "quantitative", "axis": "left", "domain": [-2.5, 2.5] }, 
-            "color": { "value": color_td }, // Color for td
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" }, //think legend should show whats shown on the axis, but no.
+            "y": { "field": "at_THETA", "type": "quantitative", "axis": "left" },
+            "color": { "value": color_theta_AT }, // Color for theta
             "opacity": { "value": opacity_AT}, // Opacity for Atlantic
             "size": { "value": size_val }, //the width of the line
             "tooltip": [
-        {"field": "at_TD", "type": "quantitative", "format":"0.2f","alt":"Atlantic - Tajima's D (TD):"}
-                        ],
+    {"field": "at_THETA", "type": "quantitative", "format":"0.2f","alt":"Atlantic - θ (theta):"}
+                   ],              
+                
+
         },
         // ¤¤¤¤¤¤¤¤¤ Mediterranean  ¤¤¤¤¤¤¤¤¤
         {
@@ -49,21 +51,19 @@ var plot_spec = {
                 "type": "csv",
                 "separator": "\t",
                 "column": "POS",
-                "value": "me_TD",
-                "sampleLength": "100000", 
+                "value": "me_THETA",
+                "sampleLength": "100000", //how many rows the file is
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "none", "linkingId": "link-1" },
-            "y": { "field": "me_TD", "type": "quantitative", "axis": "left", "domain": [-2.5, 2.5] }, 
-            "color": { "value": color_td }, // Color for td
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" }, //think legend should show whats shown on the axis, but no.
+            "y": { "field": "me_THETA", "type": "quantitative", "axis": "none" },
+            "color": { "value": color_theta_ME }, // Color for theta
             "opacity": { "value": opacity_ME}, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line
             "tooltip": [
-        {"field": "me_TD", "type": "quantitative", "format":"0.2f","alt":"Mediterranean - Tajima's D (TD):"}
-                    ],
-        
-        }
-
+        {"field": "me_THETA", "type": "quantitative", "format":"0.2f","alt":"Mediterranean - θ (theta):"}
+        ],
+        },
     ]
 };                   
 export { plot_spec };

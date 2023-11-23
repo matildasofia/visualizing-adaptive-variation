@@ -16,11 +16,6 @@ var plot_spec = {
     "width": 1000,
     "height": 300,
     "assembly": "unknown",
-    // Specifying Light gray color as background color
-    "style": {"background":"#D3D3D3", "backgroundOpacity":0.1},
-
-
-
     "tracks": [
         {
         // ¤¤¤¤¤¤¤¤¤ Atlantic  ¤¤¤¤¤¤¤¤¤

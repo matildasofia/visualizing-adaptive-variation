@@ -1,11 +1,11 @@
 const size_val = 1.5;
 const opacity_AT = 1;
 const opacity_ME = 0.5;
-const color_td = "red"
-
+const color_pi_AT = "orange"
+const color_pi_ME = "orange"
 
 var plot_spec = {
-    "title": "Diversity plot - Visualization of Tajimas D ",
+    "title": "Diversity plot - Visualization of Pi (orange)",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
     "subtitle": "Atlantic population (bold) and Mediterranean (light)",
 
@@ -16,31 +16,30 @@ var plot_spec = {
     "width": 1000,
     "height": 300,
     "assembly": "unknown",
+
     // Specifying Light gray color as background color
     "style": {"background":"#D3D3D3", "backgroundOpacity":0.1},
 
-
-
     "tracks": [
         {
-        // ¤¤¤¤¤¤¤¤¤ Atlantic  ¤¤¤¤¤¤¤¤¤
+        // ¤¤¤¤¤¤¤¤¤ Atlantic  ¤¤¤¤¤¤¤¤¤    
             "data": {
                 "url": "",
                 "type": "csv",
                 "separator": "\t",
                 "column": "POS",
-                "value": "at_TD",
-                "sampleLength": "100000", 
+                "value": "at_PI",
+                "sampleLength": "100000",
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" },
-            "y": { "field": "at_TD", "type": "quantitative", "axis": "left", "domain": [-2.5, 2.5] }, 
-            "color": { "value": color_td }, // Color for td
-            "opacity": { "value": opacity_AT}, // Opacity for Atlantic
+            "x": { "field": "POS", "type": "genomic", "axis": "none", "linkingId": "link-1" },
+            "y": { "field": "at_PI", "type": "quantitative", "axis": "none" },
+            "color": { "value": color_pi_AT }, // Color for Pi    
+            "opacity": { "value": opacity_AT}, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line
             "tooltip": [
-        {"field": "at_TD", "type": "quantitative", "format":"0.2f","alt":"Atlantic - Tajima's D (TD):"}
-                        ],
+        {"field": "at_PI", "type": "quantitative", "format":"0.2f","alt":"Atlantic - π (pi)"}
+                ],
         },
         // ¤¤¤¤¤¤¤¤¤ Mediterranean  ¤¤¤¤¤¤¤¤¤
         {
@@ -49,21 +48,19 @@ var plot_spec = {
                 "type": "csv",
                 "separator": "\t",
                 "column": "POS",
-                "value": "me_TD",
-                "sampleLength": "100000", 
+                "value": "me_PI",
+                "sampleLength": "100000",
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "none", "linkingId": "link-1" },
-            "y": { "field": "me_TD", "type": "quantitative", "axis": "left", "domain": [-2.5, 2.5] }, 
-            "color": { "value": color_td }, // Color for td
+            "y": { "field": "me_PI", "type": "quantitative", "axis": "none" },
+            "color": { "value": color_pi_ME }, // Color for Pi
             "opacity": { "value": opacity_ME}, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line
             "tooltip": [
-        {"field": "me_TD", "type": "quantitative", "format":"0.2f","alt":"Mediterranean - Tajima's D (TD):"}
-                    ],
-        
-        }
-
+        {"field": "me_PI", "type": "quantitative", "format":"0.2f","alt":"Mediterranean - π (pi):"}
+                        ],
+        },
     ]
 };                   
 export { plot_spec };
