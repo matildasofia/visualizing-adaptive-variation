@@ -1,12 +1,11 @@
 const size_val = 1.5;
 const opacity_AT = 1;
-const opacity_ME = 0.4;
-const color_td_AT = "red"
-const color_td_ME = "red"
+const opacity_ME = 0.5;
+const color_td = "red"
 
 
 var plot_spec = {
-    "title": "Visualization of Tajimas D ",
+    "title": "Diversity plot - Visualization of Tajimas D ",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
     "subtitle": "Atlantic population (bold) and Mediterranean (light)",
 
@@ -14,15 +13,9 @@ var plot_spec = {
     //"layout": { "type": "linear" },
     "xDomain": { "interval": [0, 250000] },
     "alignment": "overlay",
-    "width": 1100,
+    "width": 1000,
     "height": 300,
     "assembly": "unknown",
-
-    // Specifying Light gray color as background color
-    "style": {"background":"#D3D3D3", "backgroundOpacity":0.1},
-
-
-
     "tracks": [
         {
         // ¤¤¤¤¤¤¤¤¤ Atlantic  ¤¤¤¤¤¤¤¤¤
@@ -37,7 +30,7 @@ var plot_spec = {
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" },
             "y": { "field": "at_TD", "type": "quantitative", "axis": "left", "domain": [-2.5, 2.5] }, 
-            "color": { "value": color_td_AT }, // Color for td
+            "color": { "value": color_td }, // Color for td
             "opacity": { "value": opacity_AT}, // Opacity for Atlantic
             "size": { "value": size_val }, //the width of the line
             "tooltip": [
@@ -57,7 +50,7 @@ var plot_spec = {
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "none", "linkingId": "link-1" },
             "y": { "field": "me_TD", "type": "quantitative", "axis": "left", "domain": [-2.5, 2.5] }, 
-            "color": { "value": color_td_ME }, // Color for td
+            "color": { "value": color_td }, // Color for td
             "opacity": { "value": opacity_ME}, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line
             "tooltip": [

@@ -1,3 +1,4 @@
+<!--template.html-->
 <!DOCTYPE html>
 <html>
 
@@ -15,28 +16,47 @@
             }
         }
     </script>
-    <!-- Styling for the body -->
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        h1{
+            margin-top: 5vh;
         }
-
-        .plot-container {
-            margin-bottom: 0px;
-            /* Adjust the margin as needed */
+        h2{
+            font-family: 'Roboto', sans-serif;
+            margin:0;
+            margin-left: 5vw;
+        }
+        .double{
+            display: flex;
+            margin:0;
+            padding:0;
+        }
+        .plot-container{
+            margin:0;
+            padding:0;
         }
     </style>
 </head>
 
 <body>
-    <!-- Container for the plots -->
+    <h1></h1>
+    <h2>FST</h2>
     <div id="plot-container-0" class="plot-container"></div>
-    <div id="plot-container-1" class="plot-container"></div>
-    <div id="plot-container-2" class="plot-container"></div>
+    <h2>Diversity plots</h2>
+    <div class="double">
+        <div id="plot-container-1"></div>
+        <div id="plot-container-2"></div>
+    </div>
     <div id="plot-container-3" class="plot-container"></div>
-    <div id="plot-container-4" class="plot-container"></div>
+    <h2>Mapping depth plots</h2>
+    <div class="double">
+        <div id="plot-container-4"></div>
+        <div id="plot-container-5"></div>
+    </div>
+    <h2>Normalized mapping depth plots</h2>
+    <div class="double">
+        <div id="plot-container-6"></div>
+        <div id="plot-container-7"></div>
+    </div>
 
     <script type="module">
         const filePaths = [];
@@ -47,12 +67,9 @@
             });
         });
 
-        // Modify the function to accept file paths directly
         async function URLfromFile(filePath, button_data_track_number) {
             try {
-                // Creating a URL for the specified file path
                 const fileURL = URL.createObjectURL(new File([await fetch(filePath).then(response => response.blob())], filePath));
-                // Checking if the URL for the file exists
                 if (fileURL) {
                     GoslingPlotWithLocalData(fileURL, button_data_track_number);
                 }
@@ -61,18 +78,17 @@
             }
         }
 
-        // Importing specifications for each individual plot
         import { embed } from 'gosling.js';
-        import { plot_spec as plot_1_Spec } from './plot_1_FST.js';
-        import { plot_spec as plot_2_π_θ_Spec } from './plot_2_π_θ.js';
-        import { plot_spec as plot_2_td_Spec } from './plot_2_td.js';
-        import { plot_spec as plot_3_Spec_MD_Normalized } from './plot_3_mapping_depths_normalized.js';
-        import { plot_spec as plot_3_Spec_MD} from './plot_3_mapping_depths.js';
+        import { plot_spec as plot_1_Spec } from '../plot_1_FST.js';
+        import { plot_spec as plot_2_θ_Spec } from '../plot_2_θ.js';
+        import { plot_spec as plot_2_π_Spec } from '../plot_2_π.js';
+        import { plot_spec as plot_2_td_Spec } from '../plot_2_td.js';
+        import { plot_spec as plot_3_Spec_MD } from '../plot_3_mapping_depths.js';
+        import { plot_spec as plot_3_Spec_Nr_samples } from '../plot_3_nr_of_samples.js';
+        import { plot_spec as plot_3_Spec_MD_Normalized } from '../plot_3_mapping_depths_normalized.js';
+        import { plot_spec as plot_3_Spec_Nr_samples_Normalized } from '../plot_3_nr_of_samples_normalized.js';
 
-        // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
-        // Plotting using gosling.js 
-        // ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
-        // Function that creates a plot using gosling.js with the user-selected data file(s)
+
         async function GoslingPlotWithLocalData(fileURL, button_data_track_number) {
             try {
                 let trackData;
@@ -82,118 +98,133 @@
                 let containerId2
                 let containerId3
                 let containerId4
+                let containerId5
+                let containerId6
+                let containerId7
 
-                // ¤¤¤¤¤¤¤¤ If FST plot ¤¤¤¤¤¤¤¤
-                if (button_data_track_number >= 0 && button_data_track_number <= 1) {
-                    // if this is the 1st or 2nd datatrack 
-                    // Accessing the data for the selected track based on data-track attribute
+                if (button_data_track_number <= 1) {
                     trackData = plot_1_Spec.tracks[button_data_track_number].data;
                     plotSpec = plot_1_Spec;
                     containerId = 'plot-container-0';
-                    // Updating the 'url' property for the track's data
                     trackData.url = fileURL;
-                }   // ¤¤¤¤¤¤¤¤ If Diversity plot ¤¤¤¤¤¤¤¤
+                }
                 else if (button_data_track_number == 2) {
-                    // ################ PI AND THETA ################
-                    plotSpec = plot_2_π_θ_Spec;
+                    plotSpec = plot_2_π_Spec;
                     containerId1 = 'plot-container-1';
-                    // Atlantic (1st,2nd track) - Comment away if you only want to see Meditteranian:
-                    plotSpec.tracks.slice(0,2).forEach((track) => {
-                    track.data.url = fileURL;
+                    plotSpec.tracks.slice(0, 1).forEach((track) => {
+                        track.data.url = fileURL;
                     });
 
-                    // Meditteranian (3rd,4th track): - Comment awy if you only want to see Atlantic 
-                    plotSpec.tracks.slice(2,4).forEach((track) => {
-                    track.data.url = fileURL; 
+                    plotSpec.tracks.slice(1, 2).forEach((track) => {
+                        track.data.url = fileURL;
                     });
                     const container1 = document.getElementById(containerId1);
                     const newPlot1 = embed(container1, plotSpec);
 
-
-                    // ################ TD ################
-                    plotSpec = plot_2_td_Spec
+                    plotSpec = plot_2_θ_Spec
                     containerId2 = 'plot-container-2';
-                    // Atlantic (1st track) - Comment away if you only want to see Meditteranian:
-                    plotSpec.tracks.slice(0,1).forEach((track) => {
-                    track.data.url = fileURL;
+                    plotSpec.tracks.slice(0, 1).forEach((track) => {
+                        track.data.url = fileURL;
                     });
-                    // Mediterranean (2nd track) 
-                    plotSpec.tracks.slice(1,2).forEach((track) => {
-                    track.data.url = fileURL;
+
+                    plotSpec.tracks.slice(1, 2).forEach((track) => {
+                        track.data.url = fileURL;
                     });
+
                     const container2 = document.getElementById(containerId2);
                     const newPlot2 = embed(container2, plotSpec);
-                }                
-                else if (button_data_track_number == 3 ) {
-                    // ¤¤¤¤¤¤¤¤¤ Atlantic - Mapping Depth ¤¤¤¤¤¤¤¤¤
-                    plotSpec =  plot_3_Spec_MD;
+
+                    plotSpec = plot_2_td_Spec
                     containerId3 = 'plot-container-3';
-                    // Atlantic (1st,2nd track):
-                    plotSpec.tracks.slice(0,2).forEach((track) => {
-                    track.data.url = fileURL;
+                    plotSpec.tracks.slice(0, 1).forEach((track) => {
+                        track.data.url = fileURL;
+                    });
+                    plotSpec.tracks.slice(1, 2).forEach((track) => {
+                        track.data.url = fileURL;
                     });
                     const container3 = document.getElementById(containerId3);
                     const newPlot3 = embed(container3, plotSpec);
-
-                    // console.log(JSON.stringify(plotSpec.tracks, null, 2)); // Check the merged tracks               
-
-                    // ¤¤¤¤¤¤¤¤¤ Atlantic - Normalized Mapping Depth ¤¤¤¤¤¤¤¤¤
-                    plotSpec = plot_3_Spec_MD_Normalized;
+                }
+                else if (button_data_track_number == 3) {
+                    plotSpec = plot_3_Spec_MD;
                     containerId4 = 'plot-container-4';
-                    // Atlantic (1st,2nd track):
-                    plotSpec.tracks.slice(0,2).forEach((track) => {
-                    track.data.url = fileURL;
+                    plotSpec.tracks.slice(0, 1).forEach((track) => {
+                        track.data.url = fileURL;
                     });
                     const container4 = document.getElementById(containerId4);
                     const newPlot4 = embed(container4, plotSpec);
 
-                    // console.log(JSON.stringify(plotSpec.tracks, null, 2)); // Check the merged tracks
+                    plotSpec = plot_3_Spec_Nr_samples;
+                    containerId5 = 'plot-container-5';
+                    plotSpec.tracks.slice(0, 1).forEach((track) => {
+                        track.data.url = fileURL;
+                    });
+                    const container5 = document.getElementById(containerId5);
+                    const newPlot5 = embed(container5, plotSpec);
 
+                    plotSpec = plot_3_Spec_MD_Normalized;
+                    containerId6 = 'plot-container-6';
+                    plotSpec.tracks.slice(0, 1).forEach((track) => {
+                        track.data.url = fileURL;
+                    });
+                    const container6 = document.getElementById(containerId6);
+                    const newPlot6 = embed(container6, plotSpec);
+
+                    plotSpec = plot_3_Spec_Nr_samples_Normalized;
+                    containerId7 = 'plot-container-7';
+                    plotSpec.tracks.slice(0, 1).forEach((track) => {
+                        track.data.url = fileURL;
+                    });
+                    const container7 = document.getElementById(containerId7);
+                    const newPlot7 = embed(container7, plotSpec);
                 }
 
                 else if (button_data_track_number == 4) {
-                    // ¤¤¤¤¤¤¤¤¤ Meditteranian - Mapping Depth ¤¤¤¤¤¤¤¤¤
-                    plotSpec =  plot_3_Spec_MD;
-                    containerId3 = 'plot-container-3';
-                    // Meditteranian (3rd,4th track):
-                    plotSpec.tracks.slice(2,4).forEach((track) => {
-                    track.data.url = fileURL; 
-                    });
-                    const container3 = document.getElementById(containerId3);
-                    const newPlot3 = embed(container3, plotSpec);
-
-
-                    // ¤¤¤¤¤¤¤¤¤ Meditteranian - Normalized Mapping Depth ¤¤¤¤¤¤¤¤¤
-                    plotSpec = plot_3_Spec_MD_Normalized;
+                    plotSpec = plot_3_Spec_MD;
                     containerId4 = 'plot-container-4';
-                    // Meditteranian (3rd,4th track):
-                    plotSpec.tracks.slice(2,4).forEach((track) => {
-                    track.data.url = fileURL; 
+                    plotSpec.tracks.slice(1, 2).forEach((track) => {
+                        track.data.url = fileURL;
                     });
                     const container4 = document.getElementById(containerId4);
                     const newPlot4 = embed(container4, plotSpec);
-                    console.log(JSON.stringify(plotSpec.tracks)); // Check the merged tracks
-                }     
-                                                     
-               else {
+
+                    plotSpec = plot_3_Spec_Nr_samples;
+                    containerId5 = 'plot-container-5';
+                    plotSpec.tracks.slice(1, 2).forEach((track) => {
+                        track.data.url = fileURL;
+                    });
+                    const container5 = document.getElementById(containerId5);
+                    const newPlot5 = embed(container5, plotSpec);
+
+                    plotSpec = plot_3_Spec_MD_Normalized;
+                    containerId6 = 'plot-container-6';
+                    plotSpec.tracks.slice(1, 2).forEach((track) => {
+                        track.data.url = fileURL;
+                    });
+                    const container6 = document.getElementById(containerId6);
+                    const newPlot6 = embed(container6, plotSpec);
+
+                    plotSpec = plot_3_Spec_Nr_samples_Normalized;
+                    containerId7 = 'plot-container-7';
+                    plotSpec.tracks.slice(1, 2).forEach((track) => {
+                        track.data.url = fileURL;
+                    });
+                    const container7 = document.getElementById(containerId7);
+                    const newPlot7 = embed(container7, plotSpec);
+                }
+                else {
                     console.error('Invalid button_data_track_number:', button_data_track_number);
                     return;
-                   }
+                }
 
-                if (button_data_track_number >= 0 && button_data_track_number <= 1) {
-                    // Create a new plot for each container
+                if (button_data_track_number <= 1) {
                     const container = document.getElementById(containerId);
                     const newPlot = await embed(container, plotSpec);
                 }
-            } 
+            }
             catch (error) {
                 console.error(error);
             }
-        }
-        // Define a function to set file paths dynamically
-        function setFilePaths(paths) {
-            // Replace the placeholder with actual file paths
-            filePaths.splice(0, filePaths.length, ...paths);
         }
     </script>
 </body>

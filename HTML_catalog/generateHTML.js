@@ -1,3 +1,4 @@
+//generateHTML.js
 const fs = require('fs');
 
 const sequenceNames = [
@@ -11,11 +12,11 @@ const sequenceNames = [
 const path = '../data/gene_regions/{sequenceName}.{fileType}.tsv';
 
 // Define the file types you want to repeat
-const fileTypes = ['snps', 'windows', 'windows', 'windows', 'windows', 'windows', 'windows', 'windows', 'mappings.windows_1000.me', 'mappings.windows_1000.me', 'mappings.windows_1000.at','mappings.windows_1000.at'];
+const fileTypes = ['snps', 'windows', 'windows', 'mappings.windows_1000.at', 'mappings.windows_1000.me'];
 
 const filesInFolder = sequenceNames.flatMap((sequenceName, sequenceIndex) => {
   return fileTypes.map((fileType, fileTypeIndex) => {
-    if (fileTypeIndex >= 8) {
+    if (fileTypeIndex >= 3) {
       // Use a different path for the last two file types
       return path.replace('{sequenceName}', sequenceName).replace('{fileType}', fileType).replace('../data/gene_regions/', '../data/gene_regions_data_mappings/');
     } else {
@@ -24,7 +25,7 @@ const filesInFolder = sequenceNames.flatMap((sequenceName, sequenceIndex) => {
   });
 });
 // Number of files to include in each iteration
-const filesPerIteration = 12;
+const filesPerIteration = 5;
 
 // Output folder for generated HTML files
 const outputFolder = '../HTML_catalog/';
@@ -45,7 +46,7 @@ const template = fs.readFileSync('./template.html', 'utf-8');
 for (let i = 0; i < iterations; i++) {
   // Extract a chunk of files for this iteration
   const filesForIteration = filesInFolder.slice(i * filesPerIteration, (i + 1) * filesPerIteration);
-  
+
   //const htmlContent = test.replace(
   const htmlContent = template.replace(
     /const filePaths = \[\];/,
