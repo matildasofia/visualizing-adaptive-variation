@@ -9,3 +9,4 @@ data/*
 !data/README.md
 
 .DS_Store
+node_modules/css-element-queries/.DS_Store
