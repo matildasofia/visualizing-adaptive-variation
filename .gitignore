@@ -3,7 +3,10 @@ data/*
 
 /gosling
 
+/node_modules
+
 # Except for 'readme.md'
 !data/README.md
 
 .DS_Store
+node_modules/css-element-queries/.DS_Store

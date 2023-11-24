@@ -5,7 +5,7 @@ const color_pi_AT = "darkorange"
 const color_pi_ME = "gold"
 
 var plot_spec = {
-    "title": "Diversity plot - Visualization of Pi",
+    "title": "Visualization of Pi",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
     "subtitle": "Atlantic population (orange) and Mediterranean (gold)",
 
@@ -14,8 +14,8 @@ var plot_spec = {
     //"layout": { "type": "linear" },
     "xDomain": { "interval": [0, 250000] },
     "alignment": "overlay",
-    "width": 1000,
-    "height": 300,
+    "width": 500,
+    "height": 200,
     "assembly": "unknown",
 
     // Specifying Light gray color as background color

@@ -6,7 +6,7 @@ const color_td_ME = "red"
 
 
 var plot_spec = {
-    "title": "Diversity plot - Visualization of Tajimas D ",
+    "title": "Visualization of Tajimas D ",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
     "subtitle": "Atlantic population (bold) and Mediterranean (light)",
 
@@ -14,7 +14,7 @@ var plot_spec = {
     //"layout": { "type": "linear" },
     "xDomain": { "interval": [0, 250000] },
     "alignment": "overlay",
-    "width": 1000,
+    "width": 1100,
     "height": 300,
     "assembly": "unknown",
 
