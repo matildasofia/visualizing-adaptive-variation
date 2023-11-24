@@ -5,7 +5,7 @@ const color_nr_samples_AT = "green"
 const color_nr_samples_ME = "lightgreen"
 
 var plot_spec = {
-    "title": " Mapping depths plot - Nr of samples (green) (window size: 1000)",
+    "title": "Nr of samples (green) (window size: 1000)",
     "subtitle": "Atlantic population (dark) and Mediterranean (light)",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
     // "description": "At (bold), Me (light)",
@@ -13,8 +13,8 @@ var plot_spec = {
     //"layout": { "type": "linear" },
     "xDomain": { "interval": [0, 250000] },
     "alignment": "overlay",
-    "width": 1000,
-    "height": 300,
+    "width": 500,
+    "height": 200,
     "assembly": "unknown",
 
     // Specifying Light gray color as background color

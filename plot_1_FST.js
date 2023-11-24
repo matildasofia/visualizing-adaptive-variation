@@ -5,8 +5,8 @@ var plot_spec = {
     //"layout": { type: 'linear', },
     "xDomain": { "interval": [0, 200000] },
     "alignment": "overlay",
-    "width": 1000,
-    "height": 200,
+    "width": 1100,
+    "height": 300,
     "assembly": "unknown",
 
     // Specifying Light gray color as background color
@@ -25,7 +25,7 @@ var plot_spec = {
             },
             "mark": "point",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom"},
-            "y": { "field": "FST", "type": "quantitative", "axis": "none", "domain": [0, 1],"legend":"false" },
+            "y": { "field": "FST", "type": "quantitative", "axis": "none", "domain": [0, 1] },
             "color": { "field": "TYPE", "type": "nominal", "legend": true },
             "opacity": { "value": 0.8 },
             "size": { "value": 4 },
@@ -41,14 +41,13 @@ var plot_spec = {
                 "separator": "\t",
                 "column": "POS", 
                 "value": "FST",
-  
                 "sampleLength": "100000",
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
-            "y": { "field": "FST", "type": "quantitative", "axis": "left", "domain": [0, 1] },
+            "y": { "field": "FST", "type": "quantitative", "axis": "left", "domain": [0, 1]},
   
-            "color": { "value": "darkblue" },
+            "color": { "value": "darkblue"},
             "opacity": { "value": 0.5 },
             "size": { "value": 2 },
             "tooltip": [
