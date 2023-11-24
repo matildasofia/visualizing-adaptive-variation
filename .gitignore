@@ -3,6 +3,8 @@ data/*
 
 /gosling
 
+/node_modules
+
 # Except for 'readme.md'
 !data/README.md
 
