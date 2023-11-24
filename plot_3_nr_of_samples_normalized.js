@@ -6,7 +6,7 @@ const color_nr_samples_ME = "lightgreen"
 
 var plot_spec = {
     "title": "Nr of samples (green) (window size: 1000)",
-    "subtitle": "Atlantic population (dark) and Mediterranean (light)",
+    //"subtitle": "Atlantic population (dark) and Mediterranean (light)",
     "static": false,
     //"layout": { "type": "linear" },
     "xDomain": { "interval": [0, 250000] },

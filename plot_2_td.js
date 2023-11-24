@@ -8,7 +8,7 @@ const color_td_ME = "red"
 var plot_spec = {
     "title": "Visualization of Tajimas D ",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
-    "subtitle": "Atlantic population (bold) and Mediterranean (light)",
+    //"subtitle": "Atlantic population (bold) and Mediterranean (light)",
 
     "static": false,
     //"layout": { "type": "linear" },

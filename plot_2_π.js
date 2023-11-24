@@ -7,7 +7,7 @@ const color_pi_ME = "gold"
 var plot_spec = {
     "title": "Visualization of Pi",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
-    "subtitle": "Atlantic population (orange) and Mediterranean (gold)",
+    //"subtitle": "Atlantic population (orange) and Mediterranean (gold)",
 
     "static": false, // enables zoom & pan for the tracks
 
