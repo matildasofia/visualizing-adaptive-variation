@@ -1,6 +1,6 @@
 const size_val = 1.5;
 const opacity_AT = 1;
-const opacity_ME = 0.5;
+const opacity_ME = 0.4;
 const color_td_AT = "red"
 const color_td_ME = "red"
 
