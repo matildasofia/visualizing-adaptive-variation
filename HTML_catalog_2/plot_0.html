@@ -20,63 +20,70 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            margin: 0;
-            margin-left: 5vw;
         }
 
-        h1 {
-            margin-top: 5vh;
+        p {
+            margin: 2em
         }
 
-        .double {
-            display: flex;
-            margin: 0;
-            padding: 0;
-        }
+        .overlay {
+            border: 2px solid rgb(237, 230, 226);
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+            text-align: left;
+            max-width: fit-content;
+            margin: 5em;
+            margin-right: 2em;
+            margin-bottom: 2em;
+            position: fixed;
+            z-index: 999;
+            right: 0;
+            bottom: 0;
 
-        .plot-container {
-            margin: 0;
-            padding: 0;
+            .circle {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                margin: 0.3em;
+                margin-top:0;
+            }
+
+            .circles {
+                display: inline-flex;
+                margin-left:2em;
+            }
         }
     </style>
 </head>
 
 <body>
-    <h1></h1> <!--add gene name?-->
-    <h2>FST</h2>
-    <div id="plot-container-1" class="plot-container"></div>
-    <h2>Diversity plots</h2>
-    <p>Atlantic population (dark/orange) and Mediterranean (light/gold)</p>
-    <div id="plot-container-2" class="plot-container"></div>
-    <p>Atlantic population (bold) and Mediterranean (light)</p>
-    <div id="plot-container-3" class="plot-container"></div>
-    <h2>Mapping depth plots</h2>
-    <p>Atlantic population (dark) and Mediterranean (light)</p>
-    <div id="plot-container-4" class="plot-container"></div>
-    <h2>Normalized mapping depth plots</h2>
-    <p>Atlantic population (dark) and Mediterranean (light)</p>
-    <div id="plot-container-5" class="plot-container"></div>
+    <div class="overlay" style="margin-top: 20em;">
+        <p><b>Atlantic</b><br>
+            Darker colors:
+        <div class="circles">
+            <div class="circle" style="background-color: rgba(255, 0, 0, 1);"></div>
+            <div class="circle" style="background-color: blue;"></div>
+            <div class="circle" style="background-color: darkorange;"></div>
+            <div class="circle" style="background-color: purple;"></div>
+            <div class="circle" style="background-color: green;"></div>
+        </div>
+        </p>
+        <p>
+            <b>Mediterranian</b><br>
+            Lighter colors:
+        <div class="circles">
+            <div class="circle" style="background-color: rgba(255, 0, 0, 0.4);"></div>
+            <div class="circle" style="background-color: lightblue;"></div>
+            <div class="circle" style="background-color: gold"></div>
+            <div class="circle" style="background-color: violet;"></div>
+            <div class="circle" style="background-color: lightgreen;"></div>
+        </div>
+
+        </p>
+    </div>
+    <div id="plot-container-1"></div>
 
     <script type="module">
-        const filePaths = ["../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.snps.tsv","../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.windows.tsv","../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.windows.tsv","../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.at.tsv","../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.me.tsv"];
-
-        document.addEventListener('DOMContentLoaded', function () {
-            filePaths.forEach(function (filePath, button_data_track_number) {
-                URLfromFile(filePath, button_data_track_number);
-            });
-        });
-
-        async function URLfromFile(filePath, button_data_track_number) {
-            try {
-                const fileURL = URL.createObjectURL(new File([await fetch(filePath).then(response => response.blob())], filePath));
-                if (fileURL) {
-                    GoslingPlotWithLocalData(fileURL, button_data_track_number);
-                }
-            } catch (error) {
-                console.error(error);
-            }
-        }
-
         import { embed } from 'gosling.js';
         import { plot_spec as plot_1_Spec } from '../plot_1_FST.js';
         import { plot_spec as plot_2_θ_Spec } from '../plot_2_θ.js';
@@ -87,27 +94,77 @@
         import { plot_spec as plot_3_Spec_MD_Normalized } from '../plot_3_mapping_depths_normalized.js';
         import { plot_spec as plot_3_Spec_Nr_samples_Normalized } from '../plot_3_nr_of_samples_normalized.js';
 
+        const filePaths = ["../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.snps.tsv", "../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.windows.tsv", "../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.windows.tsv", "../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.at.tsv", "../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.me.tsv"];
+
+        document.addEventListener('DOMContentLoaded', function () {
+            filePaths.forEach(function (filePath, button_data_track_number) {
+                URLfromFile(filePath, button_data_track_number);
+            });
+            PlotAll();
+        });
+
+        async function PlotAll() {
+            try {
+                const plotSpec = {
+                    "arrangement": "vertical",
+                    "views":
+                        [plot_1_Spec,
+                            {
+                                "arrangement": "horizontal",
+                                "views": [
+                                    plot_2_π_Spec,
+                                    plot_2_θ_Spec
+                                ]
+                            },
+                            plot_2_td_Spec,
+                            {
+                                "arrangement": "horizontal",
+                                "views": [plot_3_Spec_MD,
+                                    plot_3_Spec_Nr_samples
+                                ]
+                            },
+                            {
+                                "arrangement": "horizontal",
+                                "views": [
+                                    plot_3_Spec_MD_Normalized
+                                    ,
+                                    plot_3_Spec_Nr_samples_Normalized,
+                                ]
+                            }
+
+                        ],
+
+
+                    "responsiveSize": true
+                };
+
+                const container = document.getElementById('plot-container-1');
+                await embed(container, plotSpec);
+            }
+            catch (error) {
+                console.error("Error embedding plot:", error);
+            }
+        };
+
+        async function URLfromFile(filePath, button_data_track_number) {
+            try {
+                const fileURL = filePath;
+                if (fileURL) {
+                    GoslingPlotWithLocalData(fileURL, button_data_track_number);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
 
         async function GoslingPlotWithLocalData(fileURL, button_data_track_number) {
             try {
                 let trackData;
                 let plotSpec;
-                let containerId1
-                let containerId2
-                let containerId3
-                let containerId4
-                let containerId5
-                let containerId6
-                let containerId7
 
                 if (button_data_track_number <= 1) {
                     trackData = plot_1_Spec.tracks[button_data_track_number].data;
-                    plotSpec = plot_1_Spec;
                     trackData.url = fileURL;
-
-                    containerId1 = 'plot-container-1';
-                    const container1 = document.getElementById(containerId1);
-                    const newPlot1 = await embed(container1, plotSpec);
                 }
 
                 else if (button_data_track_number == 2) {
@@ -133,18 +190,6 @@
                     plot_2_td_Spec.tracks.slice(1, 2).forEach((track) => {
                         track.data.url = fileURL;
                     });
-                    plotSpec = {
-                        "arrangement": "serial",
-                        "views": [plot_2_π_Spec, plot_2_θ_Spec],
-                        "responsiveSize": true
-                    };
-                    containerId2 = 'plot-container-2';
-                    const container2 = document.getElementById(containerId2);
-                    const newPlot2 = embed(container2, plotSpec);
-
-                    containerId3 = 'plot-container-3';
-                    const container3 = document.getElementById(containerId3);
-                    const newPlot3 = embed(container3, plot_2_td_Spec);
                 }
                 else if (button_data_track_number == 3) {
                     plot_3_Spec_MD.tracks.slice(0, 1).forEach((track) => {
@@ -158,63 +203,28 @@
                     plot_3_Spec_MD_Normalized.tracks.slice(0, 1).forEach((track) => {
                         track.data.url = fileURL;
                     });
-                    
+
                     plot_3_Spec_Nr_samples_Normalized.tracks.slice(0, 1).forEach((track) => {
                         track.data.url = fileURL;
                     });
-
-                    plotSpec = {
-                        "arrangement": "serial",
-                        "views": [plot_3_Spec_MD, plot_3_Spec_Nr_samples],
-                        "responsiveSize": true
-                    };
-                    containerId4 = 'plot-container-4';
-                    const container4 = document.getElementById(containerId4);
-                    const newPlot4 = embed(container4, plotSpec);
-
-                    plotSpec = {
-                        "arrangement": "serial",
-                        "views": [plot_3_Spec_MD_Normalized, plot_3_Spec_Nr_samples_Normalized],
-                        "responsiveSize": true
-                    };
-                    containerId5 = 'plot-container-5';
-                    const container5 = document.getElementById(containerId5);
-                    const newPlot5 = embed(container5, plotSpec);
                 }
 
                 else if (button_data_track_number == 4) {
                     plot_3_Spec_MD.tracks.slice(1, 2).forEach((track) => {
                         track.data.url = fileURL;
                     });
-                    
+
                     plot_3_Spec_Nr_samples.tracks.slice(1, 2).forEach((track) => {
                         track.data.url = fileURL;
                     });
                     plot_3_Spec_MD_Normalized.tracks.slice(1, 2).forEach((track) => {
                         track.data.url = fileURL;
                     });
-                    
+
                     plot_3_Spec_Nr_samples_Normalized.tracks.slice(1, 2).forEach((track) => {
                         track.data.url = fileURL;
                     });
-                    
-                    plotSpec = {
-                        "arrangement": "serial",
-                        "views": [plot_3_Spec_MD, plot_3_Spec_Nr_samples],
-                        "responsiveSize": true
-                    };
-                    containerId6 = 'plot-container-4';
-                    const container6 = document.getElementById(containerId6);
-                    const newPlot6 = embed(container6, plotSpec); 
 
-                    plotSpec = {
-                        "arrangement": "serial",
-                        "views": [plot_3_Spec_MD_Normalized, plot_3_Spec_Nr_samples_Normalized],
-                        "responsiveSize": true
-                    };
-                    containerId7 = 'plot-container-5';
-                    const container7 = document.getElementById(containerId7);
-                    const newPlot7 = embed(container7, plotSpec); 
                 }
                 else {
                     console.error('Invalid button_data_track_number:', button_data_track_number);

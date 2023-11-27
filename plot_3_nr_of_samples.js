@@ -5,7 +5,7 @@ const color_nr_samples_AT = "green"
 const color_nr_samples_ME = "lightgreen"
 
 var plot_spec = {
-    "title": "Nr of samples (green) (window size: 1000)",
+    "title": "Window size: 1000",
     //"subtitle": "Atlantic population (dark) and Mediterranean (light)",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
     // "description": "At (bold), Me (light)",
@@ -33,7 +33,7 @@ var plot_spec = {
                 "sampleLength": "100000", //how many rows the file is
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom"},
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom","linkingId": "link-2"},
             "y": { "field": "SAMPLES", "type": "quantitative", "axis": "left"},
             "color": { "value": color_nr_samples_AT }, // Green for Nr. of samples
             "opacity": { "value": opacity_AT}, // Opacity for Atlantic
@@ -55,7 +55,7 @@ var plot_spec = {
                 "sampleLength": "100000", //how many rows the file is
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-2" },
             "y": { "field": "SAMPLES", "type": "quantitative", "axis": "none" },
             "color": { "value": color_nr_samples_ME }, // Green for Nr. of samples
             "opacity": { "value": opacity_ME}, // Opacity for Mediterranean

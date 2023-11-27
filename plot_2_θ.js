@@ -5,7 +5,7 @@ const color_theta_AT = "blue"
 const color_theta_ME = "lightblue"
 
 var plot_spec = {
-    "title": "Visualization of Theta (blue)",
+    "title": "Theta",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
     //"subtitle": "Atlantic population (dark) and Mediterranean (light)",
 
@@ -56,7 +56,7 @@ var plot_spec = {
                 "sampleLength": "100000", //how many rows the file is
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" }, //think legend should show whats shown on the axis, but no.
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom" }, //think legend should show whats shown on the axis, but no.
             "y": { "field": "me_THETA", "type": "quantitative", "axis": "none" },
             "color": { "value": color_theta_ME}, // Color for theta
             "opacity": { "value": opacity_ME}, // Opacity for Mediterranean

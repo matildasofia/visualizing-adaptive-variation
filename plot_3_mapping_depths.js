@@ -5,7 +5,7 @@ const color_mapping_depth_AT = "purple"
 const color_mapping_depth_ME = "violet"
 
 var plot_spec = {
-    "title": "Depth of coverage (Purple) (window size: 1000)",
+    "title": "Window size: 1000",
     //"subtitle": "Atlantic population (dark) and Mediterranean (light)",
     "static": false,
     //"layout": { "type": "linear" },
@@ -16,12 +16,12 @@ var plot_spec = {
     "assembly": "unknown",
 
     // Specifying Light gray color as background color
-    "style": {"background":"#D3D3D3", "backgroundOpacity":0.1},
+    "style": { "background": "#D3D3D3", "backgroundOpacity": 0.1 },
 
 
-      "tracks": [
+    "tracks": [
         {
-        // ¤¤¤¤¤¤¤¤¤ Atlantic  ¤¤¤¤¤¤¤¤¤
+            // ¤¤¤¤¤¤¤¤¤ Atlantic  ¤¤¤¤¤¤¤¤¤
 
             "data": {
                 "url": "",
@@ -32,14 +32,14 @@ var plot_spec = {
                 "sampleLength": "100000", //how many rows the file is
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-2" },
             "y": { "field": "DEPTH", "type": "quantitative", "axis": "left" },
             "color": { "value": color_mapping_depth_AT }, // orange for Mapping depth
-            "opacity": { "value": opacity_AT}, // Opacity for Atlantic
+            "opacity": { "value": opacity_AT }, // Opacity for Atlantic
             "size": { "value": size_val }, //the width of the line
             "tooltip": [
-            {"field": "DEPTH", "type": "quantitative", "format":"0.2f","alt":"Atlantic - Mapping depth:"}
-                   ],              
+                { "field": "DEPTH", "type": "quantitative", "format": "0.2f", "alt": "Atlantic - Mapping depth:" }
+            ],
 
         },
         // ¤¤¤¤¤¤¤¤¤ Mediterranean  ¤¤¤¤¤¤¤¤¤
@@ -54,19 +54,19 @@ var plot_spec = {
                 "sampleLength": "100000", //how many rows the file is
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom"},
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-2" },
             "y": { "field": "DEPTH", "type": "quantitative", "axis": "none" },
             "color": { "value": color_mapping_depth_ME }, // orange for Mapping depth
-            "opacity": { "value": opacity_ME}, // Opacity for Mediterranean
+            "opacity": { "value": opacity_ME }, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line
             "tooltip": [
-                {"field": "DEPTH", "type": "quantitative", "format":"0.2f","alt":"Mediterranean - Mapping depth:"}
-                   ],              
+                { "field": "DEPTH", "type": "quantitative", "format": "0.2f", "alt": "Mediterranean - Mapping depth:" }
+            ],
 
         }
     ]
 };
 
-export { plot_spec }; 
+export { plot_spec };
 // console.log(plot_spec.title);
 // console.log(JSON.stringify(plot_spec.tracks, null, 2));
