@@ -7,7 +7,7 @@ const color_mapping_depth_ME = "violet"
 
 var plot_spec = {
     "title": "Depth of coverage (Purple) (window size: 1000)",
-    "subtitle": "Atlantic population (dark) and Mediterranean (light)",
+    //"subtitle": "Atlantic population (dark) and Mediterranean (light)",
     "static": false,
     //"layout": { "type": "linear" },
     "xDomain": { "interval": [0, 250000] },

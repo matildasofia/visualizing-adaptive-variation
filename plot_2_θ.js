@@ -7,7 +7,7 @@ const color_theta_ME = "lightblue"
 var plot_spec = {
     "title": "Visualization of Theta (blue)",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
-    "subtitle": "Atlantic population (dark) and Mediterranean (light)",
+    //"subtitle": "Atlantic population (dark) and Mediterranean (light)",
 
     "static": false,
     //"layout": { "type": "linear" },

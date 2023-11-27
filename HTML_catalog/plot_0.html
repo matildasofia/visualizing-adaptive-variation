@@ -17,19 +17,26 @@
         }
     </script>
     <style>
+        body{
+            padding:0,
+        }
+
         h1{
             margin-top: 5vh;
         }
+
         h2{
             font-family: 'Roboto', sans-serif;
             margin:0;
             margin-left: 5vw;
         }
+
         .double{
             display: flex;
             margin:0;
             padding:0;
         }
+
         .plot-container{
             margin:0;
             padding:0;
@@ -38,7 +45,7 @@
 </head>
 
 <body>
-    <h1></h1>
+    <h1></h1> <!--add gene name?-->
     <h2>FST</h2>
     <div id="plot-container-0" class="plot-container"></div>
     <h2>Diversity plots</h2>
@@ -59,7 +66,7 @@
     </div>
 
     <script type="module">
-        const filePaths = ["../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.snps.tsv","../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.windows.tsv","../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.windows.tsv","../data/gene_regions_data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.at.tsv","../data/gene_regions_data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.me.tsv"];
+        const filePaths = ["../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.snps.tsv","../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.windows.tsv","../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.windows.tsv","../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.at.tsv","../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.me.tsv"];
 
         document.addEventListener('DOMContentLoaded', function () {
             filePaths.forEach(function (filePath, button_data_track_number) {

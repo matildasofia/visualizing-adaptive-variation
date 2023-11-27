@@ -8,6 +8,7 @@ var plot_spec = {
     "width": 1100,
     "height": 300,
     "assembly": "unknown",
+    
 
     // Specifying Light gray color as background color
 //     "style": {
