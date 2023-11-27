@@ -6,7 +6,7 @@ const color_td_ME = "red"
 
 
 var plot_spec = {
-    "title": "Visualization of Tajimas D ",
+    "title": "Tajimas D ",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
     //"subtitle": "Atlantic population (bold) and Mediterranean (light)",
 
@@ -55,9 +55,9 @@ var plot_spec = {
                 "sampleLength": "100000", 
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "none", "linkingId": "link-1" },
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" },
             "y": { "field": "me_TD", "type": "quantitative", "axis": "left", "domain": [-2.5, 2.5] }, 
-            "color": { "value": color_td_ME }, // Color for td
+            "color": { "value": color_td_ME}, // Color for td
             "opacity": { "value": opacity_ME}, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line
             "tooltip": [

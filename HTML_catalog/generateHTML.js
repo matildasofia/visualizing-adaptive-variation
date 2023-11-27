@@ -28,7 +28,7 @@ const filesInFolder = sequenceNames.flatMap((sequenceName, sequenceIndex) => {
 const filesPerIteration = 5;
 
 // Output folder for generated HTML files
-const outputFolder = '../HTML_catalog/';
+const outputFolder = './';
 
 // Ensure the output folder exists
 if (!fs.existsSync(outputFolder)) {
