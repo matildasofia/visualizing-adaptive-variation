@@ -5,7 +5,7 @@ const color_mapping_depth_AT = "purple"
 const color_mapping_depth_ME = "violet"
 
 var plot_spec = {
-    "title": "Window size: 1000",
+    "title": "Mapping Depth - Window size: 1000",
     //"subtitle": "Atlantic population (dark) and Mediterranean (light)",
     "static": false,
     //"layout": { "type": "linear" },
@@ -29,11 +29,11 @@ var plot_spec = {
                 "separator": "\t",
                 "column": "POS",
                 "value": "DEPTH",
-                "sampleLength": "100000", //how many rows the file is
+                "sampleLength": "1000", //how many rows the file is
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-2" },
-            "y": { "field": "DEPTH", "type": "quantitative", "axis": "left" },
+            "y": { "field": "DEPTH", "type": "quantitative", "axis": "left", "domain":[0,800]},
             "color": { "value": color_mapping_depth_AT }, // orange for Mapping depth
             "opacity": { "value": opacity_AT }, // Opacity for Atlantic
             "size": { "value": size_val }, //the width of the line
@@ -51,11 +51,11 @@ var plot_spec = {
                 "separator": "\t",
                 "column": "POS",
                 "value": "DEPTH",
-                "sampleLength": "100000", //how many rows the file is
+                "sampleLength": "1000", //how many rows the file is
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-2" },
-            "y": { "field": "DEPTH", "type": "quantitative", "axis": "none" },
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-2"},
+            "y": { "field": "DEPTH", "type": "quantitative", "axis": "none","domain":[0,800]},
             "color": { "value": color_mapping_depth_ME }, // orange for Mapping depth
             "opacity": { "value": opacity_ME }, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line

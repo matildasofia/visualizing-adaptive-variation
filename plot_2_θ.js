@@ -31,11 +31,11 @@ var plot_spec = {
                 "separator": "\t",
                 "column": "POS",
                 "value": "at_THETA",
-                "sampleLength": "100000", //how many rows the file is
+                "sampleLength": "1000", //how many rows the file is
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" }, //think legend should show whats shown on the axis, but no.
-            "y": { "field": "at_THETA", "type": "quantitative", "axis": "left" },
+            "y": { "field": "at_THETA", "type": "quantitative", "axis": "left","domain":[0,0.025] },
             "color": { "value": color_theta_AT}, // Color for theta
             "opacity": { "value": opacity_AT}, // Opacity for Atlantic
             "size": { "value": size_val }, //the width of the line
@@ -53,11 +53,11 @@ var plot_spec = {
                 "separator": "\t",
                 "column": "POS",
                 "value": "me_THETA",
-                "sampleLength": "100000", //how many rows the file is
+                "sampleLength": "1000", //how many rows the file is
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom" }, //think legend should show whats shown on the axis, but no.
-            "y": { "field": "me_THETA", "type": "quantitative", "axis": "none" },
+            "y": { "field": "me_THETA", "type": "quantitative", "axis": "none","domain":[0,0.025] },
             "color": { "value": color_theta_ME}, // Color for theta
             "opacity": { "value": opacity_ME}, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line
