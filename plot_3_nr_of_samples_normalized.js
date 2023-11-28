@@ -5,7 +5,7 @@ const color_nr_samples_AT = "green"
 const color_nr_samples_ME = "lightgreen"
 
 var plot_spec = {
-    "title": "Window size: 1000",
+    "title": "Nr of Samples - Window size: 1000 (Normalized)",
     //"subtitle": "Atlantic population (dark) and Mediterranean (light)",
     "static": false,
     //"layout": { "type": "linear" },
@@ -28,11 +28,11 @@ var plot_spec = {
                 "separator": "\t",
                 "column": "POS",
                 "value": "NORMALIZED_SAMPLES",
-                "sampleLength": "100000", //how many rows the file is
+                "sampleLength": "1000", //how many rows the file is
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-2"},
-            "y": { "field": "NORMALIZED_SAMPLES", "type": "quantitative", "axis": "left"},
+            "y": { "field": "NORMALIZED_SAMPLES", "type": "quantitative", "axis": "left", "domain":[0,2.5]},
             "color": { "value": color_nr_samples_AT }, // Green for Nr. of samples
             "opacity": { "value": opacity_AT}, // Opacity for Atlantic
             "size": { "value": size_val }, //the width of the line
@@ -50,11 +50,11 @@ var plot_spec = {
                 "separator": "\t",
                 "column": "POS",
                 "value": "NORMALIZED_SAMPLES",
-                "sampleLength": "100000", //how many rows the file is
+                "sampleLength": "1000", //how many rows the file is
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-2" },
-            "y": { "field": "NORMALIZED_SAMPLES", "type": "quantitative", "axis": "none" },
+            "y": { "field": "NORMALIZED_SAMPLES", "type": "quantitative", "axis": "none", "domain":[0,2.5] },
             "color": { "value": color_nr_samples_ME }, // Green for Nr. of samples
             "opacity": { "value": opacity_ME}, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line

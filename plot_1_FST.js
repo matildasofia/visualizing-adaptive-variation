@@ -27,7 +27,7 @@ var plot_spec = {
                 "column": "POS",
                 "value": "FST",
                 "binSize": 10,
-                "sampleLength": "100000",
+                "sampleLength": "1000",
             },
             "mark": "point",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom"},
@@ -48,7 +48,7 @@ var plot_spec = {
                 "separator": "\t",
                 "column": "POS",
                 "value": "FST",
-                "sampleLength": "100000",
+                "sampleLength": "1000",
             },
             "mark": "line",
 
