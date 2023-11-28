@@ -1,0 +1,36 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+p {
+    margin: 2em
+}
+
+.overlay {
+    border: 2px solid rgb(237, 230, 226);
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    text-align: left;
+    max-width: fit-content;
+    margin: 5em;
+    margin-right: 2em;
+    margin-bottom: 2em;
+    margin-top:20em;
+    position: fixed;
+    z-index: 999;
+    right: 0;
+    bottom: 0;
+
+    .circle {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: 0.3em;
+        margin-top: 0;
+    }
+
+    .circles {
+        display: inline-flex;
+        margin-left: 2em;
+    }
+}
