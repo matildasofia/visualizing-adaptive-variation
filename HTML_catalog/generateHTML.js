@@ -1,15 +1,9 @@
 //generateHTML.js
 const fs = require('fs');
-
-const sequenceNames = [
-  'seq_c_23164.REF_STRG_1_64511_XLOC_008442',
-  'seq_c_34941.REF_STRG_1_77343_XLOC_008605',
-  'seq_c_37243.REF_TRIN_14_03138_XLOC_008654',
-  'seq_c_37235.REF_TRIN_9_00299_XLOC_008653'
-];
+const { sequenceNames } = require('./listed_seq.js');
 
 // Define the template for file paths
-const path = '../data/gene_regions/{sequenceName}.{fileType}.tsv';
+const path = '../../data/gene_regions/{sequenceName}.{fileType}.tsv';
 
 // Define the file types you want to repeat
 const fileTypes = ['snps', 'windows', 'windows', 'mappings.windows_1000.at', 'mappings.windows_1000.me'];
@@ -28,7 +22,7 @@ const filesInFolder = sequenceNames.flatMap((sequenceName, sequenceIndex) => {
 const filesPerIteration = 5;
 
 // Output folder for generated HTML files
-const outputFolder = './';
+const outputFolder = './all_candidate_genes/';
 
 // Ensure the output folder exists
 if (!fs.existsSync(outputFolder)) {
@@ -40,7 +34,6 @@ const iterations = Math.ceil(filesInFolder.length / filesPerIteration);
 
 // Read the template HTML file
 const template = fs.readFileSync('./template.html', 'utf-8');
-//const template = fs.readFileSync('./test.html', 'utf-8');
 
 // Iterate through the files and generate HTML files
 for (let i = 0; i < iterations; i++) {
@@ -54,7 +47,7 @@ for (let i = 0; i < iterations; i++) {
   );
 
   // Write the HTML file to the output folder
-  fs.writeFileSync(`${outputFolder}plot_${i}.html`, htmlContent, 'utf-8');
+  fs.writeFileSync(`${outputFolder}${filesForIteration[0].split('/')[4].slice(0, -9)}_${i}.html`, htmlContent, 'utf-8');
 }
 
 console.log('HTML files generated successfully.');
