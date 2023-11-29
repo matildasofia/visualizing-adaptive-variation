@@ -5,6 +5,8 @@ data/*
 
 /node_modules
 
+/HTML_catalog/all_candidate_genes/*
+
 # Except for 'readme.md'
 !data/README.md
 

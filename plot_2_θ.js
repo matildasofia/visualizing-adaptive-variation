@@ -21,7 +21,6 @@ var plot_spec = {
     "style": {"background":"#D3D3D3", "backgroundOpacity":0.1},
 
 
-
     "tracks": [
         {
         // ¤¤¤¤¤¤¤¤¤ Atlantic  ¤¤¤¤¤¤¤¤¤

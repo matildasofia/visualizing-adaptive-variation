@@ -9,7 +9,6 @@ import { plot_spec as plot_3_Spec_Nr_samples } from '../plot_3_nr_of_samples.js'
 import { plot_spec as plot_3_Spec_MD_Normalized } from '../plot_3_mapping_depths_normalized.js';
 import { plot_spec as plot_3_Spec_Nr_samples_Normalized } from '../plot_3_nr_of_samples_normalized.js';
 async function PlotAll() {
-
     try {
         const plotSpec = {
             "arrangement": "vertical",
