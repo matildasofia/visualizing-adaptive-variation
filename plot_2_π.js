@@ -14,7 +14,7 @@ var plot_spec = {
     //"layout": { "type": "linear" },
     "xDomain": { "interval": [0, 250000] },
     "alignment": "overlay",
-    "width": 500,
+    "width": 490,
     "height": 200,
     "assembly": "unknown",
 
@@ -35,7 +35,7 @@ var plot_spec = {
             
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId":"link-1" },
-            "y": { "field": "at_PI", "type": "quantitative", "axis": "left", "domain":[0,0.02] },
+            "y": { "field": "at_PI", "type": "quantitative", "axis": "left", "domain":[0,0.05] },
             "color": { "value": color_pi_AT }, // Color for Pi    
             "opacity": { "value": opacity_AT}, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line
@@ -54,8 +54,8 @@ var plot_spec = {
                 "sampleLength": "1000",
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
-            "y": { "field": "me_PI", "type": "quantitative", "axis": "none" ,"domain":[0,0.02]},
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom","linkingId":"link-1" },
+            "y": { "field": "me_PI", "type": "quantitative", "axis": "none" ,"domain":[0,0.05]},
             "color": { "value": color_pi_ME }, // Color for Pi
             "opacity": { "value": opacity_ME}, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line

@@ -14,7 +14,7 @@ var plot_spec = {
     //"layout": { "type": "linear" },
     "xDomain": { "interval": [0, 250000] },
     "alignment": "overlay",
-    "width": 1100,
+    "width": 1000,
     "height": 300,
     "assembly": "unknown",
 
@@ -35,8 +35,8 @@ var plot_spec = {
                 "sampleLength": "1000", 
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" },
-            "y": { "field": "at_TD", "type": "quantitative", "axis": "left", "domain": [-2.5, 2.5] }, 
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
+            "y": { "field": "at_TD", "type": "quantitative", "axis": "left", "domain": [-3.5, 3.5] }, 
             "color": { "value": color_td_AT }, // Color for td
             "opacity": { "value": opacity_AT}, // Opacity for Atlantic
             "size": { "value": size_val }, //the width of the line
@@ -55,8 +55,8 @@ var plot_spec = {
                 "sampleLength": "1000", 
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" },
-            "y": { "field": "me_TD", "type": "quantitative", "axis": "left", "domain": [-2.5, 2.5] }, 
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom" ,"linkingId":"link-1"},
+            "y": { "field": "me_TD", "type": "quantitative", "axis": "none", "domain": [-3.5, 3.5] }, 
             "color": { "value": color_td_ME}, // Color for td
             "opacity": { "value": opacity_ME}, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line

@@ -11,7 +11,7 @@ var plot_spec = {
     //"layout": { "type": "linear" },
     "xDomain": { "interval": [0, 250000] },
     "alignment": "overlay",
-    "width": 500,
+    "width": 495,
     "height": 200,
     "assembly": "unknown",
 
@@ -33,7 +33,7 @@ var plot_spec = {
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-2" },
-            "y": { "field": "DEPTH", "type": "quantitative", "axis": "left", "domain":[0,800]},
+            "y": { "field": "DEPTH", "type": "quantitative", "axis": "left", "domain":[0,1700]},
             "color": { "value": color_mapping_depth_AT }, // orange for Mapping depth
             "opacity": { "value": opacity_AT }, // Opacity for Atlantic
             "size": { "value": size_val }, //the width of the line
@@ -55,7 +55,7 @@ var plot_spec = {
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-2"},
-            "y": { "field": "DEPTH", "type": "quantitative", "axis": "none","domain":[0,800]},
+            "y": { "field": "DEPTH", "type": "quantitative", "axis": "none","domain":[0,1700]},
             "color": { "value": color_mapping_depth_ME }, // orange for Mapping depth
             "opacity": { "value": opacity_ME }, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line
