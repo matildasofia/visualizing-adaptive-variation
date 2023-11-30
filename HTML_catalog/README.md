@@ -2,8 +2,8 @@
 <h3>First step</h3>
 <p>
   <ul>
-  <li>Copy this folder "HTML_catalog" to your local computer. </li>
-  <li>Place the folder with all the data to be visualized in the HTML_catalog folder, and name it "data". <br> 
+  <li>Copy repository "Visualizing adaptive variation" to your local computer. </li>
+  <li>Place the folder with all the data to be visualized in the Visualizing adaptive variation folder, and name it "data". <br> 
     Keep the subfolders (genes, gene_regions, ..) as they are.</li> 
   <li>Download the extension "Live Server" to Visual Studio Code (or use an equivalent extension/tool).</li>
   <li>Make sure that you can run JavaScripts on your computer. <br>
@@ -14,13 +14,13 @@
 <h3>Second step</h3>
 <p>
 <ul>
-  <li>Open the terminal on your computer and go to the HTML_catalog.</li>
+  <li>Open the terminal on your computer and go into the HTML_catalog folder in Visualizing adaptive variation.</li>
   <li>Run the command "node generateHTML.js".</li>
 </ul>
 </p>
 <p>
   <h3>How to look at the result?</h3>
-Now, a folder called "all_candidate_genes" should appear in HTML_catalog, containing one HTML file for each candidate gene.<br>
+After the second step, a folder called "all_candidate_genes" should appear in HTML_catalog, containing one HTML file for each candidate gene.<br>
 If you open "all_candidate_genes" in Visual Studio Code, you can right click on one of the files and click the option "Open with Live Server".<br>
-  You should now be able to see 8 plots.
+  You should now be able to see 8 plots in your web browser. 
 </p>
