@@ -1,3 +1,5 @@
+// Content added to every page in the HTML catalog.
+// Displays a box with the colors associated to Atlantic and Mediterranian data respectively.
 export async function addOverlay(container) {
     container.innerHTML = `
     <div class="overlay" style="margin-top: 20em;">

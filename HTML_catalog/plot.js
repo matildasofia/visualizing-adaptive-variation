@@ -1,4 +1,4 @@
-
+// Imports needed for using functions in this script.
 import { embed } from 'gosling.js';
 import { plot_spec as plot_1_Spec } from '../plot_1_FST.js';
 import { plot_spec as plot_2_θ_Spec } from '../plot_2_θ.js';
@@ -8,6 +8,12 @@ import { plot_spec as plot_3_Spec_MD } from '../plot_3_mapping_depths.js';
 import { plot_spec as plot_3_Spec_Nr_samples } from '../plot_3_nr_of_samples.js';
 import { plot_spec as plot_3_Spec_MD_Normalized } from '../plot_3_mapping_depths_normalized.js';
 import { plot_spec as plot_3_Spec_Nr_samples_Normalized } from '../plot_3_nr_of_samples_normalized.js';
+
+/**
+ * Asynchronous function to embed and display a collection of Gosling visualizations.
+ *
+ * @throws {Error} If there is an issue embedding the plot specification.
+ */
 async function PlotAll() {
     try {
         const plotSpec = {
@@ -36,10 +42,7 @@ async function PlotAll() {
                             plot_3_Spec_Nr_samples_Normalized,
                         ]
                     }
-
                 ],
-
-
             "responsiveSize": true
         };
 
@@ -51,88 +54,92 @@ async function PlotAll() {
     }
 };
 
-async function URLfromFile(filePath, button_data_track_number) {
-    try {
-        const fileURL = filePath;
-        if (fileURL) {
-            GoslingPlotWithLocalData(fileURL, button_data_track_number);
-        }
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-async function GoslingPlotWithLocalData(fileURL, button_data_track_number) {
+/**
+ * Asynchronous function to update Gosling plots with local data.
+ * 
+ * Inputs:
+ * @param {string} filePath - The file path to the local data.
+ * @param {number} data_track_number - The number specifying the data track to be updated.
+ * 
+ * @throws {Error} If an unsupported data_track_number is provided.
+ */
+async function GoslingPlotWithLocalData(filePath, data_track_number) {
     try {
         let trackData;
-        let plotSpec;
 
-        if (button_data_track_number <= 1) {
-            trackData = plot_1_Spec.tracks[button_data_track_number].data;
-            trackData.url = fileURL;
+        // Data tracks for plot 1
+        if (data_track_number <= 1) {
+            trackData = plot_1_Spec.tracks[data_track_number].data;
+            trackData.url = filePath;
         }
 
-        else if (button_data_track_number == 2) {
+        // Data tracks for plot 2-4
+        else if (data_track_number == 2) {
             plot_2_π_Spec.tracks.slice(0, 1).forEach((track) => {
-                track.data.url = fileURL;
+                track.data.url = filePath;
             });
 
             plot_2_π_Spec.tracks.slice(1, 2).forEach((track) => {
-                track.data.url = fileURL;
+                track.data.url = filePath;
             });
 
             plot_2_θ_Spec.tracks.slice(0, 1).forEach((track) => {
-                track.data.url = fileURL;
+                track.data.url = filePath;
             });
 
             plot_2_θ_Spec.tracks.slice(1, 2).forEach((track) => {
-                track.data.url = fileURL;
+                track.data.url = filePath;
             });
 
             plot_2_td_Spec.tracks.slice(0, 1).forEach((track) => {
-                track.data.url = fileURL;
+                track.data.url = filePath;
             });
             plot_2_td_Spec.tracks.slice(1, 2).forEach((track) => {
-                track.data.url = fileURL;
+                track.data.url = filePath;
             });
         }
-        else if (button_data_track_number == 3) {
+
+        // Data tracks for plot 5-8
+        // Atlantic data
+        else if (data_track_number == 3) {
             plot_3_Spec_MD.tracks.slice(0, 1).forEach((track) => {
-                track.data.url = fileURL;
+                track.data.url = filePath;
             });
 
             plot_3_Spec_Nr_samples.tracks.slice(0, 1).forEach((track) => {
-                track.data.url = fileURL;
+                track.data.url = filePath;
             });
 
             plot_3_Spec_MD_Normalized.tracks.slice(0, 1).forEach((track) => {
-                track.data.url = fileURL;
+                track.data.url = filePath;
             });
 
             plot_3_Spec_Nr_samples_Normalized.tracks.slice(0, 1).forEach((track) => {
-                track.data.url = fileURL;
+                track.data.url = filePath;
             });
         }
 
-        else if (button_data_track_number == 4) {
+        // Data tracks for plot 5-8
+        // Mediterranian data
+        else if (data_track_number == 4) {
             plot_3_Spec_MD.tracks.slice(1, 2).forEach((track) => {
-                track.data.url = fileURL;
+                track.data.url = filePath;
             });
 
             plot_3_Spec_Nr_samples.tracks.slice(1, 2).forEach((track) => {
-                track.data.url = fileURL;
+                track.data.url = filePath;
             });
             plot_3_Spec_MD_Normalized.tracks.slice(1, 2).forEach((track) => {
-                track.data.url = fileURL;
+                track.data.url = filePath;
             });
 
             plot_3_Spec_Nr_samples_Normalized.tracks.slice(1, 2).forEach((track) => {
-                track.data.url = fileURL;
+                track.data.url = filePath;
             });
 
         }
         else {
-            console.error('Invalid button_data_track_number:', button_data_track_number);
+            console.error('Invalid data_track_number:', data_track_number);
             return;
         }
 
@@ -142,5 +149,5 @@ async function GoslingPlotWithLocalData(fileURL, button_data_track_number) {
     }
 }
 
-
-export { PlotAll, URLfromFile, GoslingPlotWithLocalData };
+// Export functions defined in this script.
+export { PlotAll, GoslingPlotWithLocalData };
