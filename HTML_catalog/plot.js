@@ -1,13 +1,13 @@
 // Imports needed for using functions in this script.
 import { embed } from 'gosling.js';
-import { plot_spec as plot_1_Spec } from '../plot_1_FST.js';
-import { plot_spec as plot_2_θ_Spec } from '../plot_2_θ.js';
-import { plot_spec as plot_2_π_Spec } from '../plot_2_π.js';
-import { plot_spec as plot_2_td_Spec } from '../plot_2_td.js';
-import { plot_spec as plot_3_Spec_MD } from '../plot_3_mapping_depths.js';
-import { plot_spec as plot_3_Spec_Nr_samples } from '../plot_3_nr_of_samples.js';
-import { plot_spec as plot_3_Spec_MD_Normalized } from '../plot_3_mapping_depths_normalized.js';
-import { plot_spec as plot_3_Spec_Nr_samples_Normalized } from '../plot_3_nr_of_samples_normalized.js';
+import { plot_spec as plot_1_Spec } from './plot_scripts/plot_1_FST.js';
+import { plot_spec as plot_2_θ_Spec } from './plot_scripts/plot_2_θ.js';
+import { plot_spec as plot_2_π_Spec } from './plot_scripts/plot_2_π.js';
+import { plot_spec as plot_2_td_Spec } from './plot_scripts/plot_2_td.js';
+import { plot_spec as plot_3_Spec_MD } from './plot_scripts/plot_3_mapping_depths.js';
+import { plot_spec as plot_3_Spec_Nr_samples } from './plot_scripts/plot_3_nr_of_samples.js';
+import { plot_spec as plot_3_Spec_MD_Normalized } from './plot_scripts/plot_3_mapping_depths_normalized.js';
+import { plot_spec as plot_3_Spec_Nr_samples_Normalized } from './plot_scripts/plot_3_nr_of_samples_normalized.js';
 
 /**
  * Asynchronous function to embed and display a collection of Gosling visualizations.
