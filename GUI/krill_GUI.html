@@ -43,25 +43,26 @@
         <button class="plot-button" data-track="0">FST - SNPs</button>
         <input type="file" class="file-input" style="display: none;">
     </div>
+        
+    </div>
     <!-- Container for the plots -->
-    <div id="plot-container-0" class="plot-container"></div>
+    <div id="plot-container" class="plot-container"></div>
 
     <script type="module">
+        import { embed } from 'gosling.js';
+        import { plot_spec as plot_1_Spec } from './GUI_plot_spec.js';
+        import { GoslingPlotWithLocalData, URLfromFile } from './plot.js';
+        
         /* Lets the user input a datafile, a URL is created for each of the files. Makes sure that the buttons appear
-         only after the entire webpage has finished loading 
+         only after the entire webpage has finished loading. Events are set after a button has been clicked.
         */
-
         document.addEventListener('DOMContentLoaded', function () {
-            // Grouping all the file-input buttons into a list
             const fileInputs = document.querySelectorAll('.file-input');
-            // Button Click Event Listeners - Triggers a popup GUI to choose files from, once you have clicked on a button
             document.querySelectorAll('.plot-button').forEach(function (button, button_data_track_num) {
-                // Adding click event listener to each button
                 button.addEventListener('click', function () {
                     fileInputs[button_data_track_num].click();
                 });
             });
-            // File Input Event Listeners - Specifies what happens after local data files have been selected
             fileInputs.forEach(function (fileInput, button_data_track_num) {
                 // Adding change event listener to each file-input button
                 fileInput.addEventListener('change', function () {
@@ -69,72 +70,6 @@
                 });
             });
         });
-        
-        // Function that generates a URL for the selected file(s)
-        async function URLfromFile(fileInputs, button_data_track_number) {
-            // Creating a URL for the selected file
-            const fileURL = URL.createObjectURL(fileInputs[button_data_track_number].files[0]);
-            // Checking if the URL for the file exists
-            if (fileURL) {
-                // Calling the function to plot with local data
-                GoslingPlotWithLocalData(fileURL, button_data_track_number, fileInputs[button_data_track_number].files[0]);
-            }
-        }
-
-        import { embed } from 'gosling.js';
-        import { plot_spec as plot_1_Spec } from './GUI_plot_spec.js';
-
-        async function GoslingPlotWithLocalData(fileURL, button_data_track_number, fileInput) {
-            try {
-                let trackData;
-                let plotSpec;
-                let containerId;
-
-                // ¤¤¤¤¤¤¤¤ If FST plot ¤¤¤¤¤¤¤¤
-                if (button_data_track_number >= 0 && button_data_track_number <= 1) {
-                    trackData = plot_1_Spec.tracks[button_data_track_number].data;
-                    plotSpec = plot_1_Spec;
-                    containerId = 'plot-container-0';
-                    // Updating the 'url' property for the track's data
-                    trackData.url = fileURL;
-                    if (fileInput.name.includes(".tsv")) {
-                        trackData.type = "csv";
-                        trackData.separator = "\t";
-                    }
-                    else if (fileInput.name.includes(".csv")) {
-                        trackData.type = "csv";
-                        trackData.separator = ",";
-                    }
-                    else {
-                        console.error('Invalid data type, only tsv or csv accepted');
-                        return;
-                    }
-                } 
-                                   
-               else {
-                    console.error('Invalid button_data_track_number:', button_data_track_number);
-                    return;
-                   }
-
-                if (button_data_track_number >= 0 && button_data_track_number <= 1) {
-                    // Create a new plot for each container
-                    const container = document.getElementById(containerId);
-                    const newPlot = await embed(container, plotSpec);
-                }
-            } 
-            catch (error) {
-                // Handling errors and logging to the console
-                console.error(error);
-            }
-        }
-
-        async function configureDataType(fileURL, button_data_track_number) {
-            const trackData = plot_1_Spec.tracks[button_data_track_number].data;
-            if (fileURL.includes(".tsv")) {
-                trackData.type = "csv";
-                trackData.separator = "\t";
-            }
-        }
     </script>
 </body>
 </html>
