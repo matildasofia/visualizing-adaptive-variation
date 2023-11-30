@@ -3,9 +3,9 @@ var plot_spec = {
     //"subtitle": "Per base and per kbase",
     "static": false, // enables zoom & pan for the tracks
     //"layout": { type: 'linear', },
-    "xDomain": { "interval": [0, 200000] },
+    "xDomain": { "interval": [0, 250000] },
     "alignment": "overlay",
-    "width": 1100,
+    "width": 1000,
     "height": 300,
     "assembly": "unknown",
 
@@ -54,7 +54,7 @@ var plot_spec = {
 
             // "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
             "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
-            "y": { "field": "FST", "type": "quantitative", "axis": "left", "domain": [0, 1] },
+            "y": { "field": "FST", "type": "quantitative", "axis": "none", "domain": [0, 1] },
 
             "color": { "value": "darkblue" },
             "opacity": { "value": 0.5 },

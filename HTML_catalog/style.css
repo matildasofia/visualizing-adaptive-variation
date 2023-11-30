@@ -4,11 +4,14 @@ body {
 
 p {
     margin: 2em
-    
 }
 
 .header{
+    margin: 2em;
+    margin-left:3.5em;
+    margin-bottom:0em;
     font-size: large;
+    
 }
 
 .overlay {

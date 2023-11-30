@@ -13,7 +13,7 @@ var plot_spec = {
     //"layout": { "type": "linear" },
     "xDomain": { "interval": [0, 250000] },
     "alignment": "overlay",
-    "width": 500,
+    "width": 495,
     "height": 200,
     "assembly": "unknown",
 
