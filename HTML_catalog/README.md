@@ -2,8 +2,8 @@
 <h3>First step</h3>
 <p>
   <ul>
-  <li>Copy this folder "HTML_catalog" to your local computer. </li>
-  <li>Place the folder with all the data to be visualized in the HTML_catalog folder, and name it "data". <br> 
+  <li>Copy this repository "Visualizing adaptive variation" to your local computer. </li>
+  <li>Place the folder with all the data to be visualized in the Visualizing adaptive variation folder, and name it "data". <br> 
     Keep the subfolders (genes, gene_regions, ..) as they are.</li> 
   <li>Download the extension "Live Server" to Visual Studio Code (or use an equivalent extension/tool).</li>
   <li>Make sure that you can run JavaScripts on your computer. <br>
@@ -14,7 +14,7 @@
 <h3>Second step</h3>
 <p>
 <ul>
-  <li>Open the terminal on your computer and go to the HTML_catalog.</li>
+  <li>Open the terminal on your computer and go into the HTML_catalog.</li>
   <li>Run the command "node generateHTML.js".</li>
 </ul>
 </p>
