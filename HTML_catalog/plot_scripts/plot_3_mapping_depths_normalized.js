@@ -55,7 +55,7 @@ var plot_spec = {
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-2" },
-            "y": { "field": "NORMALIZED_DEPTH", "type": "quantitative", "axis": "none", "domain":[0,16] },
+            "y": { "field": "NORMALIZED_DEPTH", "type": "quantitative", "axis": "none", "domain":[0,16],"grid":true},
             "color": { "value": color_mapping_depth_ME }, // orange for Mapping depth
             "opacity": { "value": opacity_ME }, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line

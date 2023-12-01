@@ -33,7 +33,7 @@ var plot_spec = {
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-2" },
-            "y": { "field": "DEPTH", "type": "quantitative", "axis": "left", "domain":[0,1700]},
+            "y": { "field": "DEPTH", "type": "quantitative", "axis": "left", "domain":[0,1700],"grid":true},
             "color": { "value": color_mapping_depth_AT }, // orange for Mapping depth
             "opacity": { "value": opacity_AT }, // Opacity for Atlantic
             "size": { "value": size_val }, //the width of the line

@@ -36,7 +36,7 @@ var plot_spec = {
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
-            "y": { "field": "at_TD", "type": "quantitative", "axis": "left", "domain": [-3.5, 3.5] }, 
+            "y": { "field": "at_TD", "type": "quantitative", "axis": "left", "domain": [-3.5, 3.5],"grid":true }, 
             "color": { "value": color_td_AT }, // Color for td
             "opacity": { "value": opacity_AT}, // Opacity for Atlantic
             "size": { "value": size_val }, //the width of the line

@@ -34,7 +34,7 @@ var plot_spec = {
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom","linkingId": "link-2"},
-            "y": { "field": "SAMPLES", "type": "quantitative", "axis": "left","domain":[0,70]},
+            "y": { "field": "SAMPLES", "type": "quantitative", "axis": "left","domain":[0,70],"grid":true},
             "color": { "value": color_nr_samples_AT }, // Green for Nr. of samples
             "opacity": { "value": opacity_AT}, // Opacity for Atlantic
             "size": { "value": size_val }, //the width of the line
