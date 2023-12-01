@@ -10,7 +10,7 @@ var track = {
     },
     "mark": "point",
     "x": { "field": "POS", "type": "genomic", "axis": "bottom"},
-    "y": { "field": "FST", "type": "quantitative", "axis": "left", "domain": [0, 1], "legend": "false" },
+    "y": { "field": "FST", "type": "quantitative", "axis": "left", "domain": [0, 1] },
     "color": { "field": "TYPE", "type": "nominal", "legend": true },
     "opacity": { "value": 0.8 },
     "size": { "value": 4 },
