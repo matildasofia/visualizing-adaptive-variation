@@ -33,7 +33,7 @@ var plot_spec = {
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom","linkingId":"link-1" }, //think legend should show whats shown on the axis, but no.
-            "y": { "field": "at_THETA", "type": "quantitative", "axis": "left","domain":[0,0.05] },
+            "y": { "field": "at_THETA", "type": "quantitative", "axis": "left","domain":[0,0.05], "grid":true},
             "color": { "value": color_theta_AT}, // Color for theta
             "opacity": { "value": opacity_AT}, // Opacity for Atlantic
             "size": { "value": size_val }, //the width of the line
@@ -55,7 +55,7 @@ var plot_spec = {
             },
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom","linkingId":"link-1" }, //think legend should show whats shown on the axis, but no.
-            "y": { "field": "me_THETA", "type": "quantitative", "axis": "none","domain":[0,0.05],"grid":true },
+            "y": { "field": "me_THETA", "type": "quantitative", "axis": "none","domain":[0,0.05] },
             "color": { "value": color_theta_ME}, // Color for theta
             "opacity": { "value": opacity_ME}, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line

@@ -35,7 +35,7 @@ var plot_spec = {
             
             "mark": "line",
             "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId":"link-1" },
-            "y": { "field": "at_PI", "type": "quantitative", "axis": "left", "domain":[0,0.05],"grid":true },
+            "y": { "field": "at_PI", "type": "quantitative", "axis": "left", "domain":[0,0.05], "grid":true},
             "color": { "value": color_pi_AT }, // Color for Pi    
             "opacity": { "value": opacity_AT}, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line
