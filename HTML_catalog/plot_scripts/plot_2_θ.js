@@ -1,14 +1,13 @@
 const size_val = 1.5;
 const opacity_AT = 1;
 const opacity_ME = 1;
-const color_nr_samples_AT = "green"
-const color_nr_samples_ME = "lightgreen"
+const color_theta_AT = "blue"
+const color_theta_ME = "lightblue"
 
 var plot_spec = {
-    "title": "Nr of Samples - Window size: 1000",
-    //"subtitle": "Atlantic population (dark) and Mediterranean (light)",
+    "title": "Theta",
     // "description": "Atlantic population is shown in bold, Mediterranean in lighter color",
-    // "description": "At (bold), Me (light)",
+    //"subtitle": "Atlantic population (dark) and Mediterranean (light)",
     "static": false,
     //"layout": { "type": "linear" },
     "xDomain": { "interval": [0, 250000] },
@@ -21,7 +20,7 @@ var plot_spec = {
     "style": {"background":"#D3D3D3", "backgroundOpacity":0.1},
 
 
-      "tracks": [
+    "tracks": [
         {
         // ¤¤¤¤¤¤¤¤¤ Atlantic  ¤¤¤¤¤¤¤¤¤
             "data": {
@@ -29,45 +28,41 @@ var plot_spec = {
                 "type": "csv",
                 "separator": "\t",
                 "column": "POS",
-                "value": "SAMPLES",
+                "value": "at_THETA",
                 "sampleLength": "1000", //how many rows the file is
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom","linkingId": "link-2"},
-            "y": { "field": "SAMPLES", "type": "quantitative", "axis": "left","domain":[0,70]},
-            "color": { "value": color_nr_samples_AT }, // Green for Nr. of samples
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom","linkingId":"link-1" }, //think legend should show whats shown on the axis, but no.
+            "y": { "field": "at_THETA", "type": "quantitative", "axis": "left","domain":[0,0.05], "grid":true},
+            "color": { "value": color_theta_AT}, // Color for theta
             "opacity": { "value": opacity_AT}, // Opacity for Atlantic
             "size": { "value": size_val }, //the width of the line
             "tooltip": [
-                {"field": "SAMPLES", "type": "quantitative", "format":"0.2f","alt":"Atlantic - Nr of samples:"}
+    {"field": "at_THETA", "type": "quantitative", "format":"0.2f","alt":"Atlantic - θ (theta):"}
                    ],              
-            
+                
+
         },
         // ¤¤¤¤¤¤¤¤¤ Mediterranean  ¤¤¤¤¤¤¤¤¤
-
         {
             "data": {
                 "url": "",
                 "type": "csv",
                 "separator": "\t",
                 "column": "POS",
-                "value": "SAMPLES",
+                "value": "me_THETA",
                 "sampleLength": "1000", //how many rows the file is
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-2" },
-            "y": { "field": "SAMPLES", "type": "quantitative", "axis": "none", "domain":[0,70]},
-            "color": { "value": color_nr_samples_ME }, // Green for Nr. of samples
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom","linkingId":"link-1" }, //think legend should show whats shown on the axis, but no.
+            "y": { "field": "me_THETA", "type": "quantitative", "axis": "none","domain":[0,0.05] },
+            "color": { "value": color_theta_ME}, // Color for theta
             "opacity": { "value": opacity_ME}, // Opacity for Mediterranean
             "size": { "value": size_val }, //the width of the line
             "tooltip": [
-                {"field": "SAMPLES", "type": "quantitative", "format":"0.2f","alt":"Mediterranean - Nr of samples:"}
-                   ],              
-    
+        {"field": "me_THETA", "type": "quantitative", "format":"0.2f","alt":"Mediterranean - θ (theta):"}
+        ],
         },
     ]
-};
-
-export { plot_spec }; 
-// console.log(plot_spec.title);
-// console.log(JSON.stringify(plot_spec.tracks, null, 2));
+};                   
+export { plot_spec };
