@@ -1,4 +1,4 @@
-import { track } from './track.js';
+import { trackTemplate } from './track.js';
 
 var plot_spec = {
     "title": "FST",
@@ -15,7 +15,7 @@ var plot_spec = {
     },
 
     "tracks": [
-        track
+        trackTemplate
     ]
 };
 
