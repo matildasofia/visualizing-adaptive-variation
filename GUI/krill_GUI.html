@@ -13,7 +13,7 @@
               "higlass": "https://esm.sh/higlass@1.13?external=react,react-dom,pixi",
               "gosling.js": "https://esm.sh/gosling.js@0.11.0?external=react,react-dom,pixi,higlass"
             }
-          }
+        }
     </script>
     <!-- Styling for the body -->
     <style>
@@ -35,6 +35,14 @@
             gap: 10px;
             margin-top: 20px;
         }
+        #columnLabel,
+        #columnSelector {
+            display: none;
+        }
+        .column-container {
+            display: flex;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -43,8 +51,16 @@
         <button class="plot-button" data-track="0">Choose a FST file</button>
         <input type="file" class="file-input" style="display: none;">
     </div>
-        
+
+    <!-- Container for label and selector -->
+    <div class="column-container">
+        <!-- Text next to the dropdown menu -->
+        <div id="columnLabel">Specify column for y-values:</div>
+
+        <!-- Dropdown menu for selecting columns -->
+        <select id="columnSelector"></select>
     </div>
+
     <!-- Container for the plots -->
     <div id="plot-container" class="plot-container"></div>
 
@@ -52,10 +68,7 @@
         import { embed } from 'gosling.js';
         import { plot_spec as plot_1_Spec } from './GUI_plot_spec.js';
         import { GoslingPlotWithLocalData, URLfromFile } from './plot.js';
-        
-        /* Lets the user input a datafile, a URL is created for each of the files. Makes sure that the buttons appear
-         only after the entire webpage has finished loading. Events are set after a button has been clicked.
-        */
+
         document.addEventListener('DOMContentLoaded', function () {
             const fileInputs = document.querySelectorAll('.file-input');
             document.querySelectorAll('.plot-button').forEach(function (button, button_data_track_num) {
@@ -64,8 +77,14 @@
                 });
             });
             fileInputs.forEach(function (fileInput, button_data_track_num) {
-                // Adding change event listener to each file-input button
                 fileInput.addEventListener('change', function () {
+                    const columnSelector = document.getElementById('columnSelector');
+                    const columnLabel = document.getElementById('columnLabel');
+                    
+                    // Show label and selector
+                    columnSelector.style.display = 'block';
+                    columnLabel.style.display = 'block';
+
                     URLfromFile(fileInputs, button_data_track_num);
                 });
             });
