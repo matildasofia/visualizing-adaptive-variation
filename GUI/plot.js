@@ -43,15 +43,13 @@ async function GoslingPlotWithLocalData(fileURL, button_data_track_number, fileI
 }
 
 async function configureDataType(fileInput, trackData) {
-    const fileName = fileInput.name;
-    const extension = fileName.substring(fileName.lastIndexOf('.') + 1);
-    console.log(extension); 
+    const fileType = fileInput.type;
     
-    if (extension == "tsv") {
+    if (fileType == "text/tab-separated-values") {
         trackData.type = "csv";
         trackData.separator = "\t";
     }
-    else if (extension == "csv") {
+    else if (fileType == "text/csv") {
         trackData.type = "csv";
         trackData.separator = ",";
     }
