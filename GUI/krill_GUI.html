@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Gosling Visualization</title>
     <link rel="stylesheet" href="https://esm.sh/higlass@1.13/dist/hglib.css">
@@ -22,90 +21,59 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-family: 'Roboto', sans-serif;
         }
-
-        #buttons-container {
-            margin-top: 40px;
+        #plots-container {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            align-items: center;
         }
-
-        /* #columnLabel,
-        #columnSelector {
+        .plot-container {
+            margin-bottom: 0px; /* Adjust the margin as needed */
+        }
+        #buttons-container {
+            display: flex;
+            flex-direction: column; /* Change to row to display buttons on the same row */
+            gap: 10px;
+            margin-top: 20px;
+        }
+        #columnLabelX,
+        #columnSelectorX,
+        #columnLabelY,
+        #columnSelectorY {
             display: none;
-        } */
+        }
+        .column-container {
+            display: flex;
+            align-items: center;
+        }
     </style>
 </head>
-
 <body>
     <!-- Container for buttons -->
     <div id="buttons-container">
         <button class="plot-button" data-track="0">Choose a FST file</button>
         <input type="file" class="file-input" style="display: none;">
-
-        <!-- Container for label and selector -->
-        <div class="column-container">
-            <!-- Text next to the dropdown menu -->
-            <div id="columnLabel">Specify column for y-values:</div>
-            <!-- Dropdown menu for selecting columns -->
-            <select id="columnSelector"></select>
-        </div>
-
-        <div>
-            <label for="mark">Mark:</label>
-            <select name="mark" id="mark">
-                <option value="point" selected>point</option>
-                <option value="line">line</option>
-                <option value="area">area</option>
-                <option value="bar">bar</option>
-                <option value="rect">rect</option>
-                <option value="text">text</option>
-                <option value="link">link</option>
-                <option value="triangle">triangle</option>
-            </select>
-        </div>
-
-        <div>
-            <label for="color">Color:</label>
-            <select name="color" id="color">
-                <option value="blue" selected>blue</option>
-                <option value="pink">pink</option>
-                <option value="red">red</option>
-                <option value="gold">gold</option>
-                <option value="green">green</option>
-                <option value="purple">purple</option>
-                <option value="black">black</option>
-                <option value="orange">orange</option>
-            </select>
-        </div>
-        <div>
-            <label for="size">Size:</label>
-            <select name="size" id="size">
-                <option value="one">1</option>
-                <option value="two">2</option>
-                <option value="three">3</option>
-            </select>
-        </div>
-
-        <div>
-            <label for="bcolor">Background color:</label>
-            <select name="bcolor" id="bcolor">
-                <option value="white" selected>white</option>
-                <option value="grey">grey</option>
-            </select>
-        </div>
     </div>
-
+    <!-- Container for X label and selector -->
+    <div class="column-container">
+        <!-- Text next to the dropdown menu -->
+        <div id="columnLabelX">Specify column for X-values:</div>
+        <!-- Dropdown menu for X: selecting columns -->
+        <select id="columnSelectorX"></select>
+    </div>
+    <!-- Container for Y label and selector -->
+    <div class="column-container">
+        <!-- Text next to the dropdown menu -->
+        <div id="columnLabelY">Specify column for Y-values:</div>
+        <!-- Dropdown menu for Y: selecting columns -->
+        <select id="columnSelectorY"></select>
+    </div>
     <!-- Container for the plots -->
     <div id="plot-container" class="plot-container"></div>
-
     <script type="module">
         import { embed } from 'gosling.js';
         import { plot_spec as plot_1_Spec } from './GUI_plot_spec.js';
         import { GoslingPlotWithLocalData, URLfromFile } from './plot.js';
-
         document.addEventListener('DOMContentLoaded', function () {
             const fileInputs = document.querySelectorAll('.file-input');
             document.querySelectorAll('.plot-button').forEach(function (button, button_data_track_num) {
@@ -115,18 +83,23 @@
             });
             fileInputs.forEach(function (fileInput, button_data_track_num) {
                 fileInput.addEventListener('change', function () {
-                    const columnSelector = document.getElementById('columnSelector');
-                    const columnLabel = document.getElementById('columnLabel');
-
+                    const columnSelectorX = document.getElementById('columnSelectorX');
+                    const columnLabelX = document.getElementById('columnLabelX');
+                    const columnSelectorY = document.getElementById('columnSelectorY');
+                    const columnLabelY = document.getElementById('columnLabelY');
+    
                     // Show label and selector
-                    columnSelector.style.display = 'block';
-                    columnLabel.style.display = 'block';
-
+                    columnSelectorX.style.display = 'block';
+                    columnLabelX.style.display = 'block';
+                    columnSelectorY.style.display = 'block';
+                    columnLabelY.style.display = 'block';
                     URLfromFile(fileInputs, button_data_track_num);
                 });
             });
         });
     </script>
 </body>
-
 </html>
+
+
+
