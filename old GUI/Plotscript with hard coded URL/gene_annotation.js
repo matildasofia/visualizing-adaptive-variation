@@ -1,66 +1,136 @@
 const size_val = 1.5;
-const opacity_AT = 1;
-const opacity_ME = 0.4;
+const opacity = 1;
 const color_td_AT = "red"
-const color_td_ME = "red"
 
 
 var plot_spec = {
     "static": false,
-    //"layout": { "type": "linear" },
+    "layout": { "type": "linear" },
     "xDomain": { "interval": [0, 250000] },
     "alignment": "overlay",
     "width": 1100,
     "height": 300,
     "assembly": "unknown",
 
-    // Specifying Light gray color as background color
     "style": {"background":"#D3D3D3", "backgroundOpacity":0.1},
 
-    "tracks": [
-        {
-        // ¤¤¤¤¤¤¤¤¤ Atlantic  ¤¤¤¤¤¤¤¤¤
-            "data": {
-                "url": ".../data/genes/seq_c_23164.REF_STRG_1_64511_XLOC_008442.gff",
-                // seq_c_23164.REF_STRG_1_64511_XLOC_008442
-                "type": "csv",
-                "separator": "\t",
-                "column": "POS",
-                "value": "at_TD",
-                "sampleLength": "100000", 
-            },
-            "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" },
-            "y": { "field": "at_TD", "type": "quantitative", "axis": "left", "domain": [-2.5, 2.5] }, 
-            "color": { "value": color_td_AT }, // Color for td
-            "opacity": { "value": opacity_AT}, // Opacity for Atlantic
-            "size": { "value": size_val }, //the width of the line
-            "tooltip": [
-        {"field": "at_TD", "type": "quantitative", "format":"0.2f","alt":"Atlantic - Tajima's D (TD):"}
-                        ],
+    "tracks":[{
+        "data": {
+          "url": ".../data/genes/seq_c_23164.REF_STRG_1_64511_XLOC_008442.gff.sorted.gff.gz",
+          "indexUrl": ".../data/genes_index/seq_c_23164.REF_STRG_1_64511_XLOC_008442.gff.sorted.gff.gz.tbi",
+          //"indexURL": "https://drive.google.com/file/d/19VMUl3aEjqIsBngFD8aar5y0VlRvxUw_/view?usp=sharing",
+          "type": "gff",
+          //"extractAttributes": true
         },
-        // ¤¤¤¤¤¤¤¤¤ Mediterranean  ¤¤¤¤¤¤¤¤¤
-        {
-            "data": {
-                "url": "",
-                "type": "csv",
-                "separator": "\t",
-                "column": "POS",
-                "value": "me_TD",
-                "sampleLength": "100000", 
-            },
-            "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "none", "linkingId": "link-1" },
-            "y": { "field": "me_TD", "type": "quantitative", "axis": "left", "domain": [-2.5, 2.5] }, 
-            "color": { "value": color_td_ME }, // Color for td
-            "opacity": { "value": opacity_ME}, // Opacity for Mediterranean
-            "size": { "value": size_val }, //the width of the line
-            "tooltip": [
-        {"field": "me_TD", "type": "quantitative", "format":"0.2f","alt":"Mediterranean - Tajima's D (TD):"}
-                    ],
-        
-        }
-
-    ]
-};                   
+        "mark": "rect", 
+          "x": {"field": "start", "type": "genomic"}, 
+          "xe": {"field": "end", "type": "genomic"},
+          "size": {"value": 30 }
+    }
+]
+    
+};
+                   
 export { plot_spec };
+
+
+var annotation_spec = {
+    "alignment": "overlay",
+    "title": "Corces et al.",
+    "data": {
+      "url": "https://server.gosling-lang.org/api/v1/tileset_info/?d=gene-annotation",
+      "type": "beddb",
+      "genomicFields": [
+        {"index": 1, "name": "start"},
+        {"index": 2, "name": "end"}
+      ],
+      "valueFields": [
+        {"index": 5, "name": "strand", "type": "nominal"},
+        {"index": 3, "name": "name", "type": "nominal"}
+      ],
+      "exonIntervalFields": [
+        {"index": 12, "name": "start"},
+        {"index": 13, "name": "end"}
+      ]
+    },
+    "tracks": [
+      {
+        "dataTransform": [
+          {"type": "filter", "field": "type", "oneOf": ["gene"]},
+          {"type": "filter", "field": "strand", "oneOf": ["+"]}
+        ],
+        "mark": "text",
+        "text": {"field": "name", "type": "nominal"},
+        "x": {"field": "start", "type": "genomic"},
+        "xe": {"field": "end", "type": "genomic"},
+        "size": {"value": 8},
+        "style": {"textFontSize": 8, "dy": -12}
+      },
+      {
+        "dataTransform": [
+          {"type": "filter", "field": "type", "oneOf": ["gene"]},
+          {"type": "filter", "field": "strand", "oneOf": ["-"]}
+        ],
+        "mark": "text",
+        "text": {"field": "name", "type": "nominal"},
+        "x": {"field": "start", "type": "genomic"},
+        "xe": {"field": "end", "type": "genomic"},
+        "size": {"value": 8},
+        "style": {"textFontSize": 8, "dy": 10}
+      },
+      {
+        "dataTransform": [
+          {"type": "filter", "field": "type", "oneOf": ["gene"]},
+          {"type": "filter", "field": "strand", "oneOf": ["+"]}
+        ],
+        "mark": "rect",
+        "x": {"field": "end", "type": "genomic"},
+        "size": {"value": 7}
+      },
+      {
+        "dataTransform": [
+          {"type": "filter", "field": "type", "oneOf": ["gene"]},
+          {"type": "filter", "field": "strand", "oneOf": ["-"]}
+        ],
+        "mark": "rect",
+        "x": {"field": "start", "type": "genomic"},
+        "size": {"value": 7}
+      },
+      {
+        "dataTransform": [
+          {"type": "filter", "field": "type", "oneOf": ["exon"]}
+        ],
+        "mark": "rect",
+        "x": {"field": "start", "type": "genomic"},
+        "xe": {"field": "end", "type": "genomic"},
+        "size": {"value": 14}
+      },
+      {
+        "dataTransform": [
+          {"type": "filter", "field": "type", "oneOf": ["gene"]}
+        ],
+        "mark": "rule",
+        "x": {"field": "start", "type": "genomic"},
+        "xe": {"field": "end", "type": "genomic"},
+        "strokeWidth": {"value": 3}
+      }
+    ],
+    "row": {"field": "strand", "type": "nominal", "domain": ["+", "-"]},
+    "color": {
+      "field": "strand",
+      "type": "nominal",
+      "domain": ["+", "-"],
+      "range": ["#012DB8", "#BE1E2C"]
+    },
+    "visibility": [
+      {
+        "operation": "less-than",
+        "measure": "width",
+        "threshold": "|xe-x|",
+        "transitionPadding": 10,
+        "target": "mark"
+      }
+    ],
+    "width": 350,
+    "height": 100
+  }

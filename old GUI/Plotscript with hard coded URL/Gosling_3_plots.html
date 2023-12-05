@@ -7,12 +7,13 @@
     <script type="importmap">
         {
             "imports": {
-                "react": "https://esm.sh/react@18",
-                "react-dom": "https://esm.sh/react-dom@18",
-                "pixi": "https://esm.sh/pixi.js@6",
-                "gosling.js": "https://esm.sh/gosling.js@0.11.0?external=react,react-dom,pixi"
+              "react": "https://esm.sh/react@18",
+              "react-dom": "https://esm.sh/react-dom@18",
+              "pixi": "https://esm.sh/pixi.js@6",
+              "higlass": "https://esm.sh/higlass@1.13?external=react,react-dom,pixi",
+              "gosling.js": "https://esm.sh/gosling.js@0.11.0?external=react,react-dom,pixi,higlass"
             }
-        }
+          }
     </script>
 </head>
 
@@ -24,18 +25,21 @@
 
         // Import specifications for each individual plot
         // import { plot_spec as plot_1_Spec } from './plot_1.js';
-        import { plot_spec as plot_2_Spec } from './plot_2.js';
-        import { plot_spec as plot_3_Spec } from './plot_3.js';
+        //import { plot_spec as plot_2_Spec } from './plot_2.js';
+        //import { plot_spec as plot_3_Spec } from './plot_3.js';
+        import { plot_spec } from './gene_annotation.js';
 
         // Combine specifications of the different plots into a single javascript "Object"
         const combinedSpec = {
             "arrangement": "parallel",
             "views": [
                 // plot_1_Spec,
-                plot_2_Spec,
-                plot_3_Spec
+                //plot_2_Spec,
+                //plot_3_Spec
+                plot_spec
             ]
-        };        
+        };
+        console.log(plot_spec.tracks[0]);
         embed(document.getElementById('plots-container'), combinedSpec); // Embed the combined specifications into the container
     </script>
 </body>
