@@ -30,9 +30,15 @@ var plot_spec = {
                 "sampleLength": "1000",
             },
             "mark": "point",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom"},
-            "y": { "field": "FST", "type": "quantitative", "axis": "left", "domain": [0, 1], "legend": "false", "grid":true},
-            "color": { "field": "TYPE", "type": "nominal", "legend": true },
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
+            "y": { "field": "FST", "type": "quantitative", "axis": "left", "domain": [0, 1], "legend": "false", "grid": true },
+            "color": {
+                "field": "TYPE",
+                "type": "nominal",
+                //"domain": ["intergenic", "upstream", "intron", "downstream", "synonymous","missense","splice&synonymous","3_prime_UTR","5_prime_UTR","5_prime_UTR_premature_start_codon_gain"],
+                //"range": ["orange","indigo", "seagreen", "gold", "royalblue", "firebrick","chocolate","darkcyan","orchid","maroon"],
+                "legend": true
+            },
             "opacity": { "value": 0.8 },
             "size": { "value": 4 },
             "tooltip": [
