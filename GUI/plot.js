@@ -8,17 +8,9 @@ async function URLfromFile(fileInputs, button_data_track_number) {
         if (fileURL) {
             const track = { ...trackTemplate };
             const columnSelectorX = document.getElementById('columnSelectorX');
-            const columnLabelX = document.getElementById('columnLabelX');
             const columnSelectorY = document.getElementById('columnSelectorY');
-            const columnLabelY = document.getElementById('columnLabelY');
-            columnSelectorX.style.display = 'block';
-            columnLabelX.style.display = 'block';
             columnSelectorX.innerHTML = '<option value="" disabled selected>Select a column for X</option>';
-            columnSelectorY.style.display = 'block';
-            columnLabelY.style.display = 'block';
             columnSelectorY.innerHTML = '<option value="" disabled selected>Select a column for Y</option>';
-            // Display initial plot before column selection
-            await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
             // Continue with column selection setup
             await configureDataType(fileInputs[button_data_track_number].files[0], track, fileURL, button_data_track_number);
         }

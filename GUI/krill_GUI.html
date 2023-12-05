@@ -4,7 +4,6 @@
 <head>
     <title>Gosling Visualization</title>
     <link rel="stylesheet" href="https://esm.sh/higlass@1.13/dist/hglib.css">
-    <!-- 0.12.0 is the latest gosling version -->
     <script type="importmap">
         {
             "imports": {
@@ -16,19 +15,33 @@
             }
         }
     </script>
-    <!-- Styling for the body -->
     <style>
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+        }
+
+        button,
+        select {
+            border-color: steelblue;
+            border-radius: 2px;
+            border-width: 1.5px;
+            background-color: rgb(239, 239, 239);
+            border-style: solid;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            max-width: fit-content;
+            margin-right: 30px;
         }
 
         #buttons-container {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
             margin-top: 20px;
+            align-items: center;
+            gap:5px;
         }
 
         #columnLabelX,
@@ -37,38 +50,28 @@
         #columnSelectorY {
             display: none;
         }
-
-        .column-container {
-            display: flex;
-            align-items: center;
-        }
     </style>
 </head>
 
 <body>
-    <!-- Container for buttons -->
     <div id="buttons-container">
         <button class="plot-button" data-track="0">Choose a FST file</button>
         <input type="file" class="file-input" style="display: none;">
 
-        <!-- Container for X label and selector -->
         <div class="column-container">
-            <!-- Text next to the dropdown menu -->
-            <div id="columnLabelX">Specify column for X-values:</div>
-            <!-- Dropdown menu for X: selecting columns -->
+            <div id="columnLabelX">X-axis:</div>
             <select id="columnSelectorX"></select>
         </div>
-        <!-- Container for Y label and selector -->
+
         <div class="column-container">
-            <!-- Text next to the dropdown menu -->
-            <div id="columnLabelY">Specify column for Y-values:</div>
-            <!-- Dropdown menu for Y: selecting columns -->
+            <div id="columnLabelY">Y-axis:</div>
             <select id="columnSelectorY"></select>
         </div>
+    </div>
+    <div id="buttons-container">
 
         <label for="mark">Mark:</label>
         <select name="mark" id="mark" class="mark">
-            <option value="" disabled selected>Select your mark</option>
             <option value="point">point</option>
             <option value="line">line</option>
             <option value="area" selected>area</option>
@@ -80,7 +83,6 @@
         </select>
         <label for="color">Color:</label>
         <select name="color" id="color">
-            <option value="" disabled selected>Color for your mark</option>
             <option value="blue">blue</option>
             <option value="pink" selected>pink</option>
             <option value="red">red</option>
@@ -92,7 +94,6 @@
         </select>
         <label for="size">Mark size:</label>
         <select name="size" id="size">
-            <option value="" disabled selected>Choose size</option>
             <option value="one">1</option>
             <option value="two">2</option>
             <option value="three">3</option>
@@ -100,13 +101,12 @@
         </select>
         <label for="bcolor">Background color:</label>
         <select name="bcolor" id="bcolor">
-            <option value="" disabled selected>Choose backgroundcolor</option>
             <option value="white" selected>white</option>
             <option value="grey">grey</option>
         </select>
+
     </div>
-    </div>
-    <!-- Container for the plots -->
+
     <div id="plot-container" class="plot-container"></div>
     <script type="module">
         import { embed } from 'gosling.js';
@@ -126,11 +126,10 @@
                     const columnSelectorY = document.getElementById('columnSelectorY');
                     const columnLabelY = document.getElementById('columnLabelY');
 
-                    // Show label and selector
-                    columnSelectorX.style.display = 'block';
-                    columnLabelX.style.display = 'block';
-                    columnSelectorY.style.display = 'block';
-                    columnLabelY.style.display = 'block';
+                    columnSelectorX.style.display = 'inline';
+                    columnLabelX.style.display = 'inline';
+                    columnSelectorY.style.display = 'inline';
+                    columnLabelY.style.display = 'inline';
                     URLfromFile(fileInputs, button_data_track_num);
                 });
             });
