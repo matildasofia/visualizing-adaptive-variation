@@ -37,18 +37,18 @@
             margin-right: 30px;
         }
 
-        #buttons-container {
+        #buttons-container,
+        #buttons-container2 {
             display: flex;
             margin-top: 20px;
             align-items: center;
-            gap:5px;
+            gap: 5px;
         }
 
-        #columnLabelX,
-        #columnSelectorX,
-        #columnLabelY,
-        #columnSelectorY {
-            display: none;
+        #column-container {
+            display: flex;
+            gap: 5px;
+            align-items: center;
         }
     </style>
 </head>
@@ -58,60 +58,28 @@
         <button class="plot-button" data-track="0">Choose a FST file</button>
         <input type="file" class="file-input" style="display: none;">
 
-        <div class="column-container">
+        <div class="column-container" id="column-container">
             <div id="columnLabelX">X-axis:</div>
             <select id="columnSelectorX"></select>
         </div>
 
-        <div class="column-container">
+        <div class="column-container" id="column-container">
             <div id="columnLabelY">Y-axis:</div>
             <select id="columnSelectorY"></select>
         </div>
     </div>
-    <div id="buttons-container">
-
-        <label for="mark">Mark:</label>
-        <select name="mark" id="mark" class="mark">
-            <option value="point">point</option>
-            <option value="line">line</option>
-            <option value="area" selected>area</option>
-            <option value="bar">bar</option>
-            <option value="rect">rect</option>
-            <option value="text">text</option>
-            <option value="link">link</option>
-            <option value="triangle">triangle</option>
-        </select>
-        <label for="color">Color:</label>
-        <select name="color" id="color">
-            <option value="blue">blue</option>
-            <option value="pink" selected>pink</option>
-            <option value="red">red</option>
-            <option value="gold">gold</option>
-            <option value="green">green</option>
-            <option value="purple">purple</option>
-            <option value="black">black</option>
-            <option value="orange">orange</option>
-        </select>
-        <label for="size">Mark size:</label>
-        <select name="size" id="size">
-            <option value="one">1</option>
-            <option value="two">2</option>
-            <option value="three">3</option>
-            <option value="four" selected>4</option>
-        </select>
-        <label for="bcolor">Background color:</label>
-        <select name="bcolor" id="bcolor">
-            <option value="white" selected>white</option>
-            <option value="grey">grey</option>
-        </select>
-
-    </div>
+    <div id="buttons-container2"></div>
+    <script type="module">
+        import { options } from './options.js';
+        const container = document.getElementById('buttons-container2');
+        options(container);
+    </script>
 
     <div id="plot-container" class="plot-container"></div>
+
     <script type="module">
-        import { embed } from 'gosling.js';
-        import { plot_spec as plot_1_Spec } from './GUI_plot_spec.js';
-        import { GoslingPlotWithLocalData, URLfromFile } from './plot.js';
+        import { URLfromFile } from './plot.js';
+
         document.addEventListener('DOMContentLoaded', function () {
             const fileInputs = document.querySelectorAll('.file-input');
             document.querySelectorAll('.plot-button').forEach(function (button, button_data_track_num) {
@@ -121,15 +89,6 @@
             });
             fileInputs.forEach(function (fileInput, button_data_track_num) {
                 fileInput.addEventListener('change', function () {
-                    const columnSelectorX = document.getElementById('columnSelectorX');
-                    const columnLabelX = document.getElementById('columnLabelX');
-                    const columnSelectorY = document.getElementById('columnSelectorY');
-                    const columnLabelY = document.getElementById('columnLabelY');
-
-                    columnSelectorX.style.display = 'inline';
-                    columnLabelX.style.display = 'inline';
-                    columnSelectorY.style.display = 'inline';
-                    columnLabelY.style.display = 'inline';
                     URLfromFile(fileInputs, button_data_track_num);
                 });
             });
