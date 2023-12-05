@@ -2,9 +2,10 @@ export async function options(container) {
     container.innerHTML = `
     <label for="mark">Mark:</label>
     <select name="mark" id="mark" class="mark">
+        <option value="" disabled selected>Select a mark</option>
         <option value="point">point</option>
         <option value="line">line</option>
-        <option value="area" selected>area</option>
+        <option value="area">area</option>
         <option value="bar">bar</option>
         <option value="rect">rect</option>
         <option value="text">text</option>
@@ -14,8 +15,9 @@ export async function options(container) {
 
     <label for="color">Color:</label>
     <select name="color" id="color">
+        <option value="" disabled selected>Select color</option>
         <option value="blue">blue</option>
-        <option value="pink" selected>pink</option>
+        <option value="pink">pink</option>
         <option value="red">red</option>
         <option value="gold">gold</option>
         <option value="green">green</option>
@@ -26,15 +28,17 @@ export async function options(container) {
 
     <label for="size">Mark size:</label>
     <select name="size" id="size">
-        <option value="one">1</option>
-        <option value="two">2</option>
-        <option value="three">3</option>
-        <option value="four" selected>4</option>
+        <option value="" disabled selected>Select size</option>
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
     </select>
 
     <label for="bcolor">Background color:</label>
     <select name="bcolor" id="bcolor">
-        <option value="white" selected>white</option>
+        <option value="" disabled selected>Select background color</option>
+        <option value="white">white</option>
         <option value="grey">grey</option>
     </select>
 `};
