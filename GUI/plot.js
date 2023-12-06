@@ -1,13 +1,14 @@
 import { embed } from 'gosling.js';
-import { plot_spec as plot_1_Spec } from './GUI_plot_spec.js';
-import { track } from './track.js';
+import { plot_spec as plot_1_Spec } from './plot_spec.js';
+import { track } from './track_spec.js';
+import { handleOptions } from './update_plot_specifications.js';
 
-async function URLfromFile(fileInputs, button_data_track_number) {
+export async function URLfromFile(fileInputs, button_data_track_number) {
     try {
         const fileURL = URL.createObjectURL(fileInputs[button_data_track_number].files[0]);
         if (fileURL) {
             await configureDataType(fileInputs[button_data_track_number].files[0], track);
-            await setOptions(fileInputs[button_data_track_number].files[0], track, fileURL, button_data_track_number);
+            await handleOptions(fileInputs[button_data_track_number].files[0], track, fileURL, button_data_track_number);
         }
     } catch (error) {
         console.error(error);
@@ -38,61 +39,7 @@ async function configureDataType(fileInput, track) {
     }
 }
 
-async function setOptions(fileInput, track, fileURL, button_data_track_number) {
-    const header = await extractHeader(fileInput, track);
-    header.forEach((column, index) => {
-        const optionX = document.createElement('option');
-        const optionY = document.createElement('option');
-        optionX.value = index;
-        optionX.textContent = column;
-        optionY.value = index;
-        optionY.textContent = column;
-        document.getElementById('columnSelectorX').appendChild(optionX);
-        document.getElementById('columnSelectorY').appendChild(optionY);
-    });
-
-    columnSelectorX.addEventListener('change', async function () {
-        const chosenColumnName = columnSelectorX.options[columnSelectorX.selectedIndex].textContent;
-        track.data.column = chosenColumnName;
-        const trackX = track.x;
-        trackX.field = chosenColumnName;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
-    });
-    columnSelectorY.addEventListener('change', async function () {
-        const chosenColumnName = columnSelectorY.options[columnSelectorY.selectedIndex].textContent;
-        track.data.value = chosenColumnName;
-        const trackY = track.y;
-        trackY.field = chosenColumnName;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
-    });
-
-    mark.addEventListener('change', async function () {
-        const chosenMark = mark.value;
-        track.mark = chosenMark;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
-    });
-
-    color.addEventListener('change', async function () {
-        const chosenColor = color.value;
-        track.color.value = chosenColor;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
-    });
-
-    /* size.addEventListener('change', async function () {
-        const chosenSize = size.value;
-        track.size.value = chosenSize;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
-    }); */
-
-    bcolor.addEventListener('change', async function () {
-        const chosenBcolor = bcolor.value;
-        plot_1_Spec.style.background = chosenBcolor;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
-    });
-};
-
-
-async function GoslingPlotWithLocalData(fileURL, button_data_track_number, track) {
+export async function GoslingPlotWithLocalData(fileURL, button_data_track_number, track) {
     try {
         if (button_data_track_number === 0) {
             track = plot_1_Spec.tracks[button_data_track_number];
@@ -112,20 +59,5 @@ async function GoslingPlotWithLocalData(fileURL, button_data_track_number, track
     }
 }
 
-async function extractHeader(file, track) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-            const text = reader.result;
-            const data = text.split('\n').map(row => row.split(track.data.separator));
-            const header = data[0];
-            resolve(header);
-        };
-        reader.onerror = reject;
-        reader.readAsText(file);
-    });
-}
 
-
-export { URLfromFile, GoslingPlotWithLocalData };
 

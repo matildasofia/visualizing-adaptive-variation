@@ -58,13 +58,12 @@
     <div id="buttons-container2"></div>
 
     <script type="module">
-        import { data_configuration } from './data_configuration.js';
-        import { plot_options } from './options.js';
-
+        import { data_options } from './data_options.js';
+        import { plot_options } from './plot_options.js';
         const container1 = document.getElementById('buttons-container');
         const container2 = document.getElementById('buttons-container2');
 
-        data_configuration(container1);
+        data_options(container1);
         plot_options(container2);
     </script>
 
@@ -72,7 +71,7 @@
 
     <script type="module">
         import { URLfromFile } from './plot.js';
-        import { track } from './track.js'
+        import { track } from './track_spec.js';
 
         document.addEventListener('DOMContentLoaded', function () {
             const fileInputs = document.querySelectorAll('.file-input');

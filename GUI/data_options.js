@@ -1,4 +1,5 @@
-export async function data_configuration(container) {
+// HTML options for user
+export async function data_options(container) {
     container.innerHTML = `
 
 <button class="plot-button" data-track="0">Choose a FST file</button>

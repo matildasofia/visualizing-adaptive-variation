@@ -1,3 +1,4 @@
+// HTML options for user
 export async function plot_options(container) {
     container.innerHTML = `
     <label for="mark">Mark:</label>
@@ -33,12 +34,3 @@ export async function plot_options(container) {
         <option value="grey">grey</option>
     </select>
 `};
-
-{/* <label for="size">Mark size:</label>
-    <select name="size" id="size">
-        <option value="" disabled selected>Select size</option>
-        <option value=1>1</option>
-        <option value=2>2</option>
-        <option value=3>3</option>
-        <option value=4>4</option>
-    </select> */}

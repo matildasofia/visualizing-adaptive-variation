@@ -1,15 +1,14 @@
-import { track } from './track.js';
+import { track } from './track_spec.js';
 
 var plot_spec = {
     "title": "FST",
-    "static": false, // enables zoom & pan for the tracks
+    "static": false, 
     "xDomain": { "interval": [0, 200000] },
     "alignment": "overlay",
     "width": 1100,
     "height": 300,
     "assembly": "unknown",
 
-    //Specifying Light gray color as background color
     "style": {
         "background": "#D3D3D3", "backgroundOpacity": 0.1
     },
