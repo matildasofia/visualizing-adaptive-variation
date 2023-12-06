@@ -16,16 +16,15 @@ var plot_spec = {
 
     "tracks":[{
         "data": {
-          "url": ".../data/genes/seq_c_23164.REF_STRG_1_64511_XLOC_008442.gff.sorted.gff.gz",
-          "indexUrl": ".../data/genes_index/seq_c_23164.REF_STRG_1_64511_XLOC_008442.gff.sorted.gff.gz.tbi",
-          //"indexURL": "https://drive.google.com/file/d/19VMUl3aEjqIsBngFD8aar5y0VlRvxUw_/view?usp=sharing",
+          "url": "http://127.0.0.1:5500/data/genes_index/seq_c_23164.REF_STRG_1_64511_XLOC_008442.gff.sorted.gff.gz",
+          "indexUrl": "http://127.0.0.1:5500/data/genes_index/seq_c_23164.REF_STRG_1_64511_XLOC_008442.gff.sorted.gff.gz.tbi",
           "type": "gff",
-          //"extractAttributes": true
+          "extractAttributes": true
         },
-        "mark": "rect", 
-          "x": {"field": "start", "type": "genomic"}, 
+        "mark": "point", 
+          "x": {"field": "start", "type": "genomic", "axis": "bottom"}, 
           "xe": {"field": "end", "type": "genomic"},
-          "size": {"value": 30 }
+          "size": {"value": 2 }
     }
 ]
     
