@@ -2,7 +2,7 @@
 export async function data_options(container) {
     container.innerHTML = `
 
-<button class="plot-button" data-track="0">Choose a FST file</button>
+<button class="plot-button" data-track="0">Select file</button>
 <input type="file" class="file-input" style="display: none;">
 
 <div class="column-container" id="column-container">
