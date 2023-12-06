@@ -19,19 +19,25 @@ export async function row1(container) {
     </select></div>`};
 export async function row2(container) {
     container.innerHTML = `
-<div class="interval-container">
+
   <label for="x_start">X-domain:</label>
   <input type="text" class="interval-input" id="x_start">
   <span>-</span>
   <input type="text" class="interval-input" id="x_end">
   <button id="x_interval_button">Apply</button>
-</div>
 
-<div class="interval-container">
   <label for="y_start">Y-domain:</label>
   <input type="text" class="interval-input" id="y_start">
   <span>-</span>
   <input type="text" class="interval-input" id="y_end">
   <button id="y_interval_button">Apply</button>
-</div>
+
+<label for="binsize">Bin size:</label>
+<input type="text" class="interval-input" id="binsize">
+<button id="binsize_button">Apply</button>
+
+<label for="samplelength">Sample length:</label>
+<input type="text" class="interval-input" id="samplelength">
+<button id="samplelength_button">Apply</button>
+
   `};

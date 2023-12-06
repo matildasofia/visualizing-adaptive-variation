@@ -1,7 +1,7 @@
 import { track } from './track_spec.js';
 
 var plot_spec = {
-    "title": "FST",
+    "title": "",
     "static": false, 
     "xDomain": { "interval": [0, 200000] },
     "alignment": "overlay",

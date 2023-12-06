@@ -69,6 +69,17 @@ export async function handleOptions(fileInput, track, fileURL, button_data_track
         await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
     });
 
+    binsize_button.addEventListener('click', async function () {
+        const binsize = document.getElementById('binsize').value;
+        track.data.binSize = binsize;
+        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
+    });
+
+    samplelength_button.addEventListener('click', async function () {
+        const samplelength = document.getElementById('samplelength').value;
+        track.data.sampleLength = samplelength;
+        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
+    });
 };
 
 
