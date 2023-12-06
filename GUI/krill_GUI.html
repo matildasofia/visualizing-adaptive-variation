@@ -54,32 +54,25 @@
 </head>
 
 <body>
-    <div id="buttons-container">
-        <button class="plot-button" data-track="0">Choose a FST file</button>
-        <input type="file" class="file-input" style="display: none;">
-
-        <div class="column-container" id="column-container">
-            <div id="columnLabelX">X-axis:</div>
-            <select id="columnSelectorX"></select>
-        </div>
-
-        <div class="column-container" id="column-container">
-            <div id="columnLabelY">Y-axis:</div>
-            <select id="columnSelectorY"></select>
-        </div>
-    </div>
+    <div id="buttons-container"></div>
     <div id="buttons-container2"></div>
+
     <script type="module">
-        import { options } from './options.js';
-        const container = document.getElementById('buttons-container2');
-        options(container);
+        import { data_configuration } from './data_configuration.js';
+        import { plot_options } from './options.js';
+
+        const container1 = document.getElementById('buttons-container');
+        const container2 = document.getElementById('buttons-container2');
+
+        data_configuration(container1);
+        plot_options(container2);
     </script>
 
     <div id="plot-container" class="plot-container"></div>
 
     <script type="module">
         import { URLfromFile } from './plot.js';
-        import { trackTemplate as track } from './track.js'
+        import { track } from './track.js'
 
         document.addEventListener('DOMContentLoaded', function () {
             const fileInputs = document.querySelectorAll('.file-input');

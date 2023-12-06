@@ -1,21 +1,16 @@
-// const y_col_preset = "FST" // column set as FST for development
-const y_col_preset = "" // if user should specify column
-
-// const x_col_preset = "POS" // column set as POS for development
-const x_col_preset = "" // if user should specify the x-column
+const y_col_preset = "" 
+const x_col_preset = "" 
 
 
-const trackTemplate = {
+const track = {
     "data": {
         "url": "",
         "type": "",
         "separator": "",
-        // "column": "POS",
         "column": x_col_preset,
-        // "value": "",
         "value": y_col_preset,
         "binSize": 10,
-        "sampleLength": "1000",
+        "sampleLength": 1000,
     },
     "mark": "point",
     "x": { "field": x_col_preset, "type": "genomic", "axis": "bottom"},
@@ -29,4 +24,4 @@ const trackTemplate = {
     ],
 };
 
-export { trackTemplate };
+export { track };

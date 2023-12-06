@@ -1,23 +1,20 @@
 import { embed } from 'gosling.js';
 import { plot_spec as plot_1_Spec } from './GUI_plot_spec.js';
-import { trackTemplate as track } from './track.js';
+import { track } from './track.js';
 
 async function URLfromFile(fileInputs, button_data_track_number) {
     try {
         const fileURL = URL.createObjectURL(fileInputs[button_data_track_number].files[0]);
-
         if (fileURL) {
-            document.getElementById('columnSelectorX').innerHTML = '<option value="" disabled selected>Select a column for X</option>';
-            document.getElementById('columnSelectorY').innerHTML = '<option value="" disabled selected>Select a column for Y</option>';
-
-            await configureDataType(fileInputs[button_data_track_number].files[0], track, fileURL, button_data_track_number);
+            await configureDataType(fileInputs[button_data_track_number].files[0], track);
+            await setOptions(fileInputs[button_data_track_number].files[0], track, fileURL, button_data_track_number);
         }
     } catch (error) {
         console.error(error);
     }
 }
 
-async function configureDataType(fileInput, track, fileURL, button_data_track_number) {
+async function configureDataType(fileInput, track) {
     try {
         const fileName = fileInput.name;
         const extension = fileName.substring(fileName.lastIndexOf('.') + 1);
@@ -36,8 +33,6 @@ async function configureDataType(fileInput, track, fileURL, button_data_track_nu
             console.error('Invalid data type');
             return;
         }
-        setOptions(fileInput, track, fileURL, button_data_track_number);
-
     } catch (error) {
         console.error(error);
     }
@@ -45,7 +40,6 @@ async function configureDataType(fileInput, track, fileURL, button_data_track_nu
 
 async function setOptions(fileInput, track, fileURL, button_data_track_number) {
     const header = await extractHeader(fileInput, track);
-
     header.forEach((column, index) => {
         const optionX = document.createElement('option');
         const optionY = document.createElement('option');
@@ -84,11 +78,11 @@ async function setOptions(fileInput, track, fileURL, button_data_track_number) {
         await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
     });
 
-    size.addEventListener('change', async function () {
+    /* size.addEventListener('change', async function () {
         const chosenSize = size.value;
         track.size.value = chosenSize;
         await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
-    });
+    }); */
 
     bcolor.addEventListener('change', async function () {
         const chosenBcolor = bcolor.value;
@@ -100,12 +94,11 @@ async function setOptions(fileInput, track, fileURL, button_data_track_number) {
 
 async function GoslingPlotWithLocalData(fileURL, button_data_track_number, track) {
     try {
-        const containerId = 'plot-container';
         if (button_data_track_number === 0) {
             track = plot_1_Spec.tracks[button_data_track_number];
             track.data.url = fileURL;
             if (track.y && typeof track.y.field !== 'undefined' && track.y.field !== '' && track.x && typeof track.x.field !== 'undefined' && track.x.field !== '') {
-                const container = document.getElementById(containerId);
+                const container = document.getElementById('plot-container');
                 await embed(container, { ...plot_1_Spec, tracks: [track] });
             } else {
                 console.error('track.y.field or track.x.field is not defined');
