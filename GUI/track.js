@@ -18,11 +18,10 @@ const trackTemplate = {
         "sampleLength": "1000",
     },
     "mark": "point",
-    // "x": { "field": "POS", "type": "genomic", "axis": "bottom"},
     "x": { "field": x_col_preset, "type": "genomic", "axis": "bottom"},
-    // "y": { "field": "", "type": "quantitative", "axis": "left", "domain": [0, 1] },
     "y": { "field": y_col_preset, "type": "quantitative", "axis": "left", "domain": [0, 1] },
-    "color": { "field": "TYPE", "type": "nominal", "legend": true },
+    "color": {"value": "violet"},
+    //"color": { "field": "TYPE", "type": "nominal", "legend": true },
     "opacity": { "value": 0.8 },
     "size": { "value": 4 },
     "tooltip": [
