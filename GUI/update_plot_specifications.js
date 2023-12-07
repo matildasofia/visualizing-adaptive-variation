@@ -46,6 +46,40 @@ export async function handleOptions(fileInput, track, fileURL, button_data_track
         plot_1_Spec.style.background = chosenBcolor;
         await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
     });
+
+    x_interval_button.addEventListener('click', async function () {
+        const startValue = document.getElementById('x_start').value;
+        const endValue = document.getElementById('x_end').value;
+        const start = parseFloat(startValue);
+        const end = parseFloat(endValue);
+
+        const intervalArray = [start, end];
+        plot_1_Spec.xDomain.interval = intervalArray;
+        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
+    });
+
+    y_interval_button.addEventListener('click', async function () {
+        const startValue = document.getElementById('y_start').value;
+        const endValue = document.getElementById('y_end').value;
+        const start = parseFloat(startValue);
+        const end = parseFloat(endValue);
+
+        const intervalArray = [start, end];
+        track.y.domain = intervalArray;
+        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
+    });
+
+    binsize_button.addEventListener('click', async function () {
+        const binsize = document.getElementById('binsize').value;
+        track.data.binSize = binsize;
+        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
+    });
+
+    samplelength_button.addEventListener('click', async function () {
+        const samplelength = document.getElementById('samplelength').value;
+        track.data.sampleLength = samplelength;
+        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
+    });
 };
 
 

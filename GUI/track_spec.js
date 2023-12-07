@@ -12,16 +12,16 @@ const track = {
         "binSize": 10,
         "sampleLength": 1000,
     },
-    "mark": "point",
+    "mark": "line",
     "x": { "field": x_col_preset, "type": "genomic", "axis": "bottom"},
-    "y": { "field": y_col_preset, "type": "quantitative", "axis": "left", "domain": [0, 1] },
+    "y": { "field": y_col_preset, "type": "quantitative", "axis": "left", "domain": [0, 0.1] },
     "color": {"value": "violet"},
     //"color": { "field": "TYPE", "type": "nominal", "legend": true },
     "opacity": { "value": 0.8 },
-    "size": { "value": 4 },
-    "tooltip": [
-        { "field": "FST", "type": "quantitative", "format": "0.2f", "alt": "SNPs (per bp) - FST:" }
-    ],
+    "size": { "value": 2 },
+    //"tooltip": [
+        //{ "field": "FST", "type": "quantitative", "format": "0.2f", "alt": "SNPs (per bp) - FST:" }
+    //],
 };
 
 export { track };

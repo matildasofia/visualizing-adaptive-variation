@@ -4,6 +4,7 @@
 <head>
     <title>Gosling Visualization</title>
     <link rel="stylesheet" href="https://esm.sh/higlass@1.13/dist/hglib.css">
+    <link rel="stylesheet" href="./stylesheet.css">
     <script type="importmap">
         {
             "imports": {
@@ -15,56 +16,24 @@
             }
         }
     </script>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-family: 'Roboto', sans-serif;
-            font-size: 14px;
-        }
-
-        button,
-        select {
-            border-color: steelblue;
-            border-radius: 2px;
-            border-width: 1.5px;
-            background-color: rgb(239, 239, 239);
-            border-style: solid;
-            font-family: 'Roboto', sans-serif;
-            font-size: 14px;
-            max-width: fit-content;
-            margin-right: 30px;
-        }
-
-        #buttons-container,
-        #buttons-container2 {
-            display: flex;
-            margin-top: 20px;
-            align-items: center;
-            gap: 5px;
-        }
-
-        #column-container {
-            display: flex;
-            gap: 5px;
-            align-items: center;
-        }
-    </style>
 </head>
 
 <body>
-    <div id="buttons-container"></div>
-    <div id="buttons-container2"></div>
+    <div id="buttons-container" class="buttons-container"></div>
+    <div id="buttons-container2" class="buttons-container"></div>
+    <div id="buttons-container3" class="buttons-container"></div>
 
     <script type="module">
-        import { data_options } from './data_options.js';
+        import { row1, row2 } from './data_options.js';
         import { plot_options } from './plot_options.js';
+        
         const container1 = document.getElementById('buttons-container');
         const container2 = document.getElementById('buttons-container2');
+        const container3 = document.getElementById('buttons-container3');
 
-        data_options(container1);
-        plot_options(container2);
+        row1(container1);
+        row2(container2)
+        plot_options(container3);
     </script>
 
     <div id="plot-container" class="plot-container"></div>

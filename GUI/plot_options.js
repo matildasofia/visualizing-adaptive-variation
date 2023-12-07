@@ -1,9 +1,8 @@
 // HTML options for user
 export async function plot_options(container) {
     container.innerHTML = `
-    <label for="mark">Mark:</label>
     <select name="mark" id="mark" class="mark">
-        <option value="" disabled selected>Select a mark</option>
+        <option value="" disabled selected>Select mark</option>
         <option value="point">point</option>
         <option value="line">line</option>
         <option value="area">area</option>
@@ -14,7 +13,6 @@ export async function plot_options(container) {
         <option value="triangle">triangle</option>
     </select>
 
-    <label for="color">Color:</label>
     <select name="color" id="color">
         <option value="" disabled selected>Select color</option>
         <option value="blue">blue</option>
@@ -27,7 +25,6 @@ export async function plot_options(container) {
         <option value="orange">orange</option>
     </select>
 
-    <label for="bcolor">Background color:</label>
     <select name="bcolor" id="bcolor">
         <option value="" disabled selected>Select background color</option>
         <option value="white">white</option>
