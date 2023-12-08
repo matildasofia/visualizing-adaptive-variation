@@ -16,30 +16,44 @@
             }
         }
     </script>
+
+    <style>
+        #overlay1 {
+            display: block;
+            z-index: 999;
+        }
+    </style>
 </head>
+
+
 
 <body>
     <div id="buttons-container" class="buttons-container"></div>
     <div id="buttons-container2" class="buttons-container"></div>
     <div id="buttons-container3" class="buttons-container"></div>
+    <div id="overlay"></div>
 
     <script type="module">
         import { row1, row2 } from './data_options.js';
         import { plot_options } from './plot_options.js';
-        
+        import {overlay} from './overlay.js';
+
         const container1 = document.getElementById('buttons-container');
         const container2 = document.getElementById('buttons-container2');
         const container3 = document.getElementById('buttons-container3');
+        const container4 = document.getElementById('overlay');
 
         row1(container1);
-        row2(container2)
+        row2(container2);
         plot_options(container3);
+        overlay(container4);
+
     </script>
 
     <div id="plot-container" class="plot-container"></div>
 
     <script type="module">
-        import { URLfromFile } from './plot.js';
+        import { URLfromFile, GoslingPlotWithLocalData } from './plot.js';
         import { track } from './track_spec.js';
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -53,6 +67,12 @@
                 fileInput.addEventListener('change', function () {
                     URLfromFile(fileInputs, button_data_track_num);
                 });
+            });
+            info_button.addEventListener('click', function () {
+                overlay.style.display = "block";
+            });
+            close_button.addEventListener('click', function () {
+                overlay.style.display = "none";
             });
         });
 

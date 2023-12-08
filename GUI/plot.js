@@ -9,8 +9,10 @@ export async function URLfromFile(fileInputs, button_data_track_number) {
         if (fileURL) {
             await configureDataType(fileInputs[button_data_track_number].files[0], track);
             await handleOptions(fileInputs[button_data_track_number].files[0], track, fileURL, button_data_track_number);
+            await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
         }
     } catch (error) {
+        console.log('URL error');
         console.error(error);
     }
 }
@@ -35,6 +37,7 @@ async function configureDataType(fileInput, track) {
             return;
         }
     } catch (error) {
+        console.log('CDT error');
         console.error(error);
     }
 }
@@ -44,10 +47,12 @@ export async function GoslingPlotWithLocalData(fileURL, button_data_track_number
         if (button_data_track_number === 0) {
             track = plot_1_Spec.tracks[button_data_track_number];
             track.data.url = fileURL;
+            const container = document.getElementById('plot-container');
             if (track.y && typeof track.y.field !== 'undefined' && track.y.field !== '' && track.x && typeof track.x.field !== 'undefined' && track.x.field !== '') {
-                const container = document.getElementById('plot-container');
                 await embed(container, { ...plot_1_Spec, tracks: [track] });
-            } else {
+            }
+            else {
+                await embed(container, { ...plot_1_Spec, tracks: [track] });
                 console.error('track.y.field or track.x.field is not defined');
             }
         } else {
@@ -55,6 +60,7 @@ export async function GoslingPlotWithLocalData(fileURL, button_data_track_number
             return;
         }
     } catch (error) {
+        console.log('GPWLD error');
         console.error(error);
     }
 }
