@@ -7,14 +7,14 @@ export async function row1(container) {
 
 <div class="column-container" id="column-container">
     <div id="columnLabelX"></div>
-    <select id="columnSelectorX">
+    <select name="xcolumn" id="columnSelectorX">
         <option value="" disabled selected>Select a column for X</option>
     </select>
 </div>
 
 <div class="column-container" id="column-container">
     <div id="columnLabelY"></div>
-    <select id="columnSelectorY">
+    <select name="ycolumn" id="columnSelectorY">
         <option value="" disabled selected>Select a column for Y</option>
     </select></div>`};
 export async function row2(container) {
@@ -33,11 +33,11 @@ export async function row2(container) {
   <button id="y_interval_button">Apply</button>
 
 <label for="binsize">Bin size:</label>
-<input type="text" class="interval-input" id="binsize">
+<input type="text" class="interval-input" name="binsize" id="binsize">
 <button id="binsize_button">Apply</button>
 
 <label for="samplelength">Sample length:</label>
-<input type="text" class="interval-input" id="samplelength">
+<input type="text" class="interval-input" name="samplelenght" id="samplelength">
 <button id="samplelength_button">Apply</button>
 
   `};
