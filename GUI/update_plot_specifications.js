@@ -1,15 +1,13 @@
 import { GoslingPlotWithLocalData } from './plot.js';
-// import { plot_spec as plot_1_Spec } from './plot_spec.js';
 import { plotSpecSingleton } from './PlotSpecSingleton.js';
 
 const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
 const fileHeaders = new Map();
-export async function handleOptions(fileInput, track, fileURL, button_data_track_number) {
+export async function handleOptions(fileInput,button_data_track_number) {
     const columnSelectorsX = document.querySelectorAll(`.columnSelectorX[data-track="${button_data_track_number}"]`);
     const columnSelectorsY = document.querySelectorAll(`.columnSelectorY[data-track="${button_data_track_number}"]`);
 
     // ¤¤¤¤¤¤¤¤¤¤ Creating the dropdown menues for each track ¤¤¤¤¤¤¤¤¤¤  
-
 
     if (!fileHeaders.has(button_data_track_number)) {
         fileHeaders.set(button_data_track_number, new Set()); 
@@ -49,14 +47,6 @@ export async function handleOptions(fileInput, track, fileURL, button_data_track
                 });
             });
         }
-    // columnSelectorX.addEventListener('change', async function () {
-    //     const chosenColumnName = columnSelectorX.options[columnSelectorX.selectedIndex].textContent;
-    //     track.data.column = chosenColumnName;
-    //     const trackX = track.x;
-    //     trackX.field = chosenColumnName;
-    //     await GoslingPlotWithLocalData();
-    //     // updateURLParameters(columnSelectorX.name, columnSelectorX.options[columnSelectorX.selectedIndex].textContent);
-    // });
     // Event listeners for dropdown menu changes (adapt as needed)
     columnSelectorsX.forEach(columnSelectorX => {
         columnSelectorX.addEventListener('change', async function () {

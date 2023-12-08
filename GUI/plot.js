@@ -5,7 +5,6 @@ import { handleOptions } from './update_plot_specifications.js';
 const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
 export async function URLfromFile(fileInputs, button_data_track_number) {
     try {
-        // const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
         console.log('Plot Spec Before working on new track:', plotSpec);
         const fileURL = URL.createObjectURL(fileInputs[button_data_track_number].files[0]);
         const current_track = plotSpec.tracks[button_data_track_number];
@@ -18,7 +17,7 @@ export async function URLfromFile(fileInputs, button_data_track_number) {
 
             await configureDataType(fileInputs[button_data_track_number].files[0], current_track);
             console.log('Plot Spec after configureDataType in URLfromFile:', plotSpec);
-            await handleOptions(fileInputs[button_data_track_number].files[0], current_track, fileURL, button_data_track_number);
+            await handleOptions(fileInputs[button_data_track_number].files[0],button_data_track_number);
             console.log('Plot Spec after handleOptions in URLfromFile:', plotSpec);
             // await GoslingPlotWithLocalData();
 
@@ -70,40 +69,6 @@ export async function GoslingPlotWithLocalData() {
 }
 
 
-
-
-
-// export async function GoslingPlotWithLocalData(button_data_track_number, track) {
-//     try {
-//         if (button_data_track_number === 0 || button_data_track_number === 1 ) {
-//             const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
-            
-//             const trackok = plotSpec.tracks[button_data_track_number];
-//             // track.data.url = fileURL;
-//             console.log(plotSpec)
-//             const container = document.getElementById('plot-container');
-//             await embed(container, plotSpec); // Embed the updated plotSpec
-//             // if (trackok.y && typeof trackok.y.field !== 'undefined' && trackok.y.field !== '' && trackok.x && typeof trackok.x.field !== 'undefined' && trackok.x.field !== '') {
-//             //     // await embed(container, { ...plot_1_Spec, tracks: [track] });
-//             //     await embed(container, plotSpec); // Embed the updated plotSpec
-
-//             // }
-//             // else {
-//             //     await embed(container, plotSpec); // Embed the updated plotSpec
-
-//             //     console.error('track.y.field or track.x.field is not defined');
-//             // }
-//         } 
-        
-//         else {
-//             console.error('Invalid button_data_track_number:', button_data_track_number);
-//             return;
-//         }
-//     } catch (error) {
-//         console.log('GPWLD error');
-//         console.error(error);
-//     }
-// }
 
 
 
