@@ -32,9 +32,11 @@
     <div id="buttons-container2" class="buttons-container"></div>
     <div id="buttons-container3" class="buttons-container"></div>
     <div id="overlay"></div>
+    <div id="buttons-container4"></div>
+    <div id="buttons-container5"></div>
 
     <script type="module">
-        import { row1, row2 } from './data_options.js';
+        import { row1, row2,row3,row4 } from './data_options.js';
         import { plot_options } from './plot_options.js';
         import {overlay} from './overlay.js';
 
@@ -42,11 +44,15 @@
         const container2 = document.getElementById('buttons-container2');
         const container3 = document.getElementById('buttons-container3');
         const container4 = document.getElementById('overlay');
+        const container5 = document.getElementById('buttons-container4');
+        const container6 = document.getElementById('buttons-container5');
 
         row1(container1);
         row2(container2);
         plot_options(container3);
         overlay(container4);
+        row3(container5);
+        row4(container6);
 
     </script>
 
@@ -54,7 +60,7 @@
 
     <script type="module">
         import { URLfromFile, GoslingPlotWithLocalData } from './plot.js';
-        import { track } from './track_spec.js';
+        import { trackTemplate } from './track_spec.js';
 
         document.addEventListener('DOMContentLoaded', function () {
             const fileInputs = document.querySelectorAll('.file-input');

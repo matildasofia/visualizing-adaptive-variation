@@ -1,15 +1,27 @@
 import { embed } from 'gosling.js';
-import { plot_spec as plot_1_Spec } from './plot_spec.js';
-import { track } from './track_spec.js';
+import { plotSpecSingleton } from './PlotSpecSingleton.js';
 import { handleOptions } from './update_plot_specifications.js';
 
+const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
 export async function URLfromFile(fileInputs, button_data_track_number) {
     try {
+        // const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
+        console.log('Plot Spec Before working on new track:', plotSpec);
         const fileURL = URL.createObjectURL(fileInputs[button_data_track_number].files[0]);
+        const current_track = plotSpec.tracks[button_data_track_number];
         if (fileURL) {
-            await configureDataType(fileInputs[button_data_track_number].files[0], track);
-            await handleOptions(fileInputs[button_data_track_number].files[0], track, fileURL, button_data_track_number);
-            await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
+            current_track.data.url = fileURL;
+            console.log('Track:', current_track);
+            console.log('Button Data Track Number:', button_data_track_number);
+            console.log('Plot Spec after added fileURL in URLfromFile:', plotSpec);
+
+
+            await configureDataType(fileInputs[button_data_track_number].files[0], current_track);
+            console.log('Plot Spec after configureDataType in URLfromFile:', plotSpec);
+            await handleOptions(fileInputs[button_data_track_number].files[0], current_track, fileURL, button_data_track_number);
+            console.log('Plot Spec after handleOptions in URLfromFile:', plotSpec);
+            // await GoslingPlotWithLocalData();
+
         }
     } catch (error) {
         console.log('URL error');
@@ -42,28 +54,56 @@ async function configureDataType(fileInput, track) {
     }
 }
 
-export async function GoslingPlotWithLocalData(fileURL, button_data_track_number, track) {
+export async function GoslingPlotWithLocalData() {
     try {
-        if (button_data_track_number === 0) {
-            track = plot_1_Spec.tracks[button_data_track_number];
-            track.data.url = fileURL;
-            const container = document.getElementById('plot-container');
-            if (track.y && typeof track.y.field !== 'undefined' && track.y.field !== '' && track.x && typeof track.x.field !== 'undefined' && track.x.field !== '') {
-                await embed(container, { ...plot_1_Spec, tracks: [track] });
-            }
-            else {
-                await embed(container, { ...plot_1_Spec, tracks: [track] });
-                console.error('track.y.field or track.x.field is not defined');
-            }
-        } else {
-            console.error('Invalid button_data_track_number:', button_data_track_number);
-            return;
-        }
+        const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
+            
+        // const trackok = plotSpec.tracks[button_data_track_number];
+        // track.data.url = fileURL;
+        console.log(plotSpec)
+        const container = document.getElementById('plot-container');
+        await embed(container, plotSpec); // Embed the updated plotSpec
     } catch (error) {
         console.log('GPWLD error');
         console.error(error);
     }
 }
+
+
+
+
+
+// export async function GoslingPlotWithLocalData(button_data_track_number, track) {
+//     try {
+//         if (button_data_track_number === 0 || button_data_track_number === 1 ) {
+//             const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
+            
+//             const trackok = plotSpec.tracks[button_data_track_number];
+//             // track.data.url = fileURL;
+//             console.log(plotSpec)
+//             const container = document.getElementById('plot-container');
+//             await embed(container, plotSpec); // Embed the updated plotSpec
+//             // if (trackok.y && typeof trackok.y.field !== 'undefined' && trackok.y.field !== '' && trackok.x && typeof trackok.x.field !== 'undefined' && trackok.x.field !== '') {
+//             //     // await embed(container, { ...plot_1_Spec, tracks: [track] });
+//             //     await embed(container, plotSpec); // Embed the updated plotSpec
+
+//             // }
+//             // else {
+//             //     await embed(container, plotSpec); // Embed the updated plotSpec
+
+//             //     console.error('track.y.field or track.x.field is not defined');
+//             // }
+//         } 
+        
+//         else {
+//             console.error('Invalid button_data_track_number:', button_data_track_number);
+//             return;
+//         }
+//     } catch (error) {
+//         console.log('GPWLD error');
+//         console.error(error);
+//     }
+// }
 
 
 
