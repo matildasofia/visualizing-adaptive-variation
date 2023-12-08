@@ -2,6 +2,11 @@ import { GoslingPlotWithLocalData } from './plot.js';
 import { plot_spec as plot_1_Spec } from './plot_spec.js';
 
 export async function handleOptions(fileInput, track, fileURL, button_data_track_number) {
+    const columnSelectorX = document.getElementById('columnSelectorX');
+    const columnSelectorY = document.getElementById('columnSelectorY');
+    columnSelectorX.innerHTML = '<option value="" disabled selected>Select a column for X</option>';
+    columnSelectorY.innerHTML = '<option value="" disabled selected>Select a column for Y</option>';
+
     const header = await extractHeader(fileInput, track);
     header.forEach((column, index) => {
         const optionX = document.createElement('option');
@@ -10,8 +15,8 @@ export async function handleOptions(fileInput, track, fileURL, button_data_track
         optionX.textContent = column;
         optionY.value = index;
         optionY.textContent = column;
-        document.getElementById('columnSelectorX').appendChild(optionX);
-        document.getElementById('columnSelectorY').appendChild(optionY);
+        columnSelectorX.appendChild(optionX);
+        columnSelectorY.appendChild(optionY);
     });
 
     columnSelectorX.addEventListener('change', async function () {
@@ -95,6 +100,13 @@ export async function handleOptions(fileInput, track, fileURL, button_data_track
         await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
         updateURLParameters(samplelength.name, samplelength.value);
     });
+
+    marksize_button.addEventListener('click', async function () {
+        const marksize = document.getElementById('marksize');
+        track.size.value = parseFloat(marksize.value);
+        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
+        updateURLParameters(marksize.name, marksize.value);
+    });
 };
 
 
@@ -113,7 +125,7 @@ async function extractHeader(file, track) {
 }
 
 async function updateURLParameters(parameter, value) {
-    var url = new window.URL(document.location); 
+    var url = new window.URL(document.location);
     url.searchParams.set(parameter, value);
     history.pushState({}, '', url);
 }

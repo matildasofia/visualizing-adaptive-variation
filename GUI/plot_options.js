@@ -26,7 +26,7 @@ export async function plot_options(container) {
     </select>
 
     <label for="marksize">Mark size:</label>
-    <input type="text" class="interval-input" id="marksize">
+    <input name="size" type="text" class="interval-input" id="marksize">
     <button id="marksize_button">Apply</button>
 
     <select name="bcolor" id="bcolor">
