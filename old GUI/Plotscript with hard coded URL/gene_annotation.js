@@ -1,135 +1,122 @@
-const size_val = 1.5;
-const opacity = 1;
-const color_td_AT = "red"
 
+
+// Dessa parametrar används för goslings exempel
+/* const assembly = [["U00096.3", 4641652]];
+const xDomain = { "interval": [222000, 240000]};
+const url = "https://s3.amazonaws.com/gosling-lang.org/data/gff/E_coli_MG1655.gff3.gz";
+const indexUrl = "https://s3.amazonaws.com/gosling-lang.org/data/gff/E_coli_MG1655.gff3.gz.tbi"; */
+
+// Dessa används för krill data
+const assembly = [["seq_c_23164", 99317]];
+const xDomain = { "interval": [0, 250000] };
+const url = "http://localhost:8888/data/genes_index/seq_c_23164.REF_STRG_1_64511_XLOC_008442.gff.sorted.gff.gz";
+const indexUrl = "http://localhost:8888/data/genes_index/seq_c_23164.REF_STRG_1_64511_XLOC_008442.gff.sorted.gff.gz.tbi";
 
 var plot_spec = {
-    "static": false,
-    "layout": { "type": "linear" },
-    "xDomain": { "interval": [0, 250000] },
-    "alignment": "overlay",
-    "width": 1100,
-    "height": 300,
-    "assembly": "unknown",
-
-    "style": {"background":"#D3D3D3", "backgroundOpacity":0.1},
-
-    "tracks":[{
+    "title": "GFF3 file",
+    "subtitle": "E. coli genome, colored by gene type.",
+    "spacing": 0,
+    "layout": "linear",
+    "assembly": assembly,
+    "style": {"enableSmoothPath": true},
+    "views": [
+      {
+        "xDomain": xDomain,
+        "alignment": "overlay",
         "data": {
-          "url": "http://localhost:8888/ex_data_annot/seq_c_23164.REF_STRG_1_64511_XLOC_008442.gff.sorted.gff.gz",
-          "indexUrl": "http://localhost:8888/ex_data_annot/seq_c_23164.REF_STRG_1_64511_XLOC_008442.gff.sorted.gff.gz.tbi",
+          "url": url,
+          "indexUrl": indexUrl,
           "type": "gff",
-          //"extractAttributes": true
+          "attributesToFields": [
+            {"attribute": "ID", "defaultValue": "unknown"},
+          ]
         },
-        "mark": "rect", 
-          "x": {"field": "start", "type": "genomic", "axis": "bottom"}, 
-          "xe": {"field": "end", "type": "genomic"},
-          "size": {"value": 40 }
-    }
-]
-    
-};
-                   
-export { plot_spec };
-
-
-var annotation_spec = {
-    "alignment": "overlay",
-    "title": "Corces et al.",
-    "data": {
-      "url": "https://server.gosling-lang.org/api/v1/tileset_info/?d=gene-annotation",
-      "type": "beddb",
-      "genomicFields": [
-        {"index": 1, "name": "start"},
-        {"index": 2, "name": "end"}
-      ],
-      "valueFields": [
-        {"index": 5, "name": "strand", "type": "nominal"},
-        {"index": 3, "name": "name", "type": "nominal"}
-      ],
-      "exonIntervalFields": [
-        {"index": 12, "name": "start"},
-        {"index": 13, "name": "end"}
-      ]
-    },
-    "tracks": [
-      {
-        "dataTransform": [
-          {"type": "filter", "field": "type", "oneOf": ["gene"]},
-          {"type": "filter", "field": "strand", "oneOf": ["+"]}
+        "color": {"value": "blue"},
+        "color": {
+            "type": "nominal",
+            "field": "type",
+            "domain": [
+              "gene",
+              "CDS"
+            ],
+            "range": ["orange", "blue"]
+          },
+        "tracks": [
+          {
+            "dataTransform": [
+              {"type": "filter", "field": "type", "oneOf": ["gene"]},
+              {"type": "filter", "field": "strand", "oneOf": ["+"]}
+            ],
+            "mark": "triangleRight",
+            "x": {"field": "end", "type": "genomic", "axis": "top"},
+            "size": {"value": 10}
+          },
+          {
+            "dataTransform": [
+              {"type": "filter", "field": "type", "oneOf": ["exon"]},
+              {"type": "filter", "field": "strand", "oneOf": ["+"]}
+            ],
+            "mark": "triangleRight",
+            "x": {"field": "end", "type": "genomic"},
+            "size": {"value": 10}
+          },
+          {
+            "dataTransform": [
+              {"type": "filter", "field": "type", "oneOf": ["gene"]}
+            ],
+            "mark": "text",
+            "text": {"field": "ID", "type": "nominal"},
+            "x": {"field": "start", "type": "genomic"},
+            "xe": {"field": "end", "type": "genomic"},
+            "style": {"dy": -10}
+          },
+          {
+            "dataTransform": [
+              {"type": "filter", "field": "type", "oneOf": ["gene"]},
+              {"type": "filter", "field": "strand", "oneOf": ["-"]}
+            ],
+            "mark": "triangleLeft",
+            "x": {"field": "start", "type": "genomic"},
+            "size": {"value": 10},
+            "style": {"align": "right"}
+          },
+          {
+            "dataTransform": [
+              {"type": "filter", "field": "type", "oneOf": ["gene"]},
+              {"type": "filter", "field": "strand", "oneOf": ["+"]}
+            ],
+            "mark": "rule",
+            "x": {"field": "start", "type": "genomic"},
+            "strokeWidth": {"value": 3},
+            "xe": {"field": "end", "type": "genomic"},
+            "style": {"linePattern": {"type": "triangleRight", "size": 5}}
+          },
+          {
+            "dataTransform": [
+              {"type": "filter", "field": "type", "oneOf": ["gene"]},
+              {"type": "filter", "field": "strand", "oneOf": ["-"]}
+            ],
+            "mark": "rule",
+            "x": {"field": "start", "type": "genomic"},
+            "strokeWidth": {"value": 3},
+            "xe": {"field": "end", "type": "genomic"},
+            "style": {"linePattern": {"type": "triangleLeft", "size": 5}}
+          }
         ],
-        "mark": "text",
-        "text": {"field": "name", "type": "nominal"},
-        "x": {"field": "start", "type": "genomic"},
-        "xe": {"field": "end", "type": "genomic"},
-        "size": {"value": 8},
-        "style": {"textFontSize": 8, "dy": -12}
-      },
-      {
-        "dataTransform": [
-          {"type": "filter", "field": "type", "oneOf": ["gene"]},
-          {"type": "filter", "field": "strand", "oneOf": ["-"]}
+        "row": {"field": "strand", "type": "nominal", "domain": ["+", "-"]},
+        "visibility": [
+          {
+            "operation": "less-than",
+            "measure": "width",
+            "threshold": "|xe-x|",
+            "transitionPadding": 10,
+            "target": "mark"
+          }
         ],
-        "mark": "text",
-        "text": {"field": "name", "type": "nominal"},
-        "x": {"field": "start", "type": "genomic"},
-        "xe": {"field": "end", "type": "genomic"},
-        "size": {"value": 8},
-        "style": {"textFontSize": 8, "dy": 10}
-      },
-      {
-        "dataTransform": [
-          {"type": "filter", "field": "type", "oneOf": ["gene"]},
-          {"type": "filter", "field": "strand", "oneOf": ["+"]}
-        ],
-        "mark": "rect",
-        "x": {"field": "end", "type": "genomic"},
-        "size": {"value": 7}
-      },
-      {
-        "dataTransform": [
-          {"type": "filter", "field": "type", "oneOf": ["gene"]},
-          {"type": "filter", "field": "strand", "oneOf": ["-"]}
-        ],
-        "mark": "rect",
-        "x": {"field": "start", "type": "genomic"},
-        "size": {"value": 7}
-      },
-      {
-        "dataTransform": [
-          {"type": "filter", "field": "type", "oneOf": ["exon"]}
-        ],
-        "mark": "rect",
-        "x": {"field": "start", "type": "genomic"},
-        "xe": {"field": "end", "type": "genomic"},
-        "size": {"value": 14}
-      },
-      {
-        "dataTransform": [
-          {"type": "filter", "field": "type", "oneOf": ["gene"]}
-        ],
-        "mark": "rule",
-        "x": {"field": "start", "type": "genomic"},
-        "xe": {"field": "end", "type": "genomic"},
-        "strokeWidth": {"value": 3}
+        "opacity": {"value": 0.8},
+        "width": 800,
+        "height": 80
       }
-    ],
-    "row": {"field": "strand", "type": "nominal", "domain": ["+", "-"]},
-    "color": {
-      "field": "strand",
-      "type": "nominal",
-      "domain": ["+", "-"],
-      "range": ["#012DB8", "#BE1E2C"]
-    },
-    "visibility": [
-      {
-        "operation": "less-than",
-        "measure": "width",
-        "threshold": "|xe-x|",
-        "transitionPadding": 10,
-        "target": "mark"
-      }
-    ],
-    "width": 350,
-    "height": 100
+    ]
   }
+  export {plot_spec};

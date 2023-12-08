@@ -7,6 +7,8 @@ data/*
 
 /HTML_catalog/all_candidate_genes/*
 
+/ex_data_annot
+
 # Except for 'readme.md'
 !data/README.md
 
