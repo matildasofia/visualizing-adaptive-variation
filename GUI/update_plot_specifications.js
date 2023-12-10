@@ -205,7 +205,7 @@ export async function handleOptions(fileInput,button_data_track_number) {
             // Update plot data
             await GoslingPlotWithLocalData();
             // Uptade URL parameters
-            updateURLParameters(button.getAttribute('id'), button.value);
+            updateURLParameters(button.getAttribute('id'), chosenmarksize);
         });
     });
 }
