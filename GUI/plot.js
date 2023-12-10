@@ -1,7 +1,6 @@
 import { embed } from 'gosling.js';
 import { plotSpecSingleton } from './PlotSpecSingleton.js';
 import { handleOptions } from './update_plot_specifications.js';
-import { track_params, spec_params } from "./parameters/spec_parameters.js";
 
 const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
 export async function URLfromFile(fileInputs, button_data_track_number) {
@@ -10,24 +9,18 @@ export async function URLfromFile(fileInputs, button_data_track_number) {
         const fileURL = URL.createObjectURL(fileInputs[button_data_track_number].files[0]);
         const current_track = plotSpec.tracks[button_data_track_number];
         if (fileURL) {
-<<<<<<< HEAD
-            await checkURLParameters(track);
-            await configureDataType(fileInputs[button_data_track_number].files[0], track);
-            await handleOptions(fileInputs[button_data_track_number].files[0], track, fileURL, button_data_track_number);
-=======
             current_track.data.url = fileURL;
             console.log('Track:', current_track);
             console.log('Button Data Track Number:', button_data_track_number);
             console.log('Plot Spec after added fileURL in URLfromFile:', plotSpec);
 
-
+            await checkURLParameters(current_track);
             await configureDataType(fileInputs[button_data_track_number].files[0], current_track);
             console.log('Plot Spec after configureDataType in URLfromFile:', plotSpec);
             await handleOptions(fileInputs[button_data_track_number].files[0],button_data_track_number);
             console.log('Plot Spec after handleOptions in URLfromFile:', plotSpec);
             // await GoslingPlotWithLocalData();
 
->>>>>>> e77bbc3f4775dd2b10b3d661c9be09ad6aa86fe3
         }
     } catch (error) {
         console.log('URL error');
@@ -104,18 +97,14 @@ async function checkURLParameters(track) {
                 track.data.sampleLength = urlSearch.get("samplelength");
             }
             if (urlSearch.has("xInterval")) {
-                plot_1_Spec.xDomain.interval = urlSearch.get("xInterval").split(",").map(Number);
+                plotSpec.xDomain.interval = urlSearch.get("xInterval").split(",").map(Number);
             }
             if (urlSearch.has("bcolor")) {
-                plot_1_Spec.style.background = urlSearch.get("bcolor");
+                plotSpec.style.background = urlSearch.get("bcolor");
             }
-            console.log(plot_1_Spec);
-            console.log(urlSearch);
         }
     } catch (error) {
         console.error(error);
     }
 }
-
-
 
