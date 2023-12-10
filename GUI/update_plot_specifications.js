@@ -1,56 +1,115 @@
 import { GoslingPlotWithLocalData } from './plot.js';
-import { plot_spec as plot_1_Spec } from './plot_spec.js';
+import { plotSpecSingleton } from './PlotSpecSingleton.js';
 
-export async function handleOptions(fileInput, track, fileURL, button_data_track_number) {
-    const header = await extractHeader(fileInput, track);
-    header.forEach((column, index) => {
-        const optionX = document.createElement('option');
-        const optionY = document.createElement('option');
-        optionX.value = index;
-        optionX.textContent = column;
-        optionY.value = index;
-        optionY.textContent = column;
-        document.getElementById('columnSelectorX').appendChild(optionX);
-        document.getElementById('columnSelectorY').appendChild(optionY);
+const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
+const fileHeaders = new Map();
+export async function handleOptions(fileInput,button_data_track_number) {
+    const columnSelectorsX = document.querySelectorAll(`.columnSelectorX[data-track="${button_data_track_number}"]`);
+    const columnSelectorsY = document.querySelectorAll(`.columnSelectorY[data-track="${button_data_track_number}"]`);
+
+    // ¤¤¤¤¤¤¤¤¤¤ Creating the dropdown menues for each track ¤¤¤¤¤¤¤¤¤¤  
+
+    if (!fileHeaders.has(button_data_track_number)) {
+        fileHeaders.set(button_data_track_number, new Set()); 
+    }
+
+        const columns = fileHeaders.get(button_data_track_number);
+        const header = await extractHeader(fileInput, button_data_track_number);
+        console.log("Current track:",button_data_track_number)
+        console.log("header",header)
+
+        console.log("columns for track 0:",fileHeaders.get(0))
+        console.log("columns for track 1:",fileHeaders.get(1))
+    
+        if (!arraysEqual(Array.from(columns), header)) {
+            columns.clear();
+            header.forEach(column => {
+                columns.add(column);
+            });
+    
+            columnSelectorsX.forEach(columnSelectorX => {
+                clearOptions(columnSelectorX);
+                header.forEach((column, index) => {
+                    const optionX = document.createElement('option');
+                    optionX.value = index;
+                    optionX.textContent = column;
+                    columnSelectorX.appendChild(optionX);
+                });
+            });
+    
+            columnSelectorsY.forEach(columnSelectorY => {
+                clearOptions(columnSelectorY);
+                header.forEach((column, index) => {
+                    const optionY = document.createElement('option');
+                    optionY.value = index;
+                    optionY.textContent = column;
+                    columnSelectorY.appendChild(optionY);
+                });
+            });
+        }
+    // Event listeners for dropdown menu changes (adapt as needed)
+    columnSelectorsX.forEach(columnSelectorX => {
+        columnSelectorX.addEventListener('change', async function () {
+            const trackValue = columnSelectorX.getAttribute('data-track');
+            const selectedValue = columnSelectorX.value;
+            const chosenColumnName = columnSelectorX.options[selectedValue].textContent;
+
+            plotSpec.tracks[trackValue].data.column = chosenColumnName;
+            plotSpec.tracks[trackValue].x.field = chosenColumnName;
+
+            // Update plot data
+            await GoslingPlotWithLocalData();
+        });
     });
 
-    columnSelectorX.addEventListener('change', async function () {
-        const chosenColumnName = columnSelectorX.options[columnSelectorX.selectedIndex].textContent;
-        track.data.column = chosenColumnName;
-        const trackX = track.x;
-        trackX.field = chosenColumnName;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
-        updateURLParameters(columnSelectorX.name, columnSelectorX.options[columnSelectorX.selectedIndex].textContent);
-    });
-    columnSelectorY.addEventListener('change', async function () {
-        const chosenColumnName = columnSelectorY.options[columnSelectorY.selectedIndex].textContent;
-        track.data.value = chosenColumnName;
-        const trackY = track.y;
-        trackY.field = chosenColumnName;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
-        updateURLParameters(columnSelectorY.name, columnSelectorY.options[columnSelectorY.selectedIndex].textContent);
+    // Event listeners for dropdown menu changes (adapt as needed)
+    columnSelectorsY.forEach(columnSelectorY => {
+        columnSelectorY.addEventListener('change', async function () {
+            const trackValue = columnSelectorY.getAttribute('data-track');
+            const selectedValue = columnSelectorY.value;
+            const chosenColumnName = columnSelectorY.options[selectedValue].textContent;
+
+            plotSpec.tracks[trackValue].data.value = chosenColumnName;
+            plotSpec.tracks[trackValue].y.field = chosenColumnName;
+
+            // Update plot data
+            await GoslingPlotWithLocalData();
+        });
     });
 
-    mark.addEventListener('change', async function () {
-        const chosenMark = mark.value;
-        track.mark = chosenMark;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
+    const markButtons = document.querySelectorAll('.mark'); // Find buttons belonging to the 'mark' class
+    markButtons.forEach(button => {
+        button.addEventListener('change', async function () {
+            const trackValue = button.getAttribute('data-track');
+            const chosenmark = button.value;
+            
+            plotSpec.tracks[trackValue].mark = chosenmark;
 
-        updateURLParameters(mark.name, mark.value);
+            // Update plot data
+            await GoslingPlotWithLocalData();
+        });
     });
 
-    color.addEventListener('change', async function () {
-        const chosenColor = color.value;
-        track.color.value = chosenColor;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
-        updateURLParameters(color.name, color.value);
+    const colorButtons = document.querySelectorAll('.color'); // Find buttons belonging to the 'color' class
+    colorButtons.forEach(button => {
+        button.addEventListener('change', async function () {
+            const trackValue = button.getAttribute('data-track');
+            const chosencolor = button.value;
+            
+            plotSpec.tracks[trackValue].color.value = chosencolor;
+
+            // Update plot data
+            await GoslingPlotWithLocalData();
+        });
     });
+
+
 
     bcolor.addEventListener('change', async function () {
         const chosenBcolor = bcolor.value;
-        plot_1_Spec.style.background = chosenBcolor;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
-        updateURLParameters(bcolor.name, bcolor.value);
+        plotSpec.style.background = chosenBcolor;
+        await GoslingPlotWithLocalData();
+        // updateURLParameters(bcolor.name, bcolor.value);
     });
 
     x_interval_button.addEventListener('click', async function () {
@@ -60,11 +119,11 @@ export async function handleOptions(fileInput, track, fileURL, button_data_track
         const end = parseFloat(endValue);
 
         const intervalArray = [start, end];
-        plot_1_Spec.xDomain.interval = intervalArray;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
+        plotSpec.xDomain.interval = intervalArray;
+        await GoslingPlotWithLocalData();
 
         const xInterval = "xInterval";
-        updateURLParameters(xInterval, intervalArray);
+        // updateURLParameters(xInterval, intervalArray);
     });
 
     y_interval_button.addEventListener('click', async function () {
@@ -74,36 +133,91 @@ export async function handleOptions(fileInput, track, fileURL, button_data_track
         const end = parseFloat(endValue);
 
         const intervalArray = [start, end];
-        track.y.domain = intervalArray;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
+        plotSpec.tracks[0].y.domain = intervalArray;
+        plotSpec.tracks[1].y.domain = intervalArray;
+        await GoslingPlotWithLocalData();
 
         const yInterval = "yInterval";
-        updateURLParameters(yInterval, intervalArray);
+        // updateURLParameters(yInterval, intervalArray);
     });
 
-    binsize_button.addEventListener('click', async function () {
-        const binsize = document.getElementById('binsize')
-        const binsizeval = binsize.value;
-        track.data.binSize = binsizeval;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
-        updateURLParameters(binsize.name, binsizeval);
+    const binsizeButtons = document.querySelectorAll('.binsize'); // Find buttons belonging to the 'binsize' class
+    binsizeButtons.forEach(button => {
+        button.addEventListener('click', async function () {
+            const trackValue = button.getAttribute('data-track');
+            // const chosenbinsize = parseFloat(button.value);
+            // Find the associated input field or use a data attribute
+            const inputField = document.getElementById(`binsize_${trackValue}`);
+            // Parse the value from the input field or data attribute
+            const chosenbinsize = parseFloat(inputField.value);
+            
+            plotSpec.tracks[trackValue].data.binSize = chosenbinsize;
+
+            // Update plot data
+            await GoslingPlotWithLocalData();
+        });
     });
 
-    samplelength_button.addEventListener('click', async function () {
-        const samplelength = document.getElementById('samplelength')
-        track.data.sampleLength = samplelength.value;
-        await GoslingPlotWithLocalData(fileURL, button_data_track_number, track);
-        updateURLParameters(samplelength.name, samplelength.value);
+    const samplelengthButtons = document.querySelectorAll('.samplelength'); // Find buttons belonging to the 'samplelength' class
+
+    samplelengthButtons.forEach(button => {
+        button.addEventListener('change', async function () {
+            const trackValue = button.getAttribute('data-track');
+            // Find the associated input field
+            const inputField = document.getElementById(`samplelength_${trackValue}`);
+            // Parse the value from the input field as a float
+            const chosensamplelength = parseFloat(inputField.value);
+    
+            plotSpec.tracks[trackValue].samplelength = chosensamplelength;
+    
+            // Update plot data
+            await GoslingPlotWithLocalData();
+        });
     });
-};
 
 
-async function extractHeader(file, track) {
+    const marksizeButtons = document.querySelectorAll('.marksize'); // Find buttons belonging to the 'marksize' class
+    marksizeButtons.forEach(button => {
+        button.addEventListener('click', async function () {
+            const trackValue = button.getAttribute('data-track');
+            // Find the associated input field
+            const inputField = document.getElementById(`marksize_${trackValue}`);
+            // Parse the value from the input field
+            const chosenmarksize = parseFloat(inputField.value);           
+            console.log("chosen marker size",chosenmarksize)
+            
+            plotSpec.tracks[trackValue].size.value = chosenmarksize;
+
+            // Update plot data
+            await GoslingPlotWithLocalData();
+        });
+    });
+}
+
+
+function clearOptions(selectElement) {
+    while (selectElement.options.length > 0) {
+        selectElement.remove(0);
+    }
+}
+
+function arraysEqual(arr1, arr2) {
+    if (arr1.length !== arr2.length) return false;
+    for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) return false;
+    }
+    return true;
+}
+
+
+
+async function extractHeader(file, button_data_track_number) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => {
             const text = reader.result;
-            const data = text.split('\n').map(row => row.split(track.data.separator));
+            // const dataTrackNumber = file.getAttribute('data-track'); // Retrieve data-track number for the file
+            const data = text.split('\n').map(row => row.split(plotSpec.tracks[button_data_track_number].data.separator));
             const header = data[0];
             resolve(header);
         };
@@ -113,7 +227,7 @@ async function extractHeader(file, track) {
 }
 
 async function updateURLParameters(parameter, value) {
-    var url = new window.URL(document.location); 
+    var url = new window.URL(document.location);
     url.searchParams.set(parameter, value);
     history.pushState({}, '', url);
 }

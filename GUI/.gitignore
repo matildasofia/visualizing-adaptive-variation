@@ -1,0 +1,11 @@
+# Ignore all files in the 'data' directory
+
+/Försök med knappar innan/*
+/Gosling component/*
+/Alternative GUI structure/*
+
+
+# Except for 'readme.md'
+!data/README.md
+
+

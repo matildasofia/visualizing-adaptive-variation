@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "gosling.js": "^0.12.0"
+    "gosling.js": "^0.12.0",
+    "lodash.clonedeep": "^4.5.0"
   }
 }

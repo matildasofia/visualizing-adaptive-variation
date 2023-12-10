@@ -1,18 +1,36 @@
 import { embed } from 'gosling.js';
-import { plot_spec as plot_1_Spec } from './plot_spec.js';
-import { track } from './track_spec.js';
+import { plotSpecSingleton } from './PlotSpecSingleton.js';
 import { handleOptions } from './update_plot_specifications.js';
 import { track_params, spec_params } from "./parameters/spec_parameters.js";
 
+const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
 export async function URLfromFile(fileInputs, button_data_track_number) {
     try {
+        console.log('Plot Spec Before working on new track:', plotSpec);
         const fileURL = URL.createObjectURL(fileInputs[button_data_track_number].files[0]);
+        const current_track = plotSpec.tracks[button_data_track_number];
         if (fileURL) {
+<<<<<<< HEAD
             await checkURLParameters(track);
             await configureDataType(fileInputs[button_data_track_number].files[0], track);
             await handleOptions(fileInputs[button_data_track_number].files[0], track, fileURL, button_data_track_number);
+=======
+            current_track.data.url = fileURL;
+            console.log('Track:', current_track);
+            console.log('Button Data Track Number:', button_data_track_number);
+            console.log('Plot Spec after added fileURL in URLfromFile:', plotSpec);
+
+
+            await configureDataType(fileInputs[button_data_track_number].files[0], current_track);
+            console.log('Plot Spec after configureDataType in URLfromFile:', plotSpec);
+            await handleOptions(fileInputs[button_data_track_number].files[0],button_data_track_number);
+            console.log('Plot Spec after handleOptions in URLfromFile:', plotSpec);
+            // await GoslingPlotWithLocalData();
+
+>>>>>>> e77bbc3f4775dd2b10b3d661c9be09ad6aa86fe3
         }
     } catch (error) {
+        console.log('URL error');
         console.error(error);
     }
 }
@@ -37,26 +55,22 @@ async function configureDataType(fileInput, track) {
             return;
         }
     } catch (error) {
+        console.log('CDT error');
         console.error(error);
     }
 }
 
-export async function GoslingPlotWithLocalData(fileURL, button_data_track_number, track) {
+export async function GoslingPlotWithLocalData() {
     try {
-        if (button_data_track_number === 0) {
-            track = plot_1_Spec.tracks[button_data_track_number];
-            track.data.url = fileURL;
-            if (track.y && typeof track.y.field !== 'undefined' && track.y.field !== '' && track.x && typeof track.x.field !== 'undefined' && track.x.field !== '') {
-                const container = document.getElementById('plot-container');
-                await embed(container, { ...plot_1_Spec, tracks: [track] });
-            } else {
-                console.error('track.y.field or track.x.field is not defined');
-            }
-        } else {
-            console.error('Invalid button_data_track_number:', button_data_track_number);
-            return;
-        }
+        const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
+            
+        // const trackok = plotSpec.tracks[button_data_track_number];
+        // track.data.url = fileURL;
+        console.log(plotSpec)
+        const container = document.getElementById('plot-container');
+        await embed(container, plotSpec); // Embed the updated plotSpec
     } catch (error) {
+        console.log('GPWLD error');
         console.error(error);
     }
 }
@@ -102,4 +116,6 @@ async function checkURLParameters(track) {
         console.error(error);
     }
 }
+
+
 

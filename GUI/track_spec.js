@@ -2,7 +2,7 @@ const y_col_preset = ""
 const x_col_preset = "" 
 
 
-const track = {
+const trackTemplate = {
     "data": {
         "url": "",
         "type": "",
@@ -24,4 +24,4 @@ const track = {
     //],
 };
 
-export { track };
+export { trackTemplate };
