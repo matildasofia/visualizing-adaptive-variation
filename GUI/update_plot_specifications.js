@@ -59,6 +59,8 @@ export async function handleOptions(fileInput,button_data_track_number) {
 
             // Update plot data
             await GoslingPlotWithLocalData();
+            // Update URL parameters
+            updateURLParameters(columnSelectorX.getAttribute("id"), chosenColumnName);
         });
     });
 
@@ -74,6 +76,8 @@ export async function handleOptions(fileInput,button_data_track_number) {
 
             // Update plot data
             await GoslingPlotWithLocalData();
+            // Update URL parameters
+            updateURLParameters(columnSelectorY.getAttribute("id"), chosenColumnName);
         });
     });
 
@@ -87,6 +91,8 @@ export async function handleOptions(fileInput,button_data_track_number) {
 
             // Update plot data
             await GoslingPlotWithLocalData();
+            // Update URL
+            await updateURLParameters(button.getAttribute("id"), button.value);
         });
     });
 
@@ -100,6 +106,8 @@ export async function handleOptions(fileInput,button_data_track_number) {
 
             // Update plot data
             await GoslingPlotWithLocalData();
+            // Update URL
+            await updateURLParameters(button.getAttribute("id"), button.value);
         });
     });
 
@@ -110,6 +118,8 @@ export async function handleOptions(fileInput,button_data_track_number) {
         plotSpec.style.background = chosenBcolor;
         await GoslingPlotWithLocalData();
         // updateURLParameters(bcolor.name, bcolor.value);
+        // Update URL
+        await updateURLParameters(bcolor.name, bcolor.value);
     });
 
     x_interval_button.addEventListener('click', async function () {
@@ -123,7 +133,7 @@ export async function handleOptions(fileInput,button_data_track_number) {
         await GoslingPlotWithLocalData();
 
         const xInterval = "xInterval";
-        // updateURLParameters(xInterval, intervalArray);
+        updateURLParameters(xInterval, intervalArray);
     });
 
     y_interval_button.addEventListener('click', async function () {
@@ -138,7 +148,7 @@ export async function handleOptions(fileInput,button_data_track_number) {
         await GoslingPlotWithLocalData();
 
         const yInterval = "yInterval";
-        // updateURLParameters(yInterval, intervalArray);
+        updateURLParameters(yInterval, intervalArray);
     });
 
     const binsizeButtons = document.querySelectorAll('.binsize'); // Find buttons belonging to the 'binsize' class
@@ -155,6 +165,8 @@ export async function handleOptions(fileInput,button_data_track_number) {
 
             // Update plot data
             await GoslingPlotWithLocalData();
+            //Update URL parameters
+            updateURLParameters(button.getAttribute('id'), chosenbinsize);
         });
     });
 
@@ -172,6 +184,8 @@ export async function handleOptions(fileInput,button_data_track_number) {
     
             // Update plot data
             await GoslingPlotWithLocalData();
+            // Uptade URL parameters
+            updateURLParameters(button.getAttribute('id'), chosensamplelength);
         });
     });
 
@@ -190,6 +204,8 @@ export async function handleOptions(fileInput,button_data_track_number) {
 
             // Update plot data
             await GoslingPlotWithLocalData();
+            // Uptade URL parameters
+            updateURLParameters(button.getAttribute('id'), button.value);
         });
     });
 }
