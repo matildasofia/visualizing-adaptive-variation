@@ -119,6 +119,7 @@
                     var url = new URL(document.location);
                     Array.from(url.searchParams.keys()).forEach(key => url.searchParams.delete(key));
                     history.pushState({}, '', url);
+                    window.location.reload();
                 } catch (error) {
                     console.error(error);
                 }
