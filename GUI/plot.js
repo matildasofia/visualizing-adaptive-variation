@@ -2,11 +2,13 @@ import { embed } from 'gosling.js';
 import { plot_spec as plot_1_Spec } from './plot_spec.js';
 import { track } from './track_spec.js';
 import { handleOptions } from './update_plot_specifications.js';
+import { track_params, spec_params } from "./parameters/spec_parameters.js";
 
 export async function URLfromFile(fileInputs, button_data_track_number) {
     try {
         const fileURL = URL.createObjectURL(fileInputs[button_data_track_number].files[0]);
         if (fileURL) {
+            await checkURLParameters(track);
             await configureDataType(fileInputs[button_data_track_number].files[0], track);
             await handleOptions(fileInputs[button_data_track_number].files[0], track, fileURL, button_data_track_number);
         }
@@ -59,5 +61,45 @@ export async function GoslingPlotWithLocalData(fileURL, button_data_track_number
     }
 }
 
-
+async function checkURLParameters(track) {
+    var url = new window.URL(document.location); 
+    try {
+        if (url.searchParams.size > 0) { 
+            var urlSearch = url.searchParams;
+            if (urlSearch.has("xcolumn")) {
+                track.data.column = urlSearch.get("xcolumn");
+                track.x.field = urlSearch.get("xcolumn");
+            }
+            if (urlSearch.has("ycolumn")) {
+                track.data.value = urlSearch.get("ycolumn");
+                track.y.field = urlSearch.get("ycolumn");
+            }
+            if (urlSearch.has("mark")) {
+                track.mark = urlSearch.get("mark");
+            }
+            if (urlSearch.has("color")) {
+                track.color.value = urlSearch.get("color");
+            }
+            if (urlSearch.has("yInterval")) {
+                track.y.domain = urlSearch.get("yInterval").split(",").map(Number);
+            }
+            if (urlSearch.has("binsize")) {
+                track.data.binSize = urlSearch.get("binsize");
+            }
+            if (urlSearch.has("samplelength")) {
+                track.data.sampleLength = urlSearch.get("samplelength");
+            }
+            if (urlSearch.has("xInterval")) {
+                plot_1_Spec.xDomain.interval = urlSearch.get("xInterval").split(",").map(Number);
+            }
+            if (urlSearch.has("bcolor")) {
+                plot_1_Spec.style.background = urlSearch.get("bcolor");
+            }
+            console.log(plot_1_Spec);
+            console.log(urlSearch);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
 
