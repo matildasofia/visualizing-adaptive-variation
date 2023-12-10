@@ -3,8 +3,9 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: 'Roboto', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     min-width: fit-content;
+    line-height: 30px;
 }
 
 .buttons-container {
@@ -12,6 +13,10 @@ body {
     margin-top: 20px;
     align-items: center;
     gap: 5px;
+}
+
+#buttons_container2,#buttons_container4{
+    display:none;
 }
 
 .column-container {
@@ -29,11 +34,16 @@ input {
     background-color: rgb(239, 239, 239);
     border-style: solid;
     font-family: 'Roboto', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     margin-right: 30px;
     cursor: pointer;
     padding: 4px;
 }
+
+label{
+    font-weight: bold;
+}
+
 
 #info_button,
 #close_button {
@@ -56,7 +66,11 @@ select:hover,
 button:active,
 #info_button:active,
 #close_button:active {
-    background-color: rgb(107, 92, 204);
+    background-color: grey;
+}
+
+#track2_button{
+    opacity : 0.5;
 }
 
 .interval-input {
