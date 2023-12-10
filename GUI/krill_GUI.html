@@ -28,7 +28,7 @@
     <div id="overlay"></div>
 
     <script type="module">
-        import { info, row, row1, row2, row3, row4 } from './data_options.js';
+        import { info, row, row1, row2, row3, row4, row5} from './data_options.js';
         import { overlay } from './overlay.js';
 
         const container = document.getElementById('buttons_container');
@@ -52,6 +52,7 @@
     </script>
 
     <div id="plot-container" class="plot-container"></div>
+    <div id="button-container7" class="button-container"></div>
 
     <script type="module">
         import { URLfromFile, GoslingPlotWithLocalData } from './plot.js';
@@ -108,8 +109,21 @@
                 });
 
             });
+            clear_url_button.addEventListener('click', function () {
+                var url = new window.URL(document.location);
+                url.searchParams.forEach((_, key) => url.searchParams.delete(key));
+                history.pushState({}, '', url);
+            });
+            clear_url_button.addEventListener('click', function () {
+                try {
+                    var url = new URL(document.location);
+                    Array.from(url.searchParams.keys()).forEach(key => url.searchParams.delete(key));
+                    history.pushState({}, '', url);
+                } catch (error) {
+                    console.error(error);
+                }
+            });
         });
-
     </script>
 </body>
 

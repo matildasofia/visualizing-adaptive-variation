@@ -4,6 +4,7 @@ export async function info(container) {
     <button id="track1_button">Track 1</button>
     <button id="track2_button">Track 2</button>
     <button id="info_button">More info</button>
+    <button id="clear_url_button">Clear settings</button>
     `
 }
 
@@ -145,5 +146,11 @@ export async function row4(container) {
     <label for="marksize_1">Mark size:</label>
     <input name="size" type="number" class="interval-input" id="marksize_1" data-track="1">
     <button class="marksize" id="marksize_button_1" data-track="1">Apply</button>
+    `
+};
+
+export async function row5(container) {
+    container.innerHTML = `
+    <button id="url_clear_button">Clear variables</button>
     `
 };
