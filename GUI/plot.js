@@ -1,6 +1,7 @@
 import { embed } from 'gosling.js';
 import { plotSpecSingleton } from './PlotSpecSingleton.js';
 import { handleOptions } from './update_plot_specifications.js';
+import { parameterMappings } from './url_specifications.js';
 
 const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
 export async function URLfromFile(fileInputs, button_data_track_number) {
@@ -14,12 +15,12 @@ export async function URLfromFile(fileInputs, button_data_track_number) {
             console.log('Button Data Track Number:', button_data_track_number);
             console.log('Plot Spec after added fileURL in URLfromFile:', plotSpec);
 
-            await checkURLParameters(current_track);
+            await checkURLParameters(current_track, button_data_track_number);
             await configureDataType(fileInputs[button_data_track_number].files[0], current_track);
             console.log('Plot Spec after configureDataType in URLfromFile:', plotSpec);
             await handleOptions(fileInputs[button_data_track_number].files[0],button_data_track_number);
             console.log('Plot Spec after handleOptions in URLfromFile:', plotSpec);
-            // await GoslingPlotWithLocalData();
+            await GoslingPlotWithLocalData();
 
         }
     } catch (error) {
@@ -68,39 +69,40 @@ export async function GoslingPlotWithLocalData() {
     }
 }
 
-async function checkURLParameters(track) {
+async function checkURLParameters(track, track_nr) {
     var url = new window.URL(document.location); 
     try {
         if (url.searchParams.size > 0) { 
+            console.log("track_nr", "columnSelectorX_" + track_nr.toString())
             var urlSearch = url.searchParams;
-            if (urlSearch.has("xcolumn")) {
-                track.data.column = urlSearch.get("xcolumn");
-                track.x.field = urlSearch.get("xcolumn");
+            if (urlSearch.has("columnSelectorX_" + track_nr.toString())) {
+                track.data.column = urlSearch.get("columnSelectorX_0");
+                track.x.field = urlSearch.get("columnSelectorX_0");
             }
-            if (urlSearch.has("ycolumn")) {
-                track.data.value = urlSearch.get("ycolumn");
-                track.y.field = urlSearch.get("ycolumn");
+            if (urlSearch.has("columnSelectorY_" + track_nr.toString())) {
+                track.data.value = urlSearch.get("columnSelectorY_0");
+                track.y.field = urlSearch.get("columnSelectorY_0");
             }
-            if (urlSearch.has("mark")) {
-                track.mark = urlSearch.get("mark");
+            if (urlSearch.has("mark_" + track_nr.toString())) {
+                track.mark = urlSearch.get("mark_0");
             }
-            if (urlSearch.has("color")) {
-                track.color.value = urlSearch.get("color");
+            if (urlSearch.has("color_" + track_nr.toString())) {
+                track.color.value = urlSearch.get("color_0");
             }
             if (urlSearch.has("yInterval")) {
-                track.y.domain = urlSearch.get("yInterval").split(",").map(Number);
+                track.y.domain = urlSearch.get("yInterval").split(",").map(Number); 
             }
-            if (urlSearch.has("binsize")) {
-                track.data.binSize = urlSearch.get("binsize");
+            if (urlSearch.has("binsize_" + track_nr.toString())) {
+                track.data.binSize = urlSearch.get("binsize_0");
             }
-            if (urlSearch.has("samplelength")) {
-                track.data.sampleLength = urlSearch.get("samplelength");
+            if (urlSearch.has("samplelength_" + track_nr.toString())) {
+                track.data.sampleLength = urlSearch.get("samplelength_0");
             }
-            if (urlSearch.has("xInterval")) {
-                plotSpec.xDomain.interval = urlSearch.get("xInterval").split(",").map(Number);
+            if (urlSearch.has("xInterval")) { 
+                plotSpec.xDomain.interval = urlSearch.get("xInterval").split(",").map(Number); 
             }
             if (urlSearch.has("bcolor")) {
-                plotSpec.style.background = urlSearch.get("bcolor");
+                plotSpec.style.background = urlSearch.get("bcolor"); 
             }
         }
     } catch (error) {
