@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Gosling Visualization</title>
+    <link rel="stylesheet" href="https://esm.sh/higlass@1.13/dist/hglib.css">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+
+    <script type="importmap">
+        {
+            "imports": {
+              "react": "https://esm.sh/react@18",
+              "react-dom": "https://esm.sh/react-dom@18",
+              "pixi": "https://esm.sh/pixi.js@6",
+              "higlass": "https://esm.sh/higlass@1.13?external=react,react-dom,pixi",
+              "gosling.js": "https://esm.sh/gosling.js@0.11.0?external=react,react-dom,pixi,higlass"
+            }
+          }
+    </script>
+</head>
+
+<body>
+    <div id="header" class="header"></div>
+    <div id="overlay" class="overlay"></div>
+    <div id="plot-container-1"></div>
+
+    <script type="module">
+        import { embed } from 'gosling.js';
+        import { PlotAll, GoslingPlotWithLocalData } from '../plot.js';
+        import { addOverlay } from '../overlay-content.js';
+
+        const filePaths = ["../../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.snps.tsv","../../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.windows.tsv","../../data/gene_regions/seq_c_23164.REF_STRG_1_64511_XLOC_008442.windows.tsv","../../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.at.tsv","../../data/gene_regions.data_mappings/seq_c_23164.REF_STRG_1_64511_XLOC_008442.mappings.windows_1000.me.tsv"];
+
+        const container = document.getElementById('overlay');
+        addOverlay(container);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            filePaths.forEach(function (filePath, button_data_track_number) {
+                GoslingPlotWithLocalData(filePath, button_data_track_number);
+            });
+            const headerdiv = document.getElementById('header');
+            headerdiv.innerHTML= filePaths[0].split('/')[4].slice(0, -9);
+
+            PlotAll();
+        });
+    </script>
+</body>
+
+</html>

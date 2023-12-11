@@ -3,50 +3,50 @@ import { plotSpecSingleton } from './PlotSpecSingleton.js';
 
 const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
 const fileHeaders = new Map();
-export async function handleOptions(fileInput,button_data_track_number) {
+export async function handleOptions(fileInput, button_data_track_number) {
     const columnSelectorsX = document.querySelectorAll(`.columnSelectorX[data-track="${button_data_track_number}"]`);
     const columnSelectorsY = document.querySelectorAll(`.columnSelectorY[data-track="${button_data_track_number}"]`);
 
     // ¤¤¤¤¤¤¤¤¤¤ Creating the dropdown menues for each track ¤¤¤¤¤¤¤¤¤¤  
 
     if (!fileHeaders.has(button_data_track_number)) {
-        fileHeaders.set(button_data_track_number, new Set()); 
+        fileHeaders.set(button_data_track_number, new Set());
     }
 
-        const columns = fileHeaders.get(button_data_track_number);
-        const header = await extractHeader(fileInput, button_data_track_number);
-        console.log("Current track:",button_data_track_number)
-        console.log("header",header)
+    const columns = fileHeaders.get(button_data_track_number);
+    const header = await extractHeader(fileInput, button_data_track_number);
+    console.log("Current track:", button_data_track_number)
+    console.log("header", header)
 
-        console.log("columns for track 0:",fileHeaders.get(0))
-        console.log("columns for track 1:",fileHeaders.get(1))
-    
-        if (!arraysEqual(Array.from(columns), header)) {
-            columns.clear();
-            header.forEach(column => {
-                columns.add(column);
+    console.log("columns for track 0:", fileHeaders.get(0))
+    console.log("columns for track 1:", fileHeaders.get(1))
+
+    if (!arraysEqual(Array.from(columns), header)) {
+        columns.clear();
+        header.forEach(column => {
+            columns.add(column);
+        });
+
+        columnSelectorsX.forEach(columnSelectorX => {
+            clearOptions(columnSelectorX);
+            header.forEach((column, index) => {
+                const optionX = document.createElement('option');
+                optionX.value = index;
+                optionX.textContent = column;
+                columnSelectorX.appendChild(optionX);
             });
-    
-            columnSelectorsX.forEach(columnSelectorX => {
-                clearOptions(columnSelectorX);
-                header.forEach((column, index) => {
-                    const optionX = document.createElement('option');
-                    optionX.value = index;
-                    optionX.textContent = column;
-                    columnSelectorX.appendChild(optionX);
-                });
+        });
+
+        columnSelectorsY.forEach(columnSelectorY => {
+            clearOptions(columnSelectorY);
+            header.forEach((column, index) => {
+                const optionY = document.createElement('option');
+                optionY.value = index;
+                optionY.textContent = column;
+                columnSelectorY.appendChild(optionY);
             });
-    
-            columnSelectorsY.forEach(columnSelectorY => {
-                clearOptions(columnSelectorY);
-                header.forEach((column, index) => {
-                    const optionY = document.createElement('option');
-                    optionY.value = index;
-                    optionY.textContent = column;
-                    columnSelectorY.appendChild(optionY);
-                });
-            });
-        }
+        });
+    }
     // Event listeners for dropdown menu changes (adapt as needed)
     columnSelectorsX.forEach(columnSelectorX => {
         columnSelectorX.addEventListener('change', async function () {
@@ -86,7 +86,7 @@ export async function handleOptions(fileInput,button_data_track_number) {
         button.addEventListener('change', async function () {
             const trackValue = button.getAttribute('data-track');
             const chosenmark = button.value;
-            
+
             plotSpec.tracks[trackValue].mark = chosenmark;
 
             // Update plot data
@@ -101,7 +101,7 @@ export async function handleOptions(fileInput,button_data_track_number) {
         button.addEventListener('change', async function () {
             const trackValue = button.getAttribute('data-track');
             const chosencolor = button.value;
-            
+
             plotSpec.tracks[trackValue].color.value = chosencolor;
 
             // Update plot data
@@ -160,7 +160,7 @@ export async function handleOptions(fileInput,button_data_track_number) {
             const inputField = document.getElementById(`binsize_${trackValue}`);
             // Parse the value from the input field or data attribute
             const chosenbinsize = parseFloat(inputField.value);
-            
+
             plotSpec.tracks[trackValue].data.binSize = chosenbinsize;
 
             // Update plot data
@@ -179,9 +179,9 @@ export async function handleOptions(fileInput,button_data_track_number) {
             const inputField = document.getElementById(`samplelength_${trackValue}`);
             // Parse the value from the input field as a float
             const chosensamplelength = parseFloat(inputField.value);
-    
+
             plotSpec.tracks[trackValue].data.sampleLength = chosensamplelength;
-    
+
             // Update plot data
             await GoslingPlotWithLocalData();
             // Uptade URL parameters
@@ -197,9 +197,9 @@ export async function handleOptions(fileInput,button_data_track_number) {
             // Find the associated input field
             const inputField = document.getElementById(`marksize_${trackValue}`);
             // Parse the value from the input field
-            const chosenmarksize = parseFloat(inputField.value);           
-            console.log("chosen marker size",chosenmarksize)
-            
+            const chosenmarksize = parseFloat(inputField.value);
+            console.log("chosen marker size", chosenmarksize)
+
             plotSpec.tracks[trackValue].size.value = chosenmarksize;
 
             // Update plot data

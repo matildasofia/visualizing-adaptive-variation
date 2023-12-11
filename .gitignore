@@ -6,6 +6,7 @@ data/*
 /node_modules
 
 /HTML_catalog/all_candidate_genes/*
+!/HTML_catalog/all_candidate_genes/seq_c_23164.REF_STRG_1_64511_XLOC_008442_43.html
 
 /ex_data_annot
 
