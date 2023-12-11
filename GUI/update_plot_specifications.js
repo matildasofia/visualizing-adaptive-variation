@@ -173,14 +173,14 @@ export async function handleOptions(fileInput,button_data_track_number) {
     const samplelengthButtons = document.querySelectorAll('.samplelength'); // Find buttons belonging to the 'samplelength' class
 
     samplelengthButtons.forEach(button => {
-        button.addEventListener('change', async function () {
+        button.addEventListener('click', async function () {
             const trackValue = button.getAttribute('data-track');
             // Find the associated input field
             const inputField = document.getElementById(`samplelength_${trackValue}`);
             // Parse the value from the input field as a float
             const chosensamplelength = parseFloat(inputField.value);
     
-            plotSpec.tracks[trackValue].samplelength = chosensamplelength;
+            plotSpec.tracks[trackValue].data.sampleLength = chosensamplelength;
     
             // Update plot data
             await GoslingPlotWithLocalData();
