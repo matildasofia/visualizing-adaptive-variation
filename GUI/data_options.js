@@ -51,7 +51,7 @@ export async function row1(container) {
     
     <label for="binsize_0">Bin size:</label>
     <input type="number" class="interval-input" name="binsize" id="binsize_0">
-    <button class="binsize"  id="binsize_button_1" data-track="0">Apply</button>
+    <button class="binsize"  id="binsize_button_0" data-track="0">Apply</button>
 
     <label for="samplelength_0">Sample length:</label>
     <input type="number" class="interval-input" name="samplelength" id="samplelength_0">
