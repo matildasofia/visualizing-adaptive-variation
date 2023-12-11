@@ -1,7 +1,6 @@
 import { embed } from 'gosling.js';
 import { plotSpecSingleton } from './PlotSpecSingleton.js';
 import { handleOptions } from './update_plot_specifications.js';
-import { parameterMappings } from './url_specifications.js';
 
 const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
 export async function URLfromFile(fileInputs, button_data_track_number) {
