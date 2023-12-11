@@ -25,9 +25,11 @@ body {
     align-items: center;
 }
 
+
 button,
 select,
-input {
+input,
+#clear_url_button {
     border-color: slateblue;
     border-radius: 2px;
     border-width: 1.5px;
@@ -38,6 +40,9 @@ input {
     margin-right: 30px;
     cursor: pointer;
     padding: 4px;
+}
+#clear_url_button{
+    background-color: rgb(192, 192, 192);
 }
 
 label{
@@ -59,13 +64,18 @@ label{
 button:hover,
 select:hover,
 #info_button:hover,
-#close_button:hover {
+#close_button:hover{
     background: white;
+}
+
+#clear_url_button:hover {
+    background: rgb(244, 215, 156);
 }
 
 button:active,
 #info_button:active,
-#close_button:active {
+#close_button:active,
+#clear_url_button:active {
     background-color: grey;
 }
 
