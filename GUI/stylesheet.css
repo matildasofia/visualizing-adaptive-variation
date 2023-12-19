@@ -15,7 +15,7 @@ body {
     gap: 5px;
 }
 
-#buttons_container2,#buttons_container5{
+#buttons_container3,#buttons_container6{
     display:none;
 }
 
@@ -79,13 +79,18 @@ button:active,
     background-color: grey;
 }
 
-#track2_button{
+#track1_button{
     opacity : 0.5;
 }
 
 .interval-input {
     margin-right: 0px;
     max-width: 5em;
+    border-color: rgb(221, 221, 221);
+}
+.url-input {
+    margin-right: 0px;
+    min-width: 10em;
     border-color: rgb(221, 221, 221);
 }
 
