@@ -72,7 +72,7 @@
 
             // Add event listener for URL input and button
             document.querySelectorAll('.url-button').forEach(function (urlButton, trackNumber) {
-                const urlInput = document.getElementById(`urlInput_${trackNumber}`);
+                const urlInput = document.getElementById(`urlinput_${trackNumber}`);
                 
                 urlButton.addEventListener('click', function () {
                     URLfromServer(urlInput.value, trackNumber);

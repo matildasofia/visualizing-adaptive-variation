@@ -36,7 +36,7 @@ export async function row1(container) {
     <input type="file" class="file-input" style="display: none;">
     
     <button class="url-button" data-track="0">Load from URL</button>
-    <input type="url" id="urlInput_0" class="url-input" placeholder="Enter URL">
+    <input type="url" id="urlinput_0" class="url-input" placeholder="Enter URL">
 
 
 
