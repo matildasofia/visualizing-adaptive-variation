@@ -3,10 +3,24 @@ import { plotSpecSingleton } from './PlotSpecSingleton.js';
 
 const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
 const fileHeaders = new Map();
-export async function handleOptions(fileInput, button_data_track_number) {
+export async function handleOptions(data, button_data_track_number) {
     const columnSelectorsX = document.querySelectorAll(`.columnSelectorX[data-track="${button_data_track_number}"]`);
     const columnSelectorsY = document.querySelectorAll(`.columnSelectorY[data-track="${button_data_track_number}"]`);
-
+    let header = []; // Declare header outside the if-else blocks
+    // Check if the provided data is a file or a URL
+    if (data instanceof File) {
+        // Data is a local file, use FileReader to extract header
+        header = await extractHeader(data, button_data_track_number);
+        console.log("Header extracted from file:", header);
+        // Proceed with handling the extracted header...
+    } else if (data instanceof Blob) {
+        // Data is a Blob (assumed to be from a server)
+        header = await extractHeaderFromServer(data, button_data_track_number);
+        console.log("Header extracted from server data:", header);
+        // Proceed with handling the extracted header...
+    } else {
+        console.error("Invalid data type. Expected File or Blob.");
+    }
     // ¤¤¤¤¤¤¤¤¤¤ Creating the dropdown menues for each track ¤¤¤¤¤¤¤¤¤¤  
 
     if (!fileHeaders.has(button_data_track_number)) {
@@ -14,7 +28,6 @@ export async function handleOptions(fileInput, button_data_track_number) {
     }
 
     const columns = fileHeaders.get(button_data_track_number);
-    const header = await extractHeader(fileInput, button_data_track_number);
     console.log("Current track:", button_data_track_number)
     console.log("header", header)
 
@@ -232,7 +245,6 @@ async function extractHeader(file, button_data_track_number) {
         const reader = new FileReader();
         reader.onload = () => {
             const text = reader.result;
-            // const dataTrackNumber = file.getAttribute('data-track'); // Retrieve data-track number for the file
             const data = text.split('\n').map(row => row.split(plotSpec.tracks[button_data_track_number].data.separator));
             const header = data[0];
             resolve(header);
@@ -241,6 +253,21 @@ async function extractHeader(file, button_data_track_number) {
         reader.readAsText(file);
     });
 }
+
+async function extractHeaderFromServer(fileBlob, button_data_track_number) {
+    try {
+        const text = await new Response(fileBlob).text(); // Convert fileBlob to text
+        const data = text.split('\n').map(row => row.split(plotSpec.tracks[button_data_track_number].data.separator));
+        const header = data[0];
+        
+        return header;
+    } catch (error) {
+        console.error('Error fetching or processing data:', error);
+        return null;
+    }
+}
+
+
 
 async function updateURLParameters(parameter, value) {
     var url = new window.URL(document.location);

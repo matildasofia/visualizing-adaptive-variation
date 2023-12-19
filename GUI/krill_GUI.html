@@ -54,7 +54,7 @@
     <div id="plot-container" class="plot-container"></div>
 
     <script type="module">
-        import { URLfromFile, GoslingPlotWithLocalData } from './plot.js';
+        import { URLfromFile,URLfromServer, GoslingPlotWithLocalData } from './plot.js';
         import { trackTemplate } from './track_spec.js';
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -69,6 +69,17 @@
                     URLfromFile(fileInputs, button_data_track_num);
                 });
             });
+
+            // Add event listener for URL input and button
+            document.querySelectorAll('.url-button').forEach(function (urlButton, trackNumber) {
+                const urlInput = document.getElementById(`urlInput_${trackNumber}`);
+                
+                urlButton.addEventListener('click', function () {
+                    URLfromServer(urlInput.value, trackNumber);
+                });
+            });
+
+
             info_button.addEventListener('click', function () {
                 overlay.style.display = "block";
             });
@@ -87,10 +98,8 @@
                 document.querySelectorAll('button, select').forEach(function (element) {
                     element.style.borderColor = "slateblue";
                 });
-                document.getElementById('close_button').style.backgroundColor = "rgb(107, 92, 204, 0.4)";
-                document.getElementById('info_button').style.backgroundColor = "rgb(107, 92, 204, 0.4)";
-
-
+                document.getElementById('close_button').style.backgroundColor = "rgba(107, 92, 204, 0.4)";
+                document.getElementById('info_button').style.backgroundColor = "rgba(107, 92, 204, 0.4)";
             });
 
             track2_button.addEventListener('click', function () {
@@ -106,13 +115,14 @@
                 document.querySelectorAll('button, select').forEach(function (element) {
                     element.style.borderColor = "seagreen";
                 });
-
             });
+
             clear_url_button.addEventListener('click', function () {
                 var url = new window.URL(document.location);
                 url.searchParams.forEach((_, key) => url.searchParams.delete(key));
                 history.pushState({}, '', url);
             });
+
             clear_url_button.addEventListener('click', function () {
                 try {
                     var url = new URL(document.location);

@@ -34,6 +34,11 @@ export async function row1(container) {
     container.innerHTML = `
     <button class="plot-button" data-track="0">Choose file</button>
     <input type="file" class="file-input" style="display: none;">
+    
+    <button class="url-button" data-track="0">Load from URL</button>
+    <input type="url" id="urlInput_0" class="url-input" placeholder="Enter URL">
+
+
 
     <div class="column-container" id="column-container">
         <div id="columnLabelX"></div>
@@ -63,6 +68,11 @@ export async function row2(container) {
     container.innerHTML = `
     <button class="plot-button" data-track="1">Choose file</button>
     <input type="file" class="file-input" style="display: none;">
+
+    <!-- Second URL button -->
+    <button class="url-button" data-track="1">Load from URL</button>
+    <input type="url" id="urlinput_1" class="url-input" placeholder="Enter URL">
+
 
     <div class="column-container" id="column-container">
         <div id="columnLabelX"></div>
