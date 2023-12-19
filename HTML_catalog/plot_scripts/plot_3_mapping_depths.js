@@ -5,8 +5,7 @@ const color_mapping_depth_AT = "purple"
 const color_mapping_depth_ME = "violet"
 
 var plot_spec = {
-    //"title": "Mapping Depth - Window size: 1000",
-    "title": "Mapping Depth",
+    "title": "Mapping Depth - Window size: 1000",
     //"subtitle": "Atlantic population (dark) and Mediterranean (light)",
     "static": false,
     //"layout": { "type": "linear" },

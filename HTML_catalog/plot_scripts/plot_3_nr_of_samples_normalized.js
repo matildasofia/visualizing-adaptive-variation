@@ -5,8 +5,7 @@ const color_nr_samples_AT = "green"
 const color_nr_samples_ME = "lightgreen"
 
 var plot_spec = {
-    //"title": "Nr of Samples - Window size: 1000 (Normalized)",
-    "title": "Nr of Samples (Normalized)",
+    "title": "Nr of Samples - Window size: 1000 (Normalized)",
     //"subtitle": "Atlantic population (dark) and Mediterranean (light)",
     "static": false,
     //"layout": { "type": "linear" },

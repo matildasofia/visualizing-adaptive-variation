@@ -1,8 +1,8 @@
 // HTML options for user
 export async function info(container) {
     container.innerHTML = `
-    <button id="track1_button">File 1</button>
-    <button id="track2_button">File 2</button>
+    <button id="track1_button">Track 1</button>
+    <button id="track2_button">Track 2</button>
     <button id="info_button">More info</button>
     <button id="clear_url_button">Clear settings</button>
     `
