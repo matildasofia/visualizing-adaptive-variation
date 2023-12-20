@@ -1,2 +1,0 @@
-export type PIXIVisualProperty = 'color' | 'row' | 'stroke' | 'strokeWidth' | 'opacity' | 'x' | 'xe' | 'x1' | 'x1e' | 'y' | 'ye' | 'size' | 'text' | 'x-center' | 'y-center' | 'p-size' | 'x-start' | 'height' | 'width';
-//# sourceMappingURL=visual-property.schema.d.ts.map

@@ -1,1 +1,0 @@
-{"version":3,"file":"linking.d.ts","sourceRoot":"","sources":["../../../../src/core/utils/linking.ts"],"names":[],"mappings":"AACA,OAAO,KAAK,EAAE,YAAY,EAAE,MAAM,8BAA8B,CAAC;AAIjE;;GAEG;AACH,wBAAgB,cAAc,CAAC,OAAO,EAAE,YAAY;YAEpC,UAAU,GAAG,QAAQ;cACnB,MAAM;YACR,MAAM;aACL,OAAO;WACT,GAAG;IAkDjB"}
