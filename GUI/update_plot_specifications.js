@@ -69,6 +69,9 @@ export async function handleOptions(data, button_data_track_number) {
 
             plotSpec.tracks[trackValue].data.column = chosenColumnName;
             plotSpec.tracks[trackValue].x.field = chosenColumnName;
+            plotSpec.tracks[trackValue].tooltip[1].field = chosenColumnName;
+            plotSpec.tracks[trackValue].tooltip[1].alt = chosenColumnName;
+
 
             // Update plot data
             await GoslingPlotWithLocalData();
@@ -86,6 +89,8 @@ export async function handleOptions(data, button_data_track_number) {
 
             plotSpec.tracks[trackValue].data.value = chosenColumnName;
             plotSpec.tracks[trackValue].y.field = chosenColumnName;
+            plotSpec.tracks[trackValue].tooltip[0].field = chosenColumnName;
+            plotSpec.tracks[trackValue].tooltip[0].alt = chosenColumnName;
 
             // Update plot data
             await GoslingPlotWithLocalData();

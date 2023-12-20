@@ -14,14 +14,15 @@ const trackTemplate = {
     },
     "mark": "line",
     "x": { "field": x_col_preset, "type": "genomic", "axis": "bottom"},
-    "y": { "field": y_col_preset, "type": "quantitative", "axis": "left", "domain": [0, 1] },
+    "y": { "field": y_col_preset, "type": "quantitative", "axis": "left", "domain": [0, 1],"baseline":"2" },
     "color": {"value": "orange"},
     //"color": { "field": "TYPE", "type": "nominal", "legend": true },
     "opacity": { "value": 0.8 },
     "size": { "value": 2 },
-    //"tooltip": [
-        //{ "field": "FST", "type": "quantitative", "format": "0.2f", "alt": "SNPs (per bp) - FST:" }
-    //],
+    "tooltip": [
+        { "field": y_col_preset, "type": "quantitative", "format": "0.2f", "alt": y_col_preset},
+        { "field": x_col_preset, "type": "genomic", "format": "0.2f", "alt": x_col_preset}
+    ],
 };
 
 export { trackTemplate };
