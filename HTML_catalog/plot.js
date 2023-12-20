@@ -1,3 +1,5 @@
+// Functions used to embed, display and update Gosling visualizations.
+
 // Imports needed for using functions in this script.
 import { embed } from 'gosling.js';
 import { plot_spec as plot_1_Spec } from './plot_scripts/plot_1_FST.js';

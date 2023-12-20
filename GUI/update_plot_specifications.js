@@ -3,6 +3,13 @@ import { plotSpecSingleton } from './PlotSpecSingleton.js';
 
 const plotSpec = plotSpecSingleton.getPlotSpec(); // Get the current plot spec
 const fileHeaders = new Map();
+
+/**
+ * Handle various options for data, such as file or server URL.
+ * 
+ * @param {File|Blob} data - Data object, either a local file or a Blob from a server.
+ * @param {number} button_data_track_number - Button data track number.
+ */
 export async function handleOptions(data, button_data_track_number) {
     const columnSelectorsX = document.querySelectorAll(`.columnSelectorX[data-track="${button_data_track_number}"]`);
     const columnSelectorsY = document.querySelectorAll(`.columnSelectorY[data-track="${button_data_track_number}"]`);
@@ -228,13 +235,24 @@ export async function handleOptions(data, button_data_track_number) {
     });
 }
 
-
+/**
+ * Clear options from a select element.
+ * 
+ * @param {HTMLSelectElement} selectElement - Select element to clear options from.
+ */
 function clearOptions(selectElement) {
     while (selectElement.options.length > 0) {
         selectElement.remove(0);
     }
 }
 
+/**
+ * Check if two arrays are equal.
+ * 
+ * @param {Array} arr1 - First array.
+ * @param {Array} arr2 - Second array.
+ * @returns {boolean} - True if arrays are equal, false otherwise.
+ */
 function arraysEqual(arr1, arr2) {
     if (arr1.length !== arr2.length) return false;
     for (let i = 0; i < arr1.length; i++) {
@@ -243,8 +261,13 @@ function arraysEqual(arr1, arr2) {
     return true;
 }
 
-
-
+/**
+ * Extract the header from a local file using FileReader.
+ * 
+ * @param {File} file - Local file.
+ * @param {number} button_data_track_number - Button data track number.
+ * @returns {Promise<Array>} - Promise resolving to the extracted header.
+ */
 async function extractHeader(file, button_data_track_number) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -259,12 +282,19 @@ async function extractHeader(file, button_data_track_number) {
     });
 }
 
+/**
+ * Extract the header from server data using a Blob.
+ * 
+ * @param {Blob} fileBlob - Blob data from the server.
+ * @param {number} button_data_track_number - Button data track number.
+ * @returns {Promise<Array>} - Promise resolving to the extracted header.
+ */
 async function extractHeaderFromServer(fileBlob, button_data_track_number) {
     try {
         const text = await new Response(fileBlob).text(); // Convert fileBlob to text
         const data = text.split('\n').map(row => row.split(plotSpec.tracks[button_data_track_number].data.separator));
         const header = data[0];
-        
+
         return header;
     } catch (error) {
         console.error('Error fetching or processing data:', error);
@@ -272,8 +302,12 @@ async function extractHeaderFromServer(fileBlob, button_data_track_number) {
     }
 }
 
-
-
+/**
+ * Update URL parameters with a new parameter and its value.
+ * 
+ * @param {string} parameter - Parameter name.
+ * @param {string|number} value - Parameter value.
+ */
 async function updateURLParameters(parameter, value) {
     var url = new window.URL(document.location);
     url.searchParams.set(parameter, value);

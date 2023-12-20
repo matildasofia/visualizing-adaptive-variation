@@ -1,3 +1,4 @@
+// Plot specification used in GUI
 import { track } from './track_spec.js';
 
 var plot_spec = {

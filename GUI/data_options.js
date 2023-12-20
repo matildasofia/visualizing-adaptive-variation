@@ -1,4 +1,4 @@
-// HTML options for user
+// The options for the user on GUI
 export async function info(container) {
     container.innerHTML = `
     <button id="track0_button">Track 1</button>

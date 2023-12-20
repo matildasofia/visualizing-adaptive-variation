@@ -1,3 +1,4 @@
+// Overlay content used in "More info" on GUI
 export async function overlay(container) {
     container.innerHTML = `
     <div class="information">

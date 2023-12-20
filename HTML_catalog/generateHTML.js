@@ -1,4 +1,4 @@
-// Script to generate one HTML page for each candidate gene.
+// Generates one HTML page for each candidate gene.
 
 const fs = require('fs');
 const { sequenceNames } = require('./listed_seq.js');

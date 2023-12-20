@@ -1,5 +1,5 @@
-// Script that iterates through all files in a folder and extracts sequence names.
- 
+// Iterates through all files in a folder and extracts sequence names.
+
 const fs = require('fs');
 const path = require('path');
 

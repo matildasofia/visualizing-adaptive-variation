@@ -1,3 +1,4 @@
+<!--GUI front page-->
 <!DOCTYPE html>
 <html>
 
@@ -27,6 +28,7 @@
     <div id="buttons_container7" class="buttons-container"></div>
     <div id="buttons_container8" class="buttons-container"></div>
     <div id="overlay"></div>
+    <div id="plot-container" class="plot-container"></div>
 
     <script type="module">
         import { info, row10, row11, row2, row30, row31 } from './data_options.js';
@@ -40,9 +42,11 @@
         const container5 = document.getElementById('buttons_container5');
         const container6 = document.getElementById('buttons_container6');
 
-        // container, container1 and container 4 shall always be displayed
-        // when working with track0, container 2, 5 visible
-        // when working with track1, container 3, 6 visible
+        /* 
+        container, container1 and container 4 shall always be displayed
+        when working with track0 - container 2, 5 visible
+        when working with track1 - container 3, 6 visible
+        */
 
         overlay(container);
 
@@ -55,9 +59,8 @@
 
         row30(container5);
         row31(container6);
-    </script>
 
-    <div id="plot-container" class="plot-container"></div>
+    </script>
 
     <script type="module">
         import { URLfromFile, URLfromServer, GoslingPlotWithLocalData } from './plot.js';
@@ -76,7 +79,6 @@
                 });
             });
 
-            // Add event listener for URL input and button
             document.querySelectorAll('.url-button').forEach(function (urlButton, trackNumber) {
                 const urlInput = document.getElementById(`urlinput_${trackNumber}`);
 
