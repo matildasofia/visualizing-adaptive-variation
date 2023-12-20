@@ -1,8 +1,7 @@
+// Plot specification for "FST"
 var plot_spec = {
     "title": "FST",
-    //"subtitle": "Per base and per kbase",
-    "static": false, // enables zoom & pan for the tracks
-    //"layout": { type: 'linear', },
+    "static": false,
     "xDomain": { "interval": [0, 250000] },
     "alignment": "overlay",
     "width": 1000,
@@ -10,12 +9,8 @@ var plot_spec = {
     "assembly": "unknown",
 
 
-    //Specifying Light gray color as background color
     "style": {
         "background": "#D3D3D3", "backgroundOpacity": 0.1
-        //,"withinLinkVerticalLines": "true",
-        //"grid": "true"
-
     },
 
     "tracks": [
@@ -35,8 +30,6 @@ var plot_spec = {
             "color": {
                 "field": "TYPE",
                 "type": "nominal",
-                //"domain": ["intergenic", "upstream", "intron", "downstream", "synonymous","missense","splice&synonymous","3_prime_UTR","5_prime_UTR","5_prime_UTR_premature_start_codon_gain"],
-                //"range": ["orange","indigo", "seagreen", "gold", "royalblue", "firebrick","chocolate","darkcyan","orchid","maroon"],
                 "legend": true
             },
             "opacity": { "value": 0.8 },
@@ -56,11 +49,8 @@ var plot_spec = {
                 "sampleLength": "1000",
             },
             "mark": "line",
-
-            // "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
             "x": { "field": "POS", "type": "genomic", "axis": "bottom" },
             "y": { "field": "FST", "type": "quantitative", "axis": "none", "domain": [0, 1] },
-
             "color": { "value": "darkblue" },
             "opacity": { "value": 0.5 },
             "size": { "value": 2 },
