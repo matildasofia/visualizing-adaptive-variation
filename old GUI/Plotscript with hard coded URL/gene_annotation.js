@@ -1,22 +1,10 @@
-
-
-// Dessa parametrar används för goslings exempel
-/* const assembly = [["U00096.3", 4641652]];
-const xDomain = { "interval": [222000, 240000]};
-const url = "https://s3.amazonaws.com/gosling-lang.org/data/gff/E_coli_MG1655.gff3.gz";
-const indexUrl = "https://s3.amazonaws.com/gosling-lang.org/data/gff/E_coli_MG1655.gff3.gz.tbi"; */
-
-// Dessa används för krill data
 const assembly = [["seq_c_23164", 99317]];
-const xDomain = { "interval": [0, 250000] };
+const xDomain = {"interval": [0, 250000] };
 const url = "http://localhost:8888/data/genes_index/seq_c_23164.REF_STRG_1_64511_XLOC_008442.gff.sorted.gff.gz";
 const indexUrl = "http://localhost:8888/data/genes_index/seq_c_23164.REF_STRG_1_64511_XLOC_008442.gff.sorted.gff.gz.tbi";
 
 var plot_spec = {
-    "title": "GFF3 file",
-    "subtitle": "E. coli genome, colored by gene type.",
-    "spacing": 0,
-    "layout": "linear",
+    "title": "Gene annotation",
     "assembly": assembly,
     "style": {"enableSmoothPath": true},
     "views": [
@@ -32,15 +20,6 @@ var plot_spec = {
           ]
         },
         "color": {"value": "blue"},
-        "color": {
-            "type": "nominal",
-            "field": "type",
-            "domain": [
-              "gene",
-              "CDS"
-            ],
-            "range": ["orange", "blue"]
-          },
         "tracks": [
           {
             "dataTransform": [
@@ -48,16 +27,7 @@ var plot_spec = {
               {"type": "filter", "field": "strand", "oneOf": ["+"]}
             ],
             "mark": "triangleRight",
-            "x": {"field": "end", "type": "genomic", "axis": "top"},
-            "size": {"value": 10}
-          },
-          {
-            "dataTransform": [
-              {"type": "filter", "field": "type", "oneOf": ["exon"]},
-              {"type": "filter", "field": "strand", "oneOf": ["+"]}
-            ],
-            "mark": "triangleRight",
-            "x": {"field": "end", "type": "genomic"},
+            "x": {"field": "end", "type": "genomic", "axis": "bottom"},
             "size": {"value": 10}
           },
           {
@@ -65,10 +35,11 @@ var plot_spec = {
               {"type": "filter", "field": "type", "oneOf": ["gene"]}
             ],
             "mark": "text",
-            "text": {"field": "ID", "type": "nominal"},
-            "x": {"field": "start", "type": "genomic"},
+            "text": {"field": "seq_id", "type": "nominal"},
+            "x": {"field": "start", "type": "genomic", "axis": "top"},
             "xe": {"field": "end", "type": "genomic"},
-            "style": {"dy": -10}
+            "size": {"value": 8},
+            "style": {"textFontSize": 8, "dy": -10}
           },
           {
             "dataTransform": [
@@ -114,8 +85,8 @@ var plot_spec = {
           }
         ],
         "opacity": {"value": 0.8},
-        "width": 800,
-        "height": 80
+        "width": 1000,
+        "height": 50
       }
     ]
   }
