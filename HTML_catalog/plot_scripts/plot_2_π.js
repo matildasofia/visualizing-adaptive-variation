@@ -1,3 +1,4 @@
+// Plot specification for "Pi"
 const size_val = 1.5;
 const opacity_AT = 1;
 const opacity_ME = 1;
@@ -6,24 +7,18 @@ const color_pi_ME = "gold"
 
 var plot_spec = {
     "title": "Pi",
-    //"description": "Atlantic population is shown in bold, Mediterranean in lighter color",
-    //"subtitle": "Atlantic population (orange) and Mediterranean (gold)",
-
-    "static": false, // enables zoom & pan for the tracks
-
-    //"layout": { "type": "linear" },
+    "static": false,
     "xDomain": { "interval": [0, 250000] },
     "alignment": "overlay",
     "width": 490,
     "height": 200,
     "assembly": "unknown",
 
-    // Specifying Light gray color as background color
-    "style": {"background":"#D3D3D3", "backgroundOpacity":0.1},
+    "style": { "background": "#D3D3D3", "backgroundOpacity": 0.1 },
 
     "tracks": [
         {
-        // ¤¤¤¤¤¤¤¤¤ Atlantic  ¤¤¤¤¤¤¤¤¤    
+            // ¤¤¤¤¤¤¤¤¤ Atlantic  ¤¤¤¤¤¤¤¤¤    
             "data": {
                 "url": "",
                 "type": "csv",
@@ -32,16 +27,16 @@ var plot_spec = {
                 "value": "at_PI",
                 "sampleLength": "1000",
             },
-            
+
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId":"link-1" },
-            "y": { "field": "at_PI", "type": "quantitative", "axis": "left", "domain":[0,0.05], "grid":true},
-            "color": { "value": color_pi_AT }, // Color for Pi    
-            "opacity": { "value": opacity_AT}, // Opacity for Mediterranean
-            "size": { "value": size_val }, //the width of the line
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" },
+            "y": { "field": "at_PI", "type": "quantitative", "axis": "left", "domain": [0, 0.05], "grid": true },
+            "color": { "value": color_pi_AT },
+            "opacity": { "value": opacity_AT },
+            "size": { "value": size_val },
             "tooltip": [
-        {"field": "at_PI", "type": "quantitative", "format":"0.2f","alt":"Atlantic - π (pi)"}
-                ],
+                { "field": "at_PI", "type": "quantitative", "format": "0.2f", "alt": "Atlantic - π (pi)" }
+            ],
         },
         // ¤¤¤¤¤¤¤¤¤ Mediterranean  ¤¤¤¤¤¤¤¤¤
         {
@@ -54,15 +49,15 @@ var plot_spec = {
                 "sampleLength": "1000",
             },
             "mark": "line",
-            "x": { "field": "POS", "type": "genomic", "axis": "bottom","linkingId":"link-1" },
-            "y": { "field": "me_PI", "type": "quantitative", "axis": "none" ,"domain":[0,0.05]},
-            "color": { "value": color_pi_ME }, // Color for Pi
-            "opacity": { "value": opacity_ME}, // Opacity for Mediterranean
-            "size": { "value": size_val }, //the width of the line
+            "x": { "field": "POS", "type": "genomic", "axis": "bottom", "linkingId": "link-1" },
+            "y": { "field": "me_PI", "type": "quantitative", "axis": "none", "domain": [0, 0.05] },
+            "color": { "value": color_pi_ME },
+            "opacity": { "value": opacity_ME },
+            "size": { "value": size_val },
             "tooltip": [
-        {"field": "me_PI", "type": "quantitative", "format":"0.2f","alt":"Mediterranean - π (pi):"}
-                        ],
+                { "field": "me_PI", "type": "quantitative", "format": "0.2f", "alt": "Mediterranean - π (pi):" }
+            ],
         },
     ]
-};                   
+};
 export { plot_spec };

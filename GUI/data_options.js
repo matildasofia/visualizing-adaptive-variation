@@ -1,14 +1,66 @@
-// HTML options for user
+// The options for the user on GUI
 export async function info(container) {
     container.innerHTML = `
-    <button id="track1_button">Track 1</button>
-    <button id="track2_button">Track 2</button>
+    <button id="track0_button">Track 1</button>
+    <button id="track1_button">Track 2</button>
     <button id="info_button">More info</button>
-    <button id="clear_url_button">Clear settings</button>
-    `
+    <button id="clear_url_button">Clear settings</button>`
 }
 
-export async function row(container) {
+export async function row10(container) {
+    container.innerHTML = `
+    <button class="plot-button" data-track="0">Choose file</button>
+    <input type="file" class="file-input" style="display: none;">
+
+    <label for="urlinput_0" style="margin-right:30px;">or</label>
+    <input type="url" id="urlinput_0" class="url-input" placeholder="Enter URL">
+    <button class="url-button" data-track="0">Load</button>
+
+    <div class="column-container" id="column-container">
+        <div id="columnLabelX"></div>
+        <label for="columnSelectorX_0">X-axis: </label>
+        <select name="xcolumn" id="columnSelectorX_0" class="columnSelectorX" data-track="0">
+            <option value="" disabled selected></option>
+        </select>
+    </div>
+
+    <div class="column-container" id="column-container">
+        <div id="columnLabelY"></div>
+        <label for="columnSelectorY_0">Y-axis: </label>
+        <select name="ycolumn" id="columnSelectorY_0" class="columnSelectorY" data-track="0">
+            <option value="" disabled selected></option>
+        </select>
+    </div>
+`
+}
+
+export async function row11(container) {
+    container.innerHTML = `
+    <button class="plot-button" data-track="1">Choose file</button>
+    <input type="file" class="file-input" style="display: none;">
+
+    <label for="urlinput_1" style="margin-right:30px;">or</label>
+    <input type="url" id="urlinput_1" class="url-input" placeholder="Enter URL">
+    <button class="url-button" data-track="1">Load</button>
+
+    <div class="column-container" id="column-container">
+        <div id="columnLabelX"></div>
+        <label for="columnSelectorX_1">X-axis: </label>
+        <select name="xcolumn" id="columnSelectorX_1" class="columnSelectorX" data-track="1">
+            <option value="" disabled selected></option>
+        </select>
+    </div>
+
+    <div class="column-container" id="column-container">
+        <div id="columnLabelY"></div>
+        <label for="columnSelectorY_1">Y-axis: </label>
+        <select name="ycolumn" id="columnSelectorY_1" class="columnSelectorY" data-track="1">
+        <option value="" disabled selected></option>
+        </select>
+    </div>
+`};
+
+export async function row2(container) {
     container.innerHTML = `
     <label for="x_start">X-domain:</label>
     <input type="text" class="interval-input" id="x_start">
@@ -22,7 +74,6 @@ export async function row(container) {
     <input type="text" class="interval-input" id="y_end">
     <button id="y_interval_button">Apply</button>
 
-
     <select name="bcolor" id="bcolor">
         <option value="" disabled selected>Select background color</option>
         <option value="white">white</option>
@@ -30,68 +81,16 @@ export async function row(container) {
     </select>`
 }
 
-export async function row1(container) {
+export async function row30(container) {
     container.innerHTML = `
-    <button class="plot-button" data-track="0">Choose file</button>
-    <input type="file" class="file-input" style="display: none;">
-
-    <div class="column-container" id="column-container">
-        <div id="columnLabelX"></div>
-        <label for="columnSelectorX_0">X-axis: </label>
-        <select name="xcolumn" id="columnSelectorX_0" class="columnSelectorX" data-track="0">
-            <option value="" disabled selected>Select a column for X</option>
-        </select>
-    </div>
-
-    <div class="column-container" id="column-container">
-        <div id="columnLabelY"></div>
-        <label for="columnSelectorY_0">Y-axis: </label>
-        <select name="ycolumn" id="columnSelectorY_0" class="columnSelectorY" data-track="0">
-            <option value="" disabled selected>Select a column for Y</option>
-        </select>
-    </div>
-    
     <label for="binsize_0">Bin size:</label>
     <input type="number" class="interval-input" name="binsize" id="binsize_0">
     <button class="binsize"  id="binsize_button_0" data-track="0">Apply</button>
 
     <label for="samplelength_0">Sample length:</label>
     <input type="number" class="interval-input" name="samplelength" id="samplelength_0">
-    <button class="samplelength" id="samplelength_button_0" data-track="0">Apply</button>`
-};
-export async function row2(container) {
-    container.innerHTML = `
-    <button class="plot-button" data-track="1">Choose file</button>
-    <input type="file" class="file-input" style="display: none;">
+    <button class="samplelength" id="samplelength_button_0" data-track="0">Apply</button>
 
-    <div class="column-container" id="column-container">
-        <div id="columnLabelX"></div>
-        <label for="columnSelectorX_1">X-axis: </label>
-        <select name="xcolumn" id="columnSelectorX_1" class="columnSelectorX" data-track="1">
-            <option value="" disabled selected>Select a column for X</option>
-        </select>
-    </div>
-
-    <div class="column-container" id="column-container">
-        <div id="columnLabelY"></div>
-        <label for="columnSelectorY_1">Y-axis: </label>
-        <select name="ycolumn" id="columnSelectorY_1" class="columnSelectorY" data-track="1">
-        <option value="" disabled selected>Select a column for Y</option>
-        </select>
-    </div>
-
-    <label for="binsize_1">Bin size:</label>
-    <input type="number" class="interval-input" name="binsize" id="binsize_1">
-    <button class="binsize" id="binsize_button_1" data-track="1">Apply</button>  
-    
-    <label for="samplelength_1">Sample length:</label>
-    <input type="number" class="interval-input" name="samplelength" id="samplelength_1">
-    <button class="samplelength" id="samplelength_button_1" data-track="1">Apply</button>
-    `
-};
-
-export async function row3(container) {
-    container.innerHTML = `
     <select name="mark" id="mark_0" class="mark" data-track="0">
         <option value="" disabled selected>Select mark</option>
         <option value="point">point</option>
@@ -121,8 +120,16 @@ export async function row3(container) {
     <button class="marksize" id="marksize_button_0" data-track="0">Apply</button>
         `
 };
-export async function row4(container) {
+export async function row31(container) {
     container.innerHTML = `
+    <label for="binsize_1">Bin size:</label>
+    <input type="number" class="interval-input" name="binsize" id="binsize_1">
+    <button class="binsize" id="binsize_button_1" data-track="1">Apply</button>  
+    
+    <label for="samplelength_1">Sample length:</label>
+    <input type="number" class="interval-input" name="samplelength" id="samplelength_1">
+    <button class="samplelength" id="samplelength_button_1" data-track="1">Apply</button>
+
     <select name="mark" id="mark_1" class="mark" data-track="1">
         <option value="" disabled selected>Select mark</option>
         <option value="point">point</option>

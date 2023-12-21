@@ -1,1 +1,0 @@
-{"version":3,"file":"utils.d.ts","sourceRoot":"","sources":["../../../../src/data-fetchers/gff/utils.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,WAAW,EAAE,YAAY,EAAE,MAAM,WAAW,CAAC;AAC3D;;;;GAIG;AACH,wBAAgB,aAAa,CAAC,KAAK,EAAE,WAAW,GAAG,YAAY,GAAG,KAAK,IAAI,WAAW,CAErF;AAED,mFAAmF;AACnF,wBAAgB,qBAAqB,CAAC,CAAC,EAAE,MAAM,EAAE,QAAQ,EAAE,MAAM,YAQhE"}

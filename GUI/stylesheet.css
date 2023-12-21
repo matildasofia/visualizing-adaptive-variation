@@ -1,3 +1,4 @@
+/* Stylesheet for GUI */
 body {
     display: flex;
     flex-direction: column;
@@ -15,8 +16,9 @@ body {
     gap: 5px;
 }
 
-#buttons_container2,#buttons_container5{
-    display:none;
+#buttons_container3,
+#buttons_container6 {
+    display: none;
 }
 
 .column-container {
@@ -41,11 +43,12 @@ input,
     cursor: pointer;
     padding: 4px;
 }
-#clear_url_button{
+
+#clear_url_button {
     background-color: rgb(192, 192, 192);
 }
 
-label{
+label {
     font-weight: bold;
 }
 
@@ -58,13 +61,13 @@ label{
 #close_button {
     max-width: fit-content;
     position: fixed;
-    right:0;
+    right: 0;
 }
 
 button:hover,
 select:hover,
 #info_button:hover,
-#close_button:hover{
+#close_button:hover {
     background: white;
 }
 
@@ -79,13 +82,19 @@ button:active,
     background-color: grey;
 }
 
-#track2_button{
-    opacity : 0.5;
+#track1_button {
+    opacity: 0.5;
 }
 
 .interval-input {
     margin-right: 0px;
     max-width: 5em;
+    border-color: rgb(221, 221, 221);
+}
+
+.url-input {
+    margin-right: 0px;
+    min-width: 10em;
     border-color: rgb(221, 221, 221);
 }
 

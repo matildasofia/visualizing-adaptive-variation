@@ -1,9 +1,9 @@
+<!--GUI front page-->
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Gosling Visualization</title>
-    <link rel="stylesheet" href="https://esm.sh/higlass@1.13/dist/hglib.css">
     <link rel="stylesheet" href="./stylesheet.css">
     <script type="importmap">
         {
@@ -19,42 +19,51 @@
 </head>
 
 <body>
-    <div id="buttons_container" class="buttons-container"></div>
     <div id="buttons_container1" class="buttons-container"></div>
     <div id="buttons_container2" class="buttons-container"></div>
     <div id="buttons_container3" class="buttons-container"></div>
     <div id="buttons_container4" class="buttons-container"></div>
     <div id="buttons_container5" class="buttons-container"></div>
+    <div id="buttons_container6" class="buttons-container"></div>
+    <div id="buttons_container7" class="buttons-container"></div>
+    <div id="buttons_container8" class="buttons-container"></div>
     <div id="overlay"></div>
+    <div id="plot-container" class="plot-container"></div>
 
     <script type="module">
-        import { info, row, row1, row2, row3, row4 } from './data_options.js';
+        import { info, row10, row11, row2, row30, row31 } from './data_options.js';
         import { overlay } from './overlay.js';
 
-        const container = document.getElementById('buttons_container');
+        const container = document.getElementById('overlay');
         const container1 = document.getElementById('buttons_container1');
         const container2 = document.getElementById('buttons_container2');
         const container3 = document.getElementById('buttons_container3');
         const container4 = document.getElementById('buttons_container4');
         const container5 = document.getElementById('buttons_container5');
-        const container6 = document.getElementById('overlay');
+        const container6 = document.getElementById('buttons_container6');
 
-        info(container);
-        row(container3);
-        overlay(container6);
+        /* 
+        container, container1 and container 4 shall always be displayed
+        when working with track0 - container 2, 5 visible
+        when working with track1 - container 3, 6 visible
+        */
 
-        row1(container1);
-        row2(container2);
+        overlay(container);
 
-        row3(container4);
-        row4(container5);
+        info(container1);
+
+        row10(container2);
+        row11(container3);
+
+        row2(container4);
+
+        row30(container5);
+        row31(container6);
 
     </script>
 
-    <div id="plot-container" class="plot-container"></div>
-
     <script type="module">
-        import { URLfromFile, GoslingPlotWithLocalData } from './plot.js';
+        import { URLfromFile, URLfromServer, GoslingPlotWithLocalData } from './plot.js';
         import { trackTemplate } from './track_spec.js';
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -69,50 +78,62 @@
                     URLfromFile(fileInputs, button_data_track_num);
                 });
             });
+
+            document.querySelectorAll('.url-button').forEach(function (urlButton, trackNumber) {
+                const urlInput = document.getElementById(`urlinput_${trackNumber}`);
+
+                urlButton.addEventListener('click', function () {
+                    URLfromServer(urlInput.value, trackNumber);
+                });
+            });
+
             info_button.addEventListener('click', function () {
                 overlay.style.display = "block";
             });
             close_button.addEventListener('click', function () {
                 overlay.style.display = "none";
             });
-            track1_button.addEventListener('click', function () {
-                buttons_container1.style.display = "flex";
-                buttons_container2.style.display = "none";
-                buttons_container4.style.display = "flex";
-                buttons_container5.style.display = "none";
 
-                track1_button.style.opacity = 1;
-                track2_button.style.opacity = 0.5;
+            track0_button.addEventListener('click', function () {
+                buttons_container2.style.display = "flex";
+                buttons_container5.style.display = "flex";
+
+                buttons_container3.style.display = "none";
+                buttons_container6.style.display = "none";
+
+
+                track0_button.style.opacity = 1;
+                track1_button.style.opacity = 0.5;
 
                 document.querySelectorAll('button, select').forEach(function (element) {
                     element.style.borderColor = "slateblue";
                 });
-                document.getElementById('close_button').style.backgroundColor = "rgb(107, 92, 204, 0.4)";
-                document.getElementById('info_button').style.backgroundColor = "rgb(107, 92, 204, 0.4)";
-
-
+                document.getElementById('close_button').style.backgroundColor = "rgba(107, 92, 204, 0.4)";
+                document.getElementById('info_button').style.backgroundColor = "rgba(107, 92, 204, 0.4)";
             });
 
-            track2_button.addEventListener('click', function () {
-                buttons_container1.style.display = "none";
-                buttons_container2.style.display = "flex";
-                buttons_container4.style.display = "none";
-                buttons_container5.style.display = "flex";
+            track1_button.addEventListener('click', function () {
+                buttons_container2.style.display = "none";
+                buttons_container5.style.display = "none";
 
-                track1_button.style.opacity = 0.5;
-                track2_button.style.opacity = 1;
+                buttons_container3.style.display = "flex";
+                buttons_container6.style.display = "flex";
+
+                track0_button.style.opacity = 0.5;
+                track1_button.style.opacity = 1;
                 document.getElementById('info_button').style.backgroundColor = "rgb(148, 211, 175)";
                 document.getElementById('close_button').style.backgroundColor = "rgb(148, 211, 175)";
                 document.querySelectorAll('button, select').forEach(function (element) {
                     element.style.borderColor = "seagreen";
                 });
-
             });
+
             clear_url_button.addEventListener('click', function () {
                 var url = new window.URL(document.location);
                 url.searchParams.forEach((_, key) => url.searchParams.delete(key));
                 history.pushState({}, '', url);
             });
+
             clear_url_button.addEventListener('click', function () {
                 try {
                     var url = new URL(document.location);

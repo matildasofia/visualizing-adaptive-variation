@@ -1,6 +1,6 @@
-const y_col_preset = "" 
-const x_col_preset = "" 
-
+// Track specification used in GUI
+const y_col_preset = ""
+const x_col_preset = ""
 
 const trackTemplate = {
     "data": {
@@ -13,15 +13,15 @@ const trackTemplate = {
         "sampleLength": 1000,
     },
     "mark": "line",
-    "x": { "field": x_col_preset, "type": "genomic", "axis": "bottom"},
-    "y": { "field": y_col_preset, "type": "quantitative", "axis": "left", "domain": [0, 1] },
-    "color": {"value": "orange"},
-    //"color": { "field": "TYPE", "type": "nominal", "legend": true },
+    "x": { "field": x_col_preset, "type": "genomic", "axis": "bottom" },
+    "y": { "field": y_col_preset, "type": "quantitative", "axis": "left", "domain": [0, 1], "baseline": "2" },
+    "color": { "value": "orange" },
     "opacity": { "value": 0.8 },
     "size": { "value": 2 },
-    //"tooltip": [
-        //{ "field": "FST", "type": "quantitative", "format": "0.2f", "alt": "SNPs (per bp) - FST:" }
-    //],
+    "tooltip": [
+        { "field": y_col_preset, "type": "quantitative", "format": "0.2f", "alt": y_col_preset },
+        { "field": x_col_preset, "type": "genomic", "format": "0.2f", "alt": x_col_preset }
+    ],
 };
 
 export { trackTemplate };
