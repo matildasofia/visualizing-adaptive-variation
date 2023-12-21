@@ -10,6 +10,7 @@ const fileHeaders = new Map();
  * @param {File|Blob} data - Data object, either a local file or a Blob from a server.
  * @param {number} button_data_track_number - Button data track number.
  */
+
 export async function handleOptions(data, button_data_track_number) {
     const columnSelectorsX = document.querySelectorAll(`.columnSelectorX[data-track="${button_data_track_number}"]`);
     const columnSelectorsY = document.querySelectorAll(`.columnSelectorY[data-track="${button_data_track_number}"]`);
@@ -18,12 +19,10 @@ export async function handleOptions(data, button_data_track_number) {
     if (data instanceof File) {
         // Data is a local file, use FileReader to extract header
         header = await extractHeader(data, button_data_track_number);
-        console.log("Header extracted from file:", header);
         // Proceed with handling the extracted header...
     } else if (data instanceof Blob) {
         // Data is a Blob (assumed to be from a server)
         header = await extractHeaderFromServer(data, button_data_track_number);
-        console.log("Header extracted from server data:", header);
         // Proceed with handling the extracted header...
     } else {
         console.error("Invalid data type. Expected File or Blob.");
@@ -35,11 +34,6 @@ export async function handleOptions(data, button_data_track_number) {
     }
 
     const columns = fileHeaders.get(button_data_track_number);
-    console.log("Current track:", button_data_track_number)
-    console.log("header", header)
-
-    console.log("columns for track 0:", fileHeaders.get(0))
-    console.log("columns for track 1:", fileHeaders.get(1))
 
     if (!arraysEqual(Array.from(columns), header)) {
         columns.clear();
@@ -67,7 +61,7 @@ export async function handleOptions(data, button_data_track_number) {
             });
         });
     }
-    // Event listeners for dropdown menu changes (adapt as needed)
+
     columnSelectorsX.forEach(columnSelectorX => {
         columnSelectorX.addEventListener('change', async function () {
             const trackValue = columnSelectorX.getAttribute('data-track');
@@ -80,14 +74,12 @@ export async function handleOptions(data, button_data_track_number) {
             plotSpec.tracks[trackValue].tooltip[1].alt = chosenColumnName;
 
 
-            // Update plot data
             await GoslingPlotWithLocalData();
-            // Update URL parameters
-            updateURLParameters(columnSelectorX.getAttribute("id"), chosenColumnName);
+            await updateURLParameters(columnSelectorX.getAttribute("id"), chosenColumnName);
         });
     });
 
-    // Event listeners for dropdown menu changes (adapt as needed)
+
     columnSelectorsY.forEach(columnSelectorY => {
         columnSelectorY.addEventListener('change', async function () {
             const trackValue = columnSelectorY.getAttribute('data-track');
@@ -99,14 +91,12 @@ export async function handleOptions(data, button_data_track_number) {
             plotSpec.tracks[trackValue].tooltip[0].field = chosenColumnName;
             plotSpec.tracks[trackValue].tooltip[0].alt = chosenColumnName;
 
-            // Update plot data
             await GoslingPlotWithLocalData();
-            // Update URL parameters
-            updateURLParameters(columnSelectorY.getAttribute("id"), chosenColumnName);
+            await updateURLParameters(columnSelectorY.getAttribute("id"), chosenColumnName);
         });
     });
 
-    const markButtons = document.querySelectorAll('.mark'); // Find buttons belonging to the 'mark' class
+    const markButtons = document.querySelectorAll('.mark');
     markButtons.forEach(button => {
         button.addEventListener('change', async function () {
             const trackValue = button.getAttribute('data-track');
@@ -114,14 +104,12 @@ export async function handleOptions(data, button_data_track_number) {
 
             plotSpec.tracks[trackValue].mark = chosenmark;
 
-            // Update plot data
             await GoslingPlotWithLocalData();
-            // Update URL
             await updateURLParameters(button.getAttribute("id"), button.value);
         });
     });
 
-    const colorButtons = document.querySelectorAll('.color'); // Find buttons belonging to the 'color' class
+    const colorButtons = document.querySelectorAll('.color');
     colorButtons.forEach(button => {
         button.addEventListener('change', async function () {
             const trackValue = button.getAttribute('data-track');
@@ -129,21 +117,17 @@ export async function handleOptions(data, button_data_track_number) {
 
             plotSpec.tracks[trackValue].color.value = chosencolor;
 
-            // Update plot data
+
             await GoslingPlotWithLocalData();
-            // Update URL
             await updateURLParameters(button.getAttribute("id"), button.value);
         });
     });
 
-
-
     bcolor.addEventListener('change', async function () {
         const chosenBcolor = bcolor.value;
         plotSpec.style.background = chosenBcolor;
+
         await GoslingPlotWithLocalData();
-        // updateURLParameters(bcolor.name, bcolor.value);
-        // Update URL
         await updateURLParameters(bcolor.name, bcolor.value);
     });
 
@@ -155,84 +139,92 @@ export async function handleOptions(data, button_data_track_number) {
 
         const intervalArray = [start, end];
         plotSpec.xDomain.interval = intervalArray;
-        await GoslingPlotWithLocalData();
 
+        await GoslingPlotWithLocalData();
         const xInterval = "xInterval";
-        updateURLParameters(xInterval, intervalArray);
+        await updateURLParameters(xInterval, intervalArray);
     });
 
-    y_interval_button.addEventListener('click', async function () {
-        const startValue = document.getElementById('y_start').value;
-        const endValue = document.getElementById('y_end').value;
+    y_interval_button0.addEventListener('click', async function () {
+        const startValue = document.getElementById('y_start0').value;
+        const endValue = document.getElementById('y_end0').value;
         const start = parseFloat(startValue);
         const end = parseFloat(endValue);
 
         const intervalArray = [start, end];
         plotSpec.tracks[0].y.domain = intervalArray;
-        plotSpec.tracks[1].y.domain = intervalArray;
-        await GoslingPlotWithLocalData();
 
-        const yInterval = "yInterval";
+        await GoslingPlotWithLocalData();
+        const yInterval = "yInterval0";
         updateURLParameters(yInterval, intervalArray);
     });
 
-    const binsizeButtons = document.querySelectorAll('.binsize'); // Find buttons belonging to the 'binsize' class
+    y_interval_button1.addEventListener('click', async function () {
+        const startValue = document.getElementById('y_start1').value;
+        const endValue = document.getElementById('y_end1').value;
+        const start = parseFloat(startValue);
+        const end = parseFloat(endValue);
+
+        const intervalArray = [start, end];
+        plotSpec.tracks[1].y.domain = intervalArray;
+
+        await GoslingPlotWithLocalData();
+        const yInterval = "yInterval1";
+        updateURLParameters(yInterval, intervalArray);
+    });
+
+    const binsizeButtons = document.querySelectorAll('.binsize');
     binsizeButtons.forEach(button => {
         button.addEventListener('click', async function () {
             const trackValue = button.getAttribute('data-track');
-            // const chosenbinsize = parseFloat(button.value);
-            // Find the associated input field or use a data attribute
             const inputField = document.getElementById(`binsize_${trackValue}`);
-            // Parse the value from the input field or data attribute
             const chosenbinsize = parseFloat(inputField.value);
-
             plotSpec.tracks[trackValue].data.binSize = chosenbinsize;
 
-            // Update plot data
             await GoslingPlotWithLocalData();
-            //Update URL parameters
-            updateURLParameters(button.getAttribute('id'), chosenbinsize);
+            await updateURLParameters(button.getAttribute('id'), chosenbinsize);
         });
     });
 
-    const samplelengthButtons = document.querySelectorAll('.samplelength'); // Find buttons belonging to the 'samplelength' class
+    const samplelengthButtons = document.querySelectorAll('.samplelength');
 
     samplelengthButtons.forEach(button => {
         button.addEventListener('click', async function () {
             const trackValue = button.getAttribute('data-track');
-            // Find the associated input field
             const inputField = document.getElementById(`samplelength_${trackValue}`);
-            // Parse the value from the input field as a float
             const chosensamplelength = parseFloat(inputField.value);
-
             plotSpec.tracks[trackValue].data.sampleLength = chosensamplelength;
 
-            // Update plot data
             await GoslingPlotWithLocalData();
-            // Uptade URL parameters
-            updateURLParameters(button.getAttribute('id'), chosensamplelength);
+            await updateURLParameters(button.getAttribute('id'), chosensamplelength);
         });
     });
 
 
-    const marksizeButtons = document.querySelectorAll('.marksize'); // Find buttons belonging to the 'marksize' class
+    const marksizeButtons = document.querySelectorAll('.marksize');
     marksizeButtons.forEach(button => {
         button.addEventListener('click', async function () {
             const trackValue = button.getAttribute('data-track');
-            // Find the associated input field
             const inputField = document.getElementById(`marksize_${trackValue}`);
-            // Parse the value from the input field
             const chosenmarksize = parseFloat(inputField.value);
-            console.log("chosen marker size", chosenmarksize)
-
             plotSpec.tracks[trackValue].size.value = chosenmarksize;
 
-            // Update plot data
             await GoslingPlotWithLocalData();
-            // Uptade URL parameters
-            updateURLParameters(button.getAttribute('id'), chosenmarksize);
+            await updateURLParameters(button.getAttribute('id'), chosenmarksize);
         });
     });
+
+    check.addEventListener('click', async function () {
+        const trackValue = 1;
+
+        if (check.checked) {
+            plotSpec.tracks[trackValue].y.axis = "right";
+        } else {
+            plotSpec.tracks[trackValue].y.axis = "left";
+        }
+        await GoslingPlotWithLocalData();
+    });
+
 }
 
 /**
@@ -291,7 +283,7 @@ async function extractHeader(file, button_data_track_number) {
  */
 async function extractHeaderFromServer(fileBlob, button_data_track_number) {
     try {
-        const text = await new Response(fileBlob).text(); // Convert fileBlob to text
+        const text = await new Response(fileBlob).text();
         const data = text.split('\n').map(row => row.split(plotSpec.tracks[button_data_track_number].data.separator));
         const header = data[0];
 
