@@ -9,24 +9,28 @@ body {
     line-height: 30px;
 }
 
-.buttons-container {
+.all_buttons {
     display: flex;
-    margin-top: 20px;
+    flex-direction: column;
     align-items: center;
+    gap: 15px;
+}
+
+.both_tracks,
+.column-container,
+.track0 {
+    display: inline-flex;
     gap: 5px;
 }
 
-#buttons_container3,
-#buttons_container6 {
+.track1 {
     display: none;
-}
-
-.column-container {
-    display: flex;
     gap: 5px;
-    align-items: center;
 }
 
+#header {
+    margin-top: 15px;
+}
 
 button,
 select,
@@ -45,17 +49,20 @@ input,
 }
 
 #clear_url_button {
-    background-color: rgb(192, 192, 192);
+    background-color: rgba(192, 192, 192, 0.567);
 }
 
 label {
     font-weight: bold;
 }
 
+#track0_button {
+    background-color: rgb(107, 92, 204, 0.4);
+}
 
 #info_button,
 #close_button {
-    background-color: rgb(107, 92, 204, 0.4);
+    background-color: rgba(210, 127, 231, 0.345);
 }
 
 #close_button {
@@ -64,6 +71,8 @@ label {
     right: 0;
 }
 
+#track0_button:hover,
+#track1_button:hover,
 button:hover,
 select:hover,
 #info_button:hover,
@@ -72,7 +81,7 @@ select:hover,
 }
 
 #clear_url_button:hover {
-    background: rgb(244, 215, 156);
+    background: rgba(244, 215, 156, 0.583);
 }
 
 button:active,
@@ -84,6 +93,8 @@ button:active,
 
 #track1_button {
     opacity: 0.5;
+    background-color: rgb(148, 211, 175);
+    border-color: seagreen;
 }
 
 .interval-input {
