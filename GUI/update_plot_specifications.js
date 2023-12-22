@@ -83,7 +83,7 @@ export async function handleOptions(data, button_data_track_number) {
             // Update plot data
             await GoslingPlotWithLocalData();
             // Update URL parameters
-            updateURLParameters(columnSelectorX.getAttribute("id"), chosenColumnName);
+            updateURLParameters("x.field"+trackValue.toString(), chosenColumnName);
         });
     });
 
@@ -102,7 +102,7 @@ export async function handleOptions(data, button_data_track_number) {
             // Update plot data
             await GoslingPlotWithLocalData();
             // Update URL parameters
-            updateURLParameters(columnSelectorY.getAttribute("id"), chosenColumnName);
+            updateURLParameters("y.field"+trackValue.toString(), chosenColumnName);
         });
     });
 
@@ -117,7 +117,8 @@ export async function handleOptions(data, button_data_track_number) {
             // Update plot data
             await GoslingPlotWithLocalData();
             // Update URL
-            await updateURLParameters(button.getAttribute("id"), button.value);
+            const mark = "mark" + trackValue.toString();
+            await updateURLParameters(mark, button.value);
         });
     });
 
@@ -132,7 +133,7 @@ export async function handleOptions(data, button_data_track_number) {
             // Update plot data
             await GoslingPlotWithLocalData();
             // Update URL
-            await updateURLParameters(button.getAttribute("id"), button.value);
+            await updateURLParameters("color.value"+trackValue.toString(), button.value);
         });
     });
 
@@ -144,7 +145,7 @@ export async function handleOptions(data, button_data_track_number) {
         await GoslingPlotWithLocalData();
         // updateURLParameters(bcolor.name, bcolor.value);
         // Update URL
-        await updateURLParameters(bcolor.name, bcolor.value);
+        await updateURLParameters("background", bcolor.value);
     });
 
     x_interval_button.addEventListener('click', async function () {
@@ -157,8 +158,8 @@ export async function handleOptions(data, button_data_track_number) {
         plotSpec.xDomain.interval = intervalArray;
         await GoslingPlotWithLocalData();
 
-        const xInterval = "xInterval";
-        updateURLParameters(xInterval, intervalArray);
+        const xDomain = "xDomain.interval";
+        updateURLParameters(xDomain, intervalArray);
     });
 
     y_interval_button.addEventListener('click', async function () {
@@ -172,8 +173,8 @@ export async function handleOptions(data, button_data_track_number) {
         plotSpec.tracks[1].y.domain = intervalArray;
         await GoslingPlotWithLocalData();
 
-        const yInterval = "yInterval";
-        updateURLParameters(yInterval, intervalArray);
+        const yDomain = "y.domain";
+        updateURLParameters(yDomain, intervalArray);
     });
 
     const binsizeButtons = document.querySelectorAll('.binsize'); // Find buttons belonging to the 'binsize' class
@@ -191,7 +192,8 @@ export async function handleOptions(data, button_data_track_number) {
             // Update plot data
             await GoslingPlotWithLocalData();
             //Update URL parameters
-            updateURLParameters(button.getAttribute('id'), chosenbinsize);
+            const binSize = "data.binSize" + trackValue.toString();
+            updateURLParameters(binSize, chosenbinsize);
         });
     });
 
@@ -210,7 +212,8 @@ export async function handleOptions(data, button_data_track_number) {
             // Update plot data
             await GoslingPlotWithLocalData();
             // Uptade URL parameters
-            updateURLParameters(button.getAttribute('id'), chosensamplelength);
+            const sampleLength = "sampleLength" + trackValue.toString();
+            updateURLParameters(sampleLength, chosensamplelength);
         });
     });
 
@@ -230,7 +233,8 @@ export async function handleOptions(data, button_data_track_number) {
             // Update plot data
             await GoslingPlotWithLocalData();
             // Uptade URL parameters
-            updateURLParameters(button.getAttribute('id'), chosenmarksize);
+            const markSize = "size.value" + trackValue.toString();
+            updateURLParameters(markSize, chosenmarksize);
         });
     });
 }

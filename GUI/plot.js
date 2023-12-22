@@ -102,7 +102,7 @@ export async function GoslingPlotWithLocalData() {
 }
 
 /**
- * Check and update URL parameters for a track.
+ * Check and update plot specifications based on URL query parameters.
  * 
  * @param {object} track - Track object.
  * @param {number} track_nr - Track number.
@@ -111,37 +111,23 @@ async function checkURLParameters(track, track_nr) {
     var url = new window.URL(document.location);
     try {
         if (url.searchParams.size > 0) {
-            var urlSearch = url.searchParams;
-            if (urlSearch.has("columnSelectorX_" + track_nr.toString())) {
-                track.data.column = urlSearch.get("columnSelectorX_0");
-                track.x.field = urlSearch.get("columnSelectorX_0");
-            }
-            if (urlSearch.has("columnSelectorY_" + track_nr.toString())) {
-                track.data.value = urlSearch.get("columnSelectorY_0");
-                track.y.field = urlSearch.get("columnSelectorY_0");
-            }
-            if (urlSearch.has("mark_" + track_nr.toString())) {
-                track.mark = urlSearch.get("mark_0");
-            }
-            if (urlSearch.has("color_" + track_nr.toString())) {
-                track.color.value = urlSearch.get("color_0");
-            }
-            if (urlSearch.has("yInterval")) {
-                track.y.domain = urlSearch.get("yInterval").split(",").map(Number);
-            }
-            if (urlSearch.has("binsize_" + track_nr.toString())) {
-                track.data.binSize = urlSearch.get("binsize_0");
-            }
-            if (urlSearch.has("samplelength_" + track_nr.toString())) {
-                track.data.sampleLength = urlSearch.get("samplelength_0");
-            }
-            if (urlSearch.has("xInterval")) {
-                plotSpec.xDomain.interval = urlSearch.get("xInterval").split(",").map(Number);
-            }
-            if (urlSearch.has("bcolor")) {
-                plotSpec.style.background = urlSearch.get("bcolor");
-            }
+            const urlSearch = url.searchParams;
+            const generateParamName = param => `${param}${track_nr}`;
+            
+            track.data.column = track.x.field = track.tooltip[1].field = track.tooltip[1].alt = urlSearch.get(generateParamName("x.field")) || track.data.column;
+            track.data.value = track.y.field = track.tooltip[0].field = track.tooltip[0].alt = urlSearch.get(generateParamName("y.field")) || track.data.value;
+            track.mark = urlSearch.get(generateParamName("mark")) || track.mark;
+            track.size.value = parseInt(urlSearch.get(generateParamName("size.value"))) || track.size.value;
+            track.color.value = urlSearch.get(generateParamName("color.value")) || track.color.value;
+            track.data.binSize = urlSearch.get(generateParamName("data.binSize")) || track.data.binSize;
+            track.data.sampleLength = urlSearch.get(generateParamName("sampleLength")) || track.data.sampleLength;
+
+            plotSpec.tracks[0].y.domain = urlSearch.has("y.domain") ? urlSearch.get("y.domain").split(",").map(Number) : track.y.domain;
+            plotSpec.tracks[1].y.domain = urlSearch.has("y.domain") ? urlSearch.get("y.domain").split(",").map(Number) : track.y.domain;
+            plotSpec.xDomain.interval = urlSearch.has("xDomain.interval") ? urlSearch.get("xDomain.interval").split(",").map(Number) : plotSpec.xDomain.interval;
+            plotSpec.style.background = urlSearch.get("background") || plotSpec.style.background;
         }
+        console.log(plotSpec);
     } catch (error) {
         console.error(error);
     }
