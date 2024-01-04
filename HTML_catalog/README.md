@@ -5,7 +5,7 @@
   <li>Copy repository "Visualizing adaptive variation" to your local computer. </li>
   <li>Place the folder with all the data to be visualized in the Visualizing adaptive variation folder, and name it "data". <br> 
     Keep the subfolders (genes, gene_regions, ..) as they are.<br>
-Place file "krill_genes" inside data/info/.</li> 
+Place file "gene_list.tsv" inside data/info/.</li> 
   <li>Download the extension "Live Server" to Visual Studio Code (or use an equivalent extension/tool).</li>
   <li>Make sure that you can run JavaScripts on your computer. <br>
   Here, a JavaScript will be run in the terminal, with the bash command "node". This command can be used by downloading Node.js.</li>
