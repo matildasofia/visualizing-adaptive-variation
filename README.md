@@ -5,4 +5,4 @@ A project within the course of Applied Bioinformatics, using the Gosling grammar
 A simple GUI was developed for easy use of the Gosling grammar using data provided by the user. 
 
 ## Gene catalog
-A collection of scripts involved in the creation of visualizations of adaptive variation within Northern krill. The catalog consists of 1047 genes as candidates of adaptive variation, and the scripts are customized for these genes. However the code can be adapted to fit other use cases. 
+A collection of scripts involved in the creation of visualizations of adaptive variation within Northern krill. The script can generate a large catalogue of plots for candidate genes linked to ecological adaptation, and the scripts are customized for these genes. However the code can be adapted to fit other use cases. 
