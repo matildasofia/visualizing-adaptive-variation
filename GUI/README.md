@@ -1,29 +1,24 @@
 <h1> How to use the web app </h1>
 <h2> Prerequisites for using the web app </h2>
-<h3> Using the web app with local data</h3>
-To use the web application with local data, <b>running a local server in the background is required.</b> <br>
-Its up to the user to decide which local server tool to use, but in this project we have chosen to use an extension in Visual Studio Code (VS Code) called “Live Server” <b>, which can be found here: </b>https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer. <br>
-<b><br> Guide on how to setup your local server (Assuming you are using Live Server):</b>
+To use the web application,<b> running a local server in the background is required.</b> <br>
+It is up to the user to decide which local server tool to use, but in the development of this GUI, an extension in Visual Studio Code (VS Code) called <b> 'Live Server' </b> has been used for this purpose, <b> which can be found here: </b>https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer. <br>
+<b><br>
+
+ Guide on how to setup your local server (Assuming you are using Live Server):</b>
 <p>
   <ul>
-  <li> 1: Download the extension "Live Server" in VS Code  </li>
-  <li> 2: Right click on the HTML file for the web app <b> (krill_GUI.html)</b> in VS code and click on the option <b>"Open with Live Server"</b>.  <br> 
-    This step will redirect you to the web application and you are now set to use the application. </li> 
+  <li> <b> 1: Download and install the extension 'Live Server' in VS Code </b>  </li>
+  <li> <b> 2: To launch the application</b>, right click on the HTML file for the web app <b> (krill_GUI.html)</b> in VS code and then choose the <b>"Open with Live Server"</b> option.  <br> 
+    This step will redirect you to the web application and if you intend to only use local data in your plots, you are now set to use the application. </li> 
   </ul>
 </p>
 
-<h3> Using the web app with data fetched from remote servers (URL) </h3>
-To use the web application with data fetched from web servers instead, you are required to:
-<p>
-  <ul>
-  <li> 1: Use a <b>CORS-extension</b>, installed in the browser you intend to use when running the application. <br>
-This step is necessary due to the built-in security restrictions in browsers.  </li>
-  <li> 2: Open the web app <b> (krill_GUI.html)</b> in the browser you intend to use,  <br> 
-  and you are now set to use the application!
-  </ul>
-</p>
+<h3> Additional requirement if you intend to use the web app with data fetched from remote servers (URL) </h3>
 
-
+If you instead plan to use data coming from remote servers, you will also be required to <b> install a CORS-extension </b> in the browser where you want to run the web application in. This additional requirement is essential to bypass the built-in security policies of web browsers when handling data coming from external sources.
+<br><br>
+<b> Any CORS-extension can be used for this purpose. </b> As an example for Microsoft Edge users, the following CORS-extension can be used: https://microsoftedge.microsoft.com/addons/detail/cors-unblock/hkjklmhkbkdhlgnnfbbcihcajofmjgbh
+<br>
 
 <h2> Using the web app</h2>
 
@@ -31,18 +26,18 @@ This step is necessary due to the built-in security restrictions in browsers.  <
 <b> Once you are able to run the application, you have the option to: </b>
 <p>
   <ul>
-  <li> Use up to 2 files within a plot, one file for each track.  
+  <li> <b> Use up to two data files within a plot</b>, one file for each track.  
   </li>
-  <li> Do individual manipulation for each track, to suit your plotting needs. <br>
-  This is achieved by pressing on of the <b> "track"-buttons </b> on the top of the page to specify which track you want to modify. You are now able to modify the specified track by using the different plot configuration buttons on the webpage. <br>
+  <li> <b>Do individual manipulation for each track</b>, to suit your plotting needs. <br>
+  This is achieved by pressing on one of the <b> "Track"-buttons </b> on the top of the page, to specify which track you want to modify. You are now able to modify the specified track by interacting with the different plot configuration buttons on the webpage. <br>
   </ul>
 </p>
-<br>
-All the changes made to the plot will be dynamically updated to the plot, so the user gets instant response when they configure their plot. 
+All changes made to the plot specifications will dynamically update the plot, so the user gets instant response when they configure their plot. 
 
 <br>
-For explanations and information about the default values for each setting, click on <b>“More info”</b>.
+For explanations and information about the default values for each setting, click on the <b>“More info”</b> button.
 
 <h3> Bookmarking </h3>
-To promote accessibility of your findings, all the modifications to the plot <b>(except for the specification of which file(s) you have used)</b>, will be stored in the url.  <br>
-<b>This enables the user to save a certain plot configuration as a bookmark </b>, so you can save the plot configurations you have made and retrieve them back later in the future.
+To promote accessibility of your findings, all the modifications made to the plot <b>(except for the specification of which data file(s) you have used)</b>, will be stored in the url.  <br>
+<b>This functionality enables the user to save a certain plot configuration as a bookmark</b>, so it can be seamlessly retrieved back for later use in the future or to be shared with others.
+![image](https://github.com/matildasofia/visualizing-adaptive-variation/assets/92929542/13725679-aa99-47ed-95d7-57c0f5db4575)
