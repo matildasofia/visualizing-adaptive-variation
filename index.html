@@ -1,9 +1,123 @@
+<!--GUI front page-->
 <!DOCTYPE html>
 <html>
 
+<head>
+    <title>Gosling Visualization</title>
+    <link rel="stylesheet" href="/GUI/stylesheet.css">
+    <script type="importmap">
+        {
+            "imports": {
+              "react": "https://esm.sh/react@18",
+              "react-dom": "https://esm.sh/react-dom@18",
+              "pixi": "https://esm.sh/pixi.js@6",
+              "higlass": "https://esm.sh/higlass@1.13?external=react,react-dom,pixi",
+              "gosling.js": "https://esm.sh/gosling.js@0.11.0?external=react,react-dom,pixi,higlass"
+            }
+        }
+    </script>
+</head>
+
 <body>
-    <h1>Hello World</h1>
-    <p>I'm hosted with GitHub Pages.</p>
+    <div id="overlay"></div>
+    <div id="buttons" class="all_buttons"></div>
+    <div id="plot-container" class="plot-container"></div>
+
+    <script type="module">
+        import { all_buttons } from '/GUI/data_options.js';
+        import { overlay } from '/GUI/overlay.js';
+
+        const overlay_container = document.getElementById('overlay');
+        const buttons_container = document.getElementById('buttons');
+
+        overlay(overlay_container);
+        all_buttons(buttons_container);
+    </script>
+
+    <script type="module">
+        import { URLfromFile, URLfromServer, GoslingPlotWithLocalData } from '/GUI/plot.js';
+        import { trackTemplate } from '/GUI/track_spec.js';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const fileInputs = document.querySelectorAll('.file-input');
+            document.querySelectorAll('.plot-button').forEach(function (button, button_data_track_num) {
+                button.addEventListener('click', function () {
+                    fileInputs[button_data_track_num].click();
+                });
+            });
+            fileInputs.forEach(function (fileInput, button_data_track_num) {
+                fileInput.addEventListener('change', function () {
+                    URLfromFile(fileInputs, button_data_track_num);
+                });
+            });
+
+            document.querySelectorAll('.url-button').forEach(function (urlButton, trackNumber) {
+                const urlInput = document.getElementById(`urlinput_${trackNumber}`);
+
+                urlButton.addEventListener('click', function () {
+                    URLfromServer(urlInput.value, trackNumber);
+                });
+            });
+
+            info_button.addEventListener('click', function () {
+                overlay.style.display = "block";
+            });
+            close_button.addEventListener('click', function () {
+                overlay.style.display = "none";
+            });
+
+            track0_button.addEventListener('click', function () {
+                document.querySelectorAll('.track0').forEach(function (element) {
+                    element.style.display = "inline-flex";
+                });
+                document.querySelectorAll('.track1').forEach(function (element) {
+                    element.style.display = "none";
+                });
+
+                document.querySelectorAll('button, select').forEach(function (element) {
+                    element.style.borderColor = "slateblue";
+                });
+
+                track0_button.style.opacity = 1;
+                track1_button.style.opacity = 0.5;
+                track1_button.style.borderColor = "seagreen";
+            });
+
+            track1_button.addEventListener('click', function () {
+
+                document.querySelectorAll('.track0').forEach(function (element) {
+                    element.style.display = "none";
+                });
+                document.querySelectorAll('.track1').forEach(function (element) {
+                    element.style.display = "inline-flex";
+                });
+
+                document.querySelectorAll('button, select').forEach(function (element) {
+                    element.style.borderColor = "seagreen";
+                });
+                track0_button.style.opacity = 0.5;
+                track1_button.style.opacity = 1;
+                track0_button.style.borderColor = "slateblue";
+            });
+
+            clear_url_button.addEventListener('click', function () {
+                var url = new window.URL(document.location);
+                url.searchParams.forEach((_, key) => url.searchParams.delete(key));
+                history.pushState({}, '', url);
+            });
+
+            clear_url_button.addEventListener('click', function () {
+                try {
+                    var url = new URL(document.location);
+                    Array.from(url.searchParams.keys()).forEach(key => url.searchParams.delete(key));
+                    history.pushState({}, '', url);
+                    window.location.reload();
+                } catch (error) {
+                    console.error(error);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
